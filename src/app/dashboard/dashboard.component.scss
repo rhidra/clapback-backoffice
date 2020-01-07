@@ -1,3 +1,11 @@
 .app-dashboard {
+  padding: 0 24px;
 
+  mat-card {
+    margin-top: 24px;
+
+    mat-expansion-panel {
+      box-shadow: none !important;
+    }
+  }
 }

@@ -26,6 +26,9 @@ import {registerLocaleData} from '@angular/common';
 import localeFr from '@angular/common/locales/fr';
 import {UtilsModule} from './utils/utils.module';
 import { DashboardComponent } from './dashboard/dashboard.component';
+import {FlexLayoutModule} from '@angular/flex-layout';
+import {MatTreeModule} from '@angular/material/tree';
+import {MatExpansionModule} from '@angular/material/expansion';
 
 registerLocaleData(localeFr, 'fr');
 
@@ -39,6 +42,7 @@ registerLocaleData(localeFr, 'fr');
     BrowserModule,
     BrowserAnimationsModule,
     FormsModule,
+    FlexLayoutModule,
     ReactiveFormsModule,
     UtilsModule,
     HttpClientModule,
@@ -58,6 +62,7 @@ registerLocaleData(localeFr, 'fr');
     MatButtonModule,
     MatListModule,
     MatSnackBarModule,
+    MatExpansionModule,
   ],
   providers: [
     { provide: LOCALE_ID, useValue: 'fr' },
