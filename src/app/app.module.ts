@@ -29,6 +29,7 @@ import { DashboardComponent } from './dashboard/dashboard.component';
 import {FlexLayoutModule} from '@angular/flex-layout';
 import {MatTreeModule} from '@angular/material/tree';
 import {MatExpansionModule} from '@angular/material/expansion';
+import {GroupModule} from './group/group.module';
 
 registerLocaleData(localeFr, 'fr');
 

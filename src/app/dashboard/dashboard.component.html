@@ -7,35 +7,19 @@
           <mat-card-subtitle>News group currently displayed to the users</mat-card-subtitle>
         </mat-card-header>
         <mat-card-content>
-          <p>
-            Content of the group
+          <p [innerHTML]="dashboardService.latestGroup.content">
           </p>
 
           <mat-accordion>
-            <mat-expansion-panel>
-              <mat-expansion-panel-header>
-                News 1
-              </mat-expansion-panel-header>
-              Content of news 1
-            </mat-expansion-panel>
-
-            <mat-divider></mat-divider>
-
-            <mat-expansion-panel>
-              <mat-expansion-panel-header>
-                News 1
-              </mat-expansion-panel-header>
-              Content of news 1
-            </mat-expansion-panel>
-
-            <mat-divider></mat-divider>
-
-            <mat-expansion-panel>
-              <mat-expansion-panel-header>
-                News 1
-              </mat-expansion-panel-header>
-              Content of news 1
-            </mat-expansion-panel>
+            <div *ngFor="let item of dashboardService.latestGroup.items">
+              <mat-expansion-panel>
+                <mat-expansion-panel-header>
+                  {{item.title}}
+                </mat-expansion-panel-header>
+                <p [innerHTML]="item.content"></p>
+              </mat-expansion-panel>
+              <mat-divider></mat-divider>
+            </div>
           </mat-accordion>
         </mat-card-content>
         <mat-card-actions align="end">

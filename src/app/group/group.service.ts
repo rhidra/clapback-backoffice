@@ -1,13 +1,13 @@
 import { Injectable } from '@angular/core';
-import {HttpClient} from '@angular/common/http';
 import {NewsGroup} from '../models/newsgroup.model';
+import {HttpClient} from '@angular/common/http';
 
 @Injectable({
   providedIn: 'root'
 })
-export class DashboardService {
+export class GroupService {
 
-  latestGroup: NewsGroup;
+  groups: Array<NewsGroup>;
 
   constructor(
     private http: HttpClient,
@@ -15,8 +15,8 @@ export class DashboardService {
 
   load() {
     return new Promise(resolve => {
-      this.http.get('http://localhost:9000/news/latest').subscribe((data: any) => {
-        this.latestGroup = data;
+      this.http.get('http://localhost:9000/news/group?all=true').subscribe((data: any) => {
+        this.groups = data;
         resolve();
       });
     });
