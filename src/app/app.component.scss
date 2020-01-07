@@ -1,0 +1,19 @@
+.app-wrapper {
+
+}
+
+.bottom-action-bar {
+  margin-top: 12px;
+
+  a {
+    text-decoration: none;
+    color: mat-color($mat-grey, 600);
+  }
+
+  mat-icon {
+    position: relative;
+    top: 6px;
+
+  }
+}
+

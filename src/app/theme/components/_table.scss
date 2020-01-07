@@ -1,0 +1,71 @@
+.mat-sort-header-arrow {
+  top: 4px;
+}
+
+.search-view {
+
+  .search-bar {
+    @include bg_aleternatives(4);
+    color: white;
+    margin: 0 -15px;
+    padding: 2px 0 2px 20px;
+    z-index: 2;
+    position: relative;
+
+    .actions-container {
+      text-align: right;
+      position: relative;
+      top: 12px;
+      right: 12px;
+    }
+
+    .search-icon {
+      position: relative;
+      top: 5px;
+      left: -3px;
+    }
+
+    >>> .mat-form-field-placeholder, .mat-form-field-label, .mat-form-field-infix .mat-input-element {
+      color: white;
+    }
+
+    >>> .mat-form-field-underline {
+      background-color: rgba(white, 0.42) !important;
+    }
+  }
+
+  .filter-card {
+    margin-top: 0;
+    color: white;
+    overflow: hidden;
+    @include ease-animation;
+
+    &.filters-closed {
+      height: 0;
+      padding-top: 0;
+      padding-bottom: 0;
+    }
+  }
+
+  .search-results {
+    margin-top: 40px;
+  }
+
+  .table-loader {
+    padding: 25px;
+  }
+}
+
+mat-table {
+  mat-cell {
+    text-align: left;
+  }
+}
+
+.transparent-paginator {
+  margin-top: 36px;
+  background-color: transparent;
+  .mat-paginator-container {
+    justify-content: center !important;
+  }
+}

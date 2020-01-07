@@ -1,0 +1,75 @@
+/**
+ * Basic typography style for copy text
+ */
+body {
+  //color: $text-color;
+  //font: normal 125% / 1.4 $text-font-stack;
+}
+
+/**
+ * Smooth the text when possible
+ */
+p, div, span, h1, h2, h3, h4, h5, h6 {
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: auto;
+}
+
+$app-typography: mat-typography-config(
+  $font-family: 'Montserrat, Helvetica, Arial, sans-serif',
+  $display-4:     mat-typography-level(6rem, 6rem, 300),
+  $display-3:     mat-typography-level(5.5rem, 5.5rem, 300),
+  $display-2:     mat-typography-level(4.5rem, 4.5rem, 300),
+  $display-1:     mat-typography-level(3.5rem, 3.5rem, 300),
+  $headline:      mat-typography-level(3.2em, 3.2em, 600),
+  $title:         mat-typography-level(2.6em, 1.2em, 300),
+  $subheading-2:  mat-typography-level(1.825em, 1.825em, 400),
+  $subheading-1:  mat-typography-level(1.3em, 1.3em, 300),
+  $body-2:        mat-typography-level(15px, 22px, 300),
+  $body-1:        mat-typography-level(14px, 20px, 400),
+  $caption:       mat-typography-level(12px, 20px, 300),
+  $button:        mat-typography-level(14px, 14px, 500),
+  $input:         mat-typography-level(16px, 1.125, 400)// Line-height must be unit-less fraction of the font-size.
+) !default;
+
+@include angular-material-typography($app-typography);
+
+
+@include mat-list-typography(mat-typography-config($subheading-2:  mat-typography-level(14px, 24px, 300)));
+@include mat-table-typography(mat-typography-config($body-1:  mat-typography-level(14px, 20px, 400)));
+@include mat-option-typography(mat-typography-config($subheading-2:  mat-typography-level(12px, 20px, 400)));
+@include mat-dialog-typography(mat-typography-config($title:  mat-typography-level(1.3em, 1.3em, 300)));
+
+@mixin mat-icon-size($size: 24px) {
+  font-size: $size !important;
+  height: $size !important;
+  width: $size !important;
+  line-height: $size !important;
+}
+
+.mat-1 {
+  @include mat-icon-size(12px);
+}
+
+.mat-2 {
+  @include mat-icon-size(36px);
+}
+
+.mat-3 {
+  @include mat-icon-size(72px);
+}
+
+.mat-4 {
+  @include mat-icon-size(96px);
+}
+
+.mat-5 {
+  @include mat-icon-size(144px);
+}
+
+.text-center {
+  text-align: center !important;
+}
+
+.text-justify {
+  text-align: justify !important;
+}

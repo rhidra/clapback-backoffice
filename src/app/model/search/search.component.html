@@ -1,0 +1,45 @@
+<div class="model-search-view" *ngIf="!isLoading">
+  <div fxLayout="row wrap" fxFlex.md="70" class="card-deck-container">
+    <div fxFlex *ngFor="let model of []" class="card-item">
+
+      <mat-card>
+
+        <mat-card-header>
+          <mat-card-title class="md-card-title">{{model.name}}</mat-card-title>
+        </mat-card-header>
+
+        <mat-card-content>
+          <div class="card-text-content">
+            <mat-chip-list>
+              <mat-chip color="primary" [selected]="model.trainingPrecision">
+                <span *ngIf="model.trainingPrecision" i18n>
+                  Entrainement : {{model.trainingPrecision * 100}}%<br/>
+                  Dernier entrainement : {{model.trainingDate | date:'medium'}}
+                </span>
+                <span *ngIf="!model.trainingPrecision" i18n>Pas de score en entrainement</span>
+              </mat-chip>
+
+
+              <mat-chip color="warn" [selected]="model.prodPrecision">
+                <span *ngIf="model.prodPrecision" i18n>
+                  Production : {{model.prodPrecision * 100}}%
+                  Dernière mise en prod : {{model.publishedDate | date:'medium'}}
+                </span>
+                <span *ngIf="!model.prodPrecision" i18n>Pas de score en production</span>
+              </mat-chip>
+            </mat-chip-list>
+          </div>
+        </mat-card-content>
+
+        <mat-card-actions fxLayout="row" fxLayoutAlign="end center">
+          <button mat-icon-button><mat-icon matTooltip="Supprimer le modèle">delete</mat-icon></button>
+          <button mat-icon-button [routerLink]="['/', 'text', model.id, 'search']"><mat-icon matTooltip="Textes d'entrainement">list</mat-icon></button>
+          <button mat-icon-button><mat-icon matTooltip="Modifier le modèle">edit</mat-icon></button>
+          <button mat-raised-button color="accent" i18n>Annoter</button>
+        </mat-card-actions>
+
+      </mat-card>
+
+    </div>
+  </div>
+</div>

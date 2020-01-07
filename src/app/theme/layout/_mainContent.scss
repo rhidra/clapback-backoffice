@@ -1,0 +1,44 @@
+// -----------------------------------------------------------------------------
+// This file contains all the main content theme
+// -----------------------------------------------------------------------------
+
+.main-content {
+  background-color: $body-bg-color;
+
+  .page-view {
+    display: block;
+    padding: 0 15px 30px 15px;
+    min-height: calc(100vh - #{$navbar-height} - #{$footer-height} );
+    z-index: 2;
+    position: relative;
+  }
+}
+
+.mat-drawer-content {
+  overflow: hidden !important;
+}
+
+.container {
+  margin: auto;
+  width: 100%;
+}
+
+@media (min-width: 768px) {
+  .container {
+    max_width: 760px;
+
+  }
+}
+@media (min-width: 992px) {
+  .container {
+
+    max_width: 980px;
+
+  }
+}
+@media (min-width: 1200px) {
+  .container {
+
+    max_width: 1180px;
+  }
+}

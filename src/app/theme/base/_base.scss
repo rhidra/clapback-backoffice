@@ -1,0 +1,61 @@
+// -----------------------------------------------------------------------------
+// This file contains very basic styles.
+// -----------------------------------------------------------------------------
+
+/**
+ * Set up a decent box model on the root element
+ */
+html {
+  box-sizing: border-box;
+}
+
+/**
+ * Make all elements from the DOM inherit from the parent box-sizing
+ * Since `*` has a specificity of 0, it does not override the `html` value
+ * making all elements inheriting from the root box-sizing value
+ * See: https://css-tricks.com/inheriting-box-sizing-probably-slightly-better-best-practice/
+ */
+*,
+*::before,
+*::after {
+  box-sizing: inherit;
+}
+
+/**
+ * Specify the body background color
+ */
+body, mat-sidenav-content {
+  background-color: $body-bg-color;
+}
+
+hr {
+  height: 1px;
+  background-color: rgba(200, 200, 200, 0.6);
+  width: 100%;
+  border: none;
+  margin: 24px 0;
+}
+
+.spacer {
+  flex: auto;
+}
+
+.full-width {
+  width: 100%;
+}
+
+.full-height {
+  height: 100%;
+}
+
+[hidden], .hidden {
+  display: none !important;
+}
+
+.pointer {
+  cursor: pointer;
+}
+
+.mat-form-field {
+  @include color_aleternatives();
+}

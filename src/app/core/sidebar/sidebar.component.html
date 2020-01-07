@@ -1,0 +1,21 @@
+<div class="app-sidebar full-height">
+  <div class="sidebar-content full-height">
+    <a [routerLink]="['/dashboard']" class="brand-container text-center">
+      <div class="full-width">
+        <h1 class="title">左右</h1>
+      </div>
+    </a>
+    <mat-divider></mat-divider>
+
+    <mat-list class="sidebar-menu">
+
+      <mat-list-item  routerLinkActive="active" [routerLink]="['/model']" class="sidebar-menu-item" >
+        <mat-icon matTooltip="Pipeline" matListIcon>dashboard</mat-icon>
+        <h3 [ngClass]="{'hidden': !navbarService.isExpanded}" matLine i18n>Modèles</h3>
+      </mat-list-item>
+
+    </mat-list>
+
+  </div>
+
+</div>

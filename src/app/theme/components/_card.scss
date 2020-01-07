@@ -1,0 +1,196 @@
+$colored-header-font-color: white;
+$card-footer-border-color: mat-color($mat-grey, 200);
+$default-header-font-color: mat-color($mat-grey, 700);
+
+.card-container {
+  padding-rigth: 12px;
+}
+
+mat-card {
+  @include bg_aleternatives(5, false);
+
+  margin-top: 30px;
+  overflow: visible;
+
+  .mat-card-header-text {
+    margin: 0 12px;
+  }
+
+  mat-card-title {
+    font-size: mat-font-size($app-typography, subheading-1) !important;
+    color: $default-header-font-color;
+  }
+
+  .full-width-colored-header {
+    padding: 15px;
+    border-radius: $border-radius;
+    margin: -48px 0 20px !important;
+
+    mat-card-title {
+      font-size: mat-font-size($app-typography, subheading-1) !important;
+      color: $colored-header-font-color;
+    }
+
+    mat-card-subtitle {
+      margin-bottom: 0 !important;
+      color: rgba($colored-header-font-color, 0.62) !important;
+    }
+  }
+
+  .iconed-colored-header {
+    position: relative;
+
+    .mat-card-header-text {
+      margin-top: -6px;
+      margin-left: 64px !important;
+      padding-left: 24px;
+      line-height: 14px;
+      min-height: 55px;
+    }
+
+    .card-header-icon, .card-header-icon-sm {
+      color: white;
+      margin: -40px 0;
+      border-radius: $border-radius;
+      padding: 15px;
+      position: absolute;
+      left: -10px;
+    }
+
+    .card-header-icon {
+      font-size: 36px;
+      line-height: 45px;
+      width: 75px;
+      height: 75px;
+      text-align: center;
+    }
+
+    .card-header-icon-sm {
+      width: 54px;
+      height: 54px;
+    }
+  }
+
+  .full-width-colored-header {
+    @include bg_aleternatives();
+  }
+
+  .iconed-colored-header .card-header-icon, .card-header-icon-sm {
+    @include bg_aleternatives(2);
+  }
+
+  &.top-info-card {
+    .iconed-colored-header .mat-card-header-text {
+      width: 100%;
+      margin-right: 0;
+      text-align: right;
+      margin-bottom: 15px;
+
+      mat-card-title {
+        color: mat-color($mat-grey, 500);
+        font-size: mat-font-size($app-typography, body-2) !important;
+      }
+      mat-card-subtitle {
+        color: mat-color($mat-grey, 800);
+        font-size: mat-font-size($app-typography, subheading-1) !important;
+        font-weight: mat-font-weight($app-typography, subheading-1);
+      }
+    }
+  }
+
+  mat-card-footer {
+    margin: -10px !important;
+    margin-top: 0px !important;
+    margin-bottom: -16px !important;
+    padding: 6px;
+    border-top: 1px solid $card-footer-border-color;
+    line-height: 22px;
+    color: mat-color($mat-grey, 500);
+    font-size: mat-font-size($app-typography, caption);
+    font-weight: mat-font-weight($app-typography, caption);
+
+    .mat-icon {
+      position: relative;
+      top: 5px;
+      font-size: 18px;
+    }
+
+    a {
+      text-decoration: none;
+      color: mat-color($mat-grey, 500);
+    }
+
+    .legend-item {
+      margin-right: 10px;
+      white-space:nowrap;
+      display: inline-block;
+
+      &.legend-tone-item {
+        width: 80px;
+      }
+
+      .legend-square {
+        width: 18px;
+        height: 18px;
+        border-radius: $border-radius;
+        display: inline-block;
+        position: relative;
+        top: 4px;
+      }
+    }
+  }
+
+  mat-card-content {
+    font-weight: 300;
+    text-align: justify;
+  }
+
+  &.stat-card {
+    mat-card-content {
+      height: 300px;
+      position: relative;
+
+      &.no-min-height {
+        height: unset;
+      }
+    }
+  }
+
+  .backward-button {
+    margin-bottom: 0px;
+  }
+  .backward-icon {
+    bottom: 24px;
+  }
+
+  .backward-footer {
+    margin-top: 24px;
+  }
+}
+
+mat-chip {
+  margin-bottom: 8px;
+
+  &.mat-primary-chip {
+    @include gradiant-bg($primary-palette, 2);
+    color: white !important;
+  }
+
+  @include bg_aleternatives(2, false);
+}
+
+
+.card-round-progress {
+  position: relative;
+
+
+  .round-progress-label {
+    position: absolute;
+    top: auto;
+    margin-bottom: 0;
+    bottom: 1.5rem;
+    left: 50%;
+    font-size: 30px;
+    transform: translateX(-50%);
+  }
+}

@@ -1,0 +1,120 @@
+// -----------------------------------------------------------------------------
+// This file contains all the navbar theme
+// -----------------------------------------------------------------------------
+$navbar-height: 64px !default;
+$navbar-font-color: #555555 !default;
+$navbar-font-size: 18px !default;
+$navbar-font-weight: normal !default;
+$navbar-icon-size: 20px !default;
+$small-social-navbar-height: 30px;
+$small-social-navbar-color: mat-color($mat-grey, 800);
+
+.app-navbar {
+  height: $navbar-height !important;
+  color: $navbar-font-color;
+  font-size: $navbar-font-size;
+  z-index: 10;
+
+
+  .navbar-link {
+    font-size: $navbar-font-size;
+    font-weight: $navbar-font-weight;
+  }
+
+  &.with-social-navbar {
+    margin-top: $small-social-navbar-height;
+  }
+
+  position: relative;
+  @include ease-animation();
+
+  .spacer {
+    flex: 1 1 auto;
+  }
+
+  &.navbar-transparent {
+    background-color: transparent;
+
+    a {
+      color: white;
+    }
+  }
+
+  .navbar-toggle {
+    border: none;
+    background: transparent;
+    outline: none;
+  }
+
+  .navbar-toggle .icon-bar {
+    display: block;
+    position: relative;
+    background: $navbar-font-color;
+    width: 24px;
+    height: 2px;
+    border-radius: 1px;
+    margin: 0 auto;
+  }
+
+  .navbar-header .navbar-toggle {
+    margin: 10px 15px 10px 0;
+    width: 40px;
+    height: 40px;
+  }
+
+  .icon-bar+.icon-bar {
+    margin-top: 4px;
+  }
+
+  .icon-bar:nth-child(2),
+  .icon-bar:nth-child(3),
+  .icon-bar:nth-child(4){
+    outline: 1px solid transparent;
+  }
+  .icon-bar:nth-child(2){
+    top: 0px;
+    @include bar-animation(topbar-back);
+  }
+  .icon-bar:nth-child(3) {
+    opacity: 1;
+  }
+  .icon-bar:nth-child(4) {
+    bottom: 0px;
+    @include bar-animation(bottombar-back);
+  }
+  .toggled .icon-bar:nth-child(2) {
+    top: 6px;
+    @include bar-animation(topbar-x);
+  }
+  .toggled .icon-bar:nth-child(3) {
+    opacity: 0;
+  }
+  .toggled .icon-bar:nth-child(4) {
+    bottom: 6px;
+    @include bar-animation(bottombar-x);
+  }
+
+  @include topbar-x-rotation();
+  @include topbar-back-rotation();
+  @include bottombar-x-rotation();
+  @include bottombar-back-rotation();
+}
+
+.small-social-navbar{
+  z-index: 11;
+  height: $small-social-navbar-height !important;
+  background-color: $small-social-navbar-color;
+  color: mat-color($mat-grey, 50);
+  font-size: 12px;
+
+  position: fixed;
+
+  .social-icons{
+    font-size: 20px;
+    color : white;
+  }
+
+  mat-icon {
+    color: white;
+  }
+}

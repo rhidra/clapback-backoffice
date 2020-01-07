@@ -1,0 +1,115 @@
+$timeline-line-color: #E5E5E5 !default;
+
+.timeline {
+  list-style: none;
+  margin-top: 0;
+  padding: 8px;
+  position: relative;
+
+  &:before {
+    left: 5%;
+    background-color: $timeline-line-color;
+    top: 50px;
+    position: absolute;
+    content: " ";
+    width: 3px;
+    margin-left: -3px;
+    bottom: 100px;
+  }
+
+  & > li {
+    margin-bottom: 20px;
+    position: relative;
+  }
+
+  & > li:after {
+    clear: both;
+    content: " ";
+    display: table;
+  }
+
+  .timeline-badge {
+    @include bg_aleternatives();
+    @include ease-animation(1s);
+    color: white;
+    width: 50px;
+    height: 50px;
+    line-height: 51px;
+    font-size: 1.4em;
+    text-align: center;
+    position: absolute;
+    top: 8px;
+    left: 4%;
+    margin-left: -24px;
+    z-index: 100;
+    border-radius: 50%;
+
+    .timeline-badge-icon {
+      line-height: 50px;
+      color: white;
+    }
+  }
+
+  .timeline-panel {
+    @include ease-animation(1s);
+    float: right;
+    width: 90%;
+    margin-top: 0;
+    margin-bottom: 10px;
+    overflow: visible;
+
+    &:before {
+      content: "";
+      position: absolute;
+      width: 0;
+      height: 0;
+      left: 2px;
+      top: 18px;
+      box-sizing: border-box;
+      border: 0.8em solid;
+      border-color: transparent transparent white white;
+      box-shadow: -2px 2px 2px rgba(0,0,0,.1);
+      transform-origin: 0 0;
+      transform: rotate(45deg);
+    }
+  }
+
+  .timeline-heading {
+    margin: -8px;
+  }
+
+  .mat-card-content>:first-child, .mat-card>:first-child {
+    margin-top: -8px !important;
+  }
+
+  mat-card-title {
+    margin-bottom: 8px;
+  }
+
+  mat-card-footer {
+    margin-right: 0 !important;
+    margin-left: 0 !important;
+  }
+
+  .timeline-footer mat-icon {
+    text-align: center;
+  }
+
+  .timeline-title {
+    font-weight: 300;
+    margin-left: 10%;
+    margin-bottom: 5px;
+    font-size: 1.2em;
+    text-transform: capitalize;
+  }
+}
+
+.timeline-with-effect {
+  .hidden-pannel {
+    transform: translateX(100vw);
+  }
+
+  .hidden-badge {
+    opacity: 0;
+  }
+}

@@ -1,0 +1,24 @@
+// -----------------------------------------------------------------------------
+// This file contains all application-wide Sass variables colors
+// -----------------------------------------------------------------------------
+
+// App colors
+$primary-color: null !default;
+$accent-color:  null !default;
+$warn-color:    null !default;
+
+// App palette
+$primary-palette: mat-palette($primary-color) !default;
+$accent-palette:  mat-palette($accent-color) !default;
+$warn-palette:    mat-palette($warn-color) !default;
+
+// App theme
+$app-theme:       mat-light-theme($primary-palette, $accent-palette, $warn-palette) !default;
+
+// Body background color
+$body-bg-color:   whitesmoke !default;
+
+@include angular-material-theme($app-theme);
+
+
+

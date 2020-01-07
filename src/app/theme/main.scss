@@ -1,0 +1,40 @@
+@charset "UTF-8";
+
+// 1. Vendors
+@import 'vendor/normalize';
+
+// 2. Configuration and helpers
+@import
+  'abstracts/animations',
+  'abstracts/breakpoints',
+  'abstracts/colors',
+  'abstracts/variables',
+  'abstracts/functions',
+  'abstracts/mixins',
+  'abstracts/placeholders';
+
+// 3. Base stuff
+@import
+  'base/base',
+  'base/typography';
+
+// 4. Layout-related sections
+@import
+  'layout/sidebar',
+  'layout/navbar',
+  'layout/footer',
+  'layout/mainContent';
+
+// 5. Components
+@import
+  'components/button',
+  'components/caret',
+  'components/card',
+  'components/chartist',
+  'components/dialog',
+  'components/info',
+  'components/table',
+  'components/timeline',
+  'components/wizard';
+
+// 6. Themes

@@ -1,0 +1,76 @@
+<mat-toolbar #toolbar class="app-navbar full-width" fxLayout="row" fxLayoutAlign="space-between" color="primary" [hidden]="navbarInfo === null">
+  <div  *ngIf="navbarInfo !== null" [fxFlex]="getBlockWidth() + 'px'" fxLayoutAlign="flex-start center" fxLayout="row" fxLayoutGap="12px">
+      <button *ngIf="navbarInfo.backCb !== null" fxFlex="nogrow" class="nav-btn" type="button" mat-icon-button (click)="navbarInfo.backCb()">
+        <mat-icon data-text-color="white" aria-label="menu" matTooltip="Retour">arrow_back</mat-icon>
+      </button>
+      <div fxFlex="nogrow">{{navbarInfo.title}}</div>
+
+      <div class="divider" *ngIf="navbarInfo.actions.length > 0 || navbarInfo.addCb !== null" fxFlex="1px"></div>
+
+      <div fxLayout="row" *ngIf="navbarInfo.actions.length > 0">
+        <ng-container *ngFor="let action of navbarInfo.actions">
+          <button fxFlex="nogrow" class="action-btn" type="button" mat-icon-button
+                  *ngIf="action.menu === undefined && action.hidden !== true"
+                  (click)="action.cb()" [matTooltip]="action.placeholder">
+            <mat-icon data-text-color="white" aria-label="menu">{{action.icon}}</mat-icon>
+          </button>
+
+          <ng-container *ngIf="action.menu !== undefined && action.hidden !== true">
+            <button fxFlex="nogrow" class="action-btn" type="button" mat-icon-button [matMenuTriggerFor]="navbarMenu" [matTooltip]="action.placeholder">
+              <mat-icon data-text-color="white" aria-label="menu">{{action.icon}}</mat-icon>
+            </button>
+            <mat-menu [overlapTrigger]="false" class="pipeline-menu mat-typography" #navbarMenu="matMenu">
+              <button [ngClass]="{'active': index === action.currentIndex}" mat-menu-item
+                      (click)="action.cb(index)"
+                      *ngFor="let item of action.menu; let index = index">
+                {{item.name}}
+              </button>
+            </mat-menu>
+          </ng-container>
+        </ng-container>
+      </div>
+
+      <button fxFlex="nogrow" class="add-btn" type="button" mat-raised-button data-background-color="white"
+              *ngIf="navbarInfo.addCb !== null"
+              (click)="navbarInfo.addCb()"
+              [matTooltip]="navbarInfo.addPlaceholder">
+        <mat-icon data-text-color="primary" aria-label="menu">add</mat-icon>
+        <span fxHide.lt-lg>Ajouter</span>
+      </button>
+  </div>
+
+  <div #searchBar fxFlex.gt-md="0 0 450px"  fxFlex.gt-sm="0 0 350px" fxFlex.gt-xs="0 0 250px" fxLayoutAlign="center center">
+    <ng-container *ngIf="navbarInfo !== null">
+      <mat-form-field class="search-bar full-width" data-text-color="white" floatLabel="never" appearance="outline" *ngIf="navbarInfo.queryChangedCb !== null">
+        <mat-icon matPrefix data-text-color="white">search</mat-icon>
+        <input matInput placeholder="Rechercher" (ngModelChange)="queryChanged.next($event)" [(ngModel)]="query">
+        <mat-icon  *ngIf="navbarInfo.filterCb !== null" (click)="navbarInfo.filterCb()" matSuffix data-text-color="white">filter_list</mat-icon>
+      </mat-form-field>
+    </ng-container>
+  </div>
+
+  <div  *ngIf="navbarInfo !== null && getBlockWidth() > 0" [fxFlex]="getBlockWidth() + 'px'" fxLayoutAlign="flex-end center" [ngStyle]="{'min-width.px': getBlockWidth()}">
+    <button mat-icon-button [matMenuTriggerFor]="userMenu" [fxHide.lt-md]="true">
+      <mat-icon data-text-color="white" class="navbar-icon">person</mat-icon>
+    </button>
+
+    <button type="button" class="navbar-toggle"
+            [fxHide.gt-sm]="true"
+            [ngClass]="{'toggled': true}"
+            (click)="navbarService.sidebarToggle()">
+      <span class="sr-only" i18n>Ouvrir le menu</span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+    </button>
+
+    <mat-menu #userMenu="matMenu" class="mat-typography">
+      <button mat-menu-item>
+        <mat-icon matListIcon fontSet="fas" fontIcon="fa-sign-out-alt"></mat-icon>
+        <span class="menu-text"  i18n>Se déconnecter</span>
+      </button>
+    </mat-menu>
+  </div>
+</mat-toolbar>
+
+

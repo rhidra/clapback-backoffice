@@ -1,0 +1,129 @@
+// -----------------------------------------------------------------------------
+// This file contains all application-wide animations mixins.
+// -----------------------------------------------------------------------------
+
+
+/// Add a linear animation
+/// @param {Duration} $duration
+/// @param {Animation type} $type
+@mixin linear-animation($duration: 200ms, $type: all) {
+  transition: $type $duration linear;
+}
+
+/// Add an ease animation
+/// @param {Duration} $duration
+/// @param {Animation type} $type
+@mixin ease-animation($duration: 200ms, $type: all) {
+  transition: $type $duration ease;
+}
+/// Add an ease in animation
+/// @param {Duration} $duration
+/// @param {Animation type} $type
+@mixin ease-in-animation($duration: 150ms, $type: all) {
+  transition: $type $duration ease-in;
+}
+/// Add an cubic bezier animation
+/// @param {Duration} $duration
+/// @param {Animation type} $type
+@mixin cubic-bezier($duration: 0.5s, $type: all) {
+  transition: $type $duration cubic-bezier(0.29, 1.42, 0.79, 1);;
+}
+
+/// Navbar close button animation
+/// @param {Duration} $duration
+/// @param {Animation type} $type
+@mixin bar-animation($type){
+  -webkit-animation: $type 500ms linear 0s;
+  -moz-animation: $type 500ms linear 0s;
+  animation: $type 500ms 0s;
+  -webkit-animation-fill-mode: forwards;
+  -moz-animation-fill-mode: forwards;
+  animation-fill-mode: forwards;
+}
+
+@mixin topbar-x-rotation(){
+  @keyframes topbar-x {
+    0% {top: 0px; transform: rotate(0deg); }
+    45% {top: 6px; transform: rotate(145deg); }
+    75% {transform: rotate(130deg); }
+    100% {transform: rotate(135deg); }
+  }
+  @-webkit-keyframes topbar-x {
+    0% {top: 0px; -webkit-transform: rotate(0deg); }
+    45% {top: 6px; -webkit-transform: rotate(145deg); }
+    75% {-webkit-transform: rotate(130deg); }
+    100% { -webkit-transform: rotate(135deg); }
+  }
+  @-moz-keyframes topbar-x {
+    0% {top: 0px; -moz-transform: rotate(0deg); }
+    45% {top: 6px; -moz-transform: rotate(145deg); }
+    75% {-moz-transform: rotate(130deg); }
+    100% { -moz-transform: rotate(135deg); }
+  }
+}
+
+@mixin topbar-back-rotation(){
+  @keyframes topbar-back {
+    0% { top: 6px; transform: rotate(135deg); }
+    45% { transform: rotate(-10deg); }
+    75% { transform: rotate(5deg); }
+    100% { top: 0px; transform: rotate(0); }
+  }
+
+  @-webkit-keyframes topbar-back {
+    0% { top: 6px; -webkit-transform: rotate(135deg); }
+    45% { -webkit-transform: rotate(-10deg); }
+    75% { -webkit-transform: rotate(5deg); }
+    100% { top: 0px; -webkit-transform: rotate(0); }
+  }
+
+  @-moz-keyframes topbar-back {
+    0% { top: 6px; -moz-transform: rotate(135deg); }
+    45% { -moz-transform: rotate(-10deg); }
+    75% { -moz-transform: rotate(5deg); }
+    100% { top: 0px; -moz-transform: rotate(0); }
+  }
+}
+
+@mixin bottombar-x-rotation(){
+  @keyframes bottombar-x {
+    0% {bottom: 0px; transform: rotate(0deg);}
+    45% {bottom: 6px; transform: rotate(-145deg);}
+    75% {transform: rotate(-130deg);}
+    100% {transform: rotate(-135deg);}
+  }
+  @-webkit-keyframes bottombar-x {
+    0% {bottom: 0px; -webkit-transform: rotate(0deg);}
+    45% {bottom: 6px; -webkit-transform: rotate(-145deg);}
+    75% {-webkit-transform: rotate(-130deg);}
+    100% {-webkit-transform: rotate(-135deg);}
+  }
+  @-moz-keyframes bottombar-x {
+    0% {bottom: 0px; -moz-transform: rotate(0deg);}
+    45% {bottom: 6px; -moz-transform: rotate(-145deg);}
+    75% {-moz-transform: rotate(-130deg);}
+    100% {-moz-transform: rotate(-135deg);}
+  }
+}
+
+@mixin bottombar-back-rotation{
+  @keyframes bottombar-back {
+    0% { bottom: 6px;transform: rotate(-135deg);}
+    45% { transform: rotate(10deg);}
+    75% { transform: rotate(-5deg);}
+    100% { bottom: 0px;transform: rotate(0);}
+  }
+  @-webkit-keyframes bottombar-back {
+    0% {bottom: 6px;-webkit-transform: rotate(-135deg);}
+    45% {-webkit-transform: rotate(10deg);}
+    75% {-webkit-transform: rotate(-5deg);}
+    100% {bottom: 0px;-webkit-transform: rotate(0);}
+  }
+  @-moz-keyframes bottombar-back {
+    0% {bottom: 6px;-moz-transform: rotate(-135deg);}
+    45% {-moz-transform: rotate(10deg);}
+    75% {-moz-transform: rotate(-5deg);}
+    100% {bottom: 0px;-moz-transform: rotate(0);}
+  }
+
+}

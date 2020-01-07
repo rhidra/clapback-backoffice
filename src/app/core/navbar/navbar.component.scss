@@ -1,0 +1,56 @@
+.app-navbar {
+  .menu-text::ng-deep {
+    font-size: 15px;
+  }
+
+  .nav-btn {
+    margin-right: 6px !important;
+  }
+
+  .divider {
+    height: 24px;
+    background-color: rgba(255, 255, 255, 0.5);
+  }
+
+  .add-btn {
+    padding: 0 12px 0 6px;
+    color: mat-color($primary-color, 500);
+  }
+
+  .search-bar {
+    margin-top: 20px;
+
+    .mat-form-field-flex > .mat-form-field-infix {
+      padding: 0.6em 0 !important;
+      border-top-width: 0.5em;
+    }
+
+    .mat-form-field-prefix {
+      top: .35em;
+    }
+
+    .mat-form-field-outline-start, .mat-form-field-outline-outline-gap, .mat-form-field-outline-end {
+      background-color: rgba(255, 255, 255, 0.2);
+      border-width: 0;
+    }
+
+    &:hover .mat-form-field-outline-start, &:hover .mat-form-field-outline-outline-gap, &:hover .mat-form-field-outline-end, &:active .mat-form-field-outline-start, &:active .mat-form-field-outline-outline-gap, &:active .mat-form-field-outline-end {
+      border-width: 2px;
+    }
+
+    .mat-form-field-outline-thick {
+      color: rgba(255, 255, 255, 0.87);
+    }
+
+    input::placeholder {
+      color: white;
+      opacity: 0.8;
+    }
+
+     .mat-form-field-appearance-outline.mat-form-field-can-float.mat-form-field-should-float .mat-form-field-label {
+      transform: translateY(-1.1em) scale(.75);
+      width: 133.33333%;
+    }
+  }
+}
+

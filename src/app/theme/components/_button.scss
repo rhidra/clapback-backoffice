@@ -1,0 +1,7 @@
+mat-icon {
+  @include color_aleternatives();
+}
+
+.mat-button-toggle-checked {
+  @include bg_aleternatives();
+}

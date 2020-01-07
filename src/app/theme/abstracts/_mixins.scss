@@ -1,0 +1,282 @@
+// -----------------------------------------------------------------------------
+// This file contains all application-wide Sass mixins.
+// -----------------------------------------------------------------------------
+
+
+
+/// Add a background image in the box
+/// @param {String} $type - The image to add
+/// @param {Bacground Size} $size [cover]
+/// @param {Bacground Position} $position [center center]
+@mixin background_image ($image, $size: cover, $position: center center, $useParallax: false, $repeat: no-repeat) {
+  background-size: $size;
+  background-position: $position;
+  background-repeat: $repeat;
+  @if $image != '' {
+    background-image: image($image);
+  }
+
+  @if $useParallax == true {
+    background-attachment: fixed;
+  }
+}
+
+/// Make the background image a bit more dark
+/// @param {Number} $strength [0.8]
+@mixin background_opacity-filter ($strength: 0.8) {
+  &:after {
+    width: 100%;
+    height: 100%;
+    content: "";
+    display: block;
+    background: #000;
+    opacity: $strength;
+  }
+}
+
+/// Add a shadow to the box
+/// @param {Number} $level - The strengh of the shadow (between 1 to 5)
+/// @param {Color} $color [black] - The color of the shadow
+@mixin box_shadow ($level, $color: black) {
+
+  @if $level == 1 {
+    box-shadow: 0 1px 3px rgba($color, 0.12), 0 1px 2px rgba($color, 0.24);
+  } @else if $level == 2 {
+    box-shadow: 0 3px 6px rgba($color, 0.16), 0 3px 6px rgba($color, 0.23);
+  } @else if $level == 3 {
+    box-shadow: 0 10px 20px rgba($color, 0.19), 0 6px 6px rgba($color, 0.23);
+  } @else if $level == 4 {
+    box-shadow: 0 14px 28px rgba($color, 0.25), 0 10px 10px rgba($color, 0.22);
+  } @else if $level == 5 {
+    box-shadow: 0 19px 38px rgba($color, 0.30), 0 15px 12px rgba($color, 0.22);
+  }
+}
+
+/// Specify the different background colors
+@mixin bg_aleternatives($shadowLevel: 5, $addDefault: true, $setColor: true) {
+
+  @if $addDefault == true {
+    @include gradiant-bg($accent-palette, $shadowLevel);
+
+  }
+
+  &[data-background-color="accent"]{
+    @include gradiant-bg($primary-palette, $shadowLevel);
+    @if $setColor {color: white !important;}
+  }
+  &[data-background-color="accent"]{
+    @include gradiant-bg($accent-palette, $shadowLevel);
+    @if $setColor {color: white !important;}
+  }
+
+  &[data-background-color="purple"]{
+    @include gradiant-bg($mat-purple, $shadowLevel);
+    @if $setColor {color: white !important;}
+  }
+
+  &[data-background-color="blue"]{
+    @include gradiant-bg($mat-blue, $shadowLevel);
+    @if $setColor {color: white !important;}
+  }
+
+  &[data-background-color="green"]{
+    @include gradiant-bg($mat-green, $shadowLevel);
+    @if $setColor {color: white !important;}
+  }
+
+  &[data-background-color="orange"]{
+    @include gradiant-bg($mat-orange, $shadowLevel);
+    @if $setColor {color: white !important;}
+  }
+
+  &[data-background-color="red"]{
+    @include gradiant-bg($mat-red, $shadowLevel);
+    @if $setColor {color: white !important;}
+  }
+
+  &[data-background-color="pink"]{
+    @include gradiant-bg($mat-pink, $shadowLevel);
+    @if $setColor {color: white !important;}
+  }
+
+  &[data-background-color="brown"]{
+    @include gradiant-bg($mat-brown, $shadowLevel);
+    @if $setColor {color: white !important;}
+  }
+
+  &[data-background-color="grey"]{
+    @include gradiant-bg($mat-grey, $shadowLevel);
+    @if $setColor {color: white !important;}
+  }
+}
+
+/// Specify the different text colors
+@mixin color_aleternatives($addDefault: true) {
+
+  @if $addDefault == true {
+    color: mat-color($primary-palette, 500);
+  }
+
+  &[data-text-color="primary"]{
+    color: mat-color($primary-palette, 500);
+  }
+
+  &[data-text-color="accent"]{
+    color: mat-color($accent-palette, 500);
+  }
+
+  &[data-text-color="purple"]{
+    color: mat-color($mat-purple, 500);
+  }
+
+  &[data-text-color="blue"]{
+    color: mat-color($mat-blue, 500);
+  }
+
+  &[data-text-color="green"]{
+    color: mat-color($mat-green, 500);
+  }
+
+  &[data-text-color="orange"]{
+    color: mat-color($mat-orange, 500);
+  }
+
+  &[data-text-color="red"]{
+    color: mat-color($mat-red, 500);
+  }
+
+  &[data-text-color="pink"]{
+    color: mat-color($mat-pink, 500);
+  }
+
+  &[data-text-color="brown"]{
+    color: mat-color($mat-brown, 500);
+  }
+
+  &[data-text-color="amber"]{
+    color: mat-color($mat-amber, 500);
+  }
+
+  &[data-text-color="lime"]{
+    color: mat-color($mat-green, 500);
+  }
+
+  &[data-text-color="lightgreen"]{
+    color: mat-color($mat-light-green, 500);
+  }
+
+  &[data-text-color="grey"]{
+    color: mat-color($mat-grey, 500);
+  }
+
+  &[data-text-color="white"]{
+    color: white;
+  }
+}
+
+/// Specify the different text colors
+@mixin shadow_aleternatives($level, $addDefault: true) {
+
+  @if $addDefault == true {
+    @include box_shadow($level, mat-color($accent-palette, 500));
+  }
+
+  &[data-shadow-color="primary"]{
+    @include box_shadow($level, mat-color($accent-palette, 500));
+  }
+
+  &[data-shadow-color="purple"]{
+    @include box_shadow($level, mat-color($mat-purple, 500));
+  }
+
+  &[data-shadow-color="blue"]{
+    @include box_shadow($level, mat-color($mat-blue, 500));
+  }
+
+  &[data-shadow-color="green"]{
+    @include box_shadow($level, mat-color($mat-green, 500));
+  }
+
+  &[data-shadow-color="lime"]{
+    @include box_shadow($level, mat-color($mat-lime, 500));
+  }
+
+  &[data-shadow-color="lightgreen"]{
+    @include box_shadow($level, mat-color($mat-light-green, 500));
+  }
+
+  &[data-shadow-color="orange"]{
+    @include box_shadow($level, mat-color($mat-orange, 500));
+  }
+
+  &[data-shadow-color="red"]{
+    @include box_shadow($level, mat-color($mat-red, 500));
+  }
+
+  &[data-shadow-color="pink"]{
+    @include box_shadow($level, mat-color($mat-pink, 500));
+  }
+
+  &[data-text-color="grey"]{
+    @include box_shadow($level, mat-color($mat-grey, 500));
+  }
+}
+
+
+/// Add a gradiant background
+/// @param {Palette} $palette
+/// @param {0-5} $shadowLevel
+@mixin gradiant-bg ($palette: $primary-palette, $shadowLevel: 5, $mainColor : 500) {
+  background: linear-gradient(60deg, mat-color($palette, $mainColor), mat-color($palette, $mainColor + 100));
+  @include box_shadow($shadowLevel, mat-color($palette, $mainColor));
+}
+
+/// Event wrapper
+/// @author Harry Roberts
+/// @param {Bool} $self [false] - Whether or not to include current selector
+/// @link https://twitter.com/csswizardry/status/478938530342006784 Original tweet from Harry Roberts
+@mixin on-event($self: false) {
+  @if $self {
+    &,
+    &:hover,
+    &:active,
+    &:focus {
+      @content;
+    }
+  } @else {
+    &:hover,
+    &:active,
+    &:focus {
+      @content;
+    }
+  }
+}
+
+/// Make a context based selector a little more friendly
+/// @author Hugo Giraudel
+/// @param {String} $context
+@mixin when-inside($context) {
+  #{$context} & {
+    @content;
+  }
+}
+
+
+/// Add a filter on an image that make it darker
+/// @param {double} opacity
+@mixin darker-img($opacity: 0.5) {
+  position: relative;
+  z-index: 0;
+  &:after {
+    position: absolute;
+    z-index: -1;
+    width: 100%;
+    height: 100%;
+    display: block;
+    left: 0;
+    top: 0;
+    content: "";
+    background-color: rgba(0, 0, 0, $opacity);
+  }
+}
+

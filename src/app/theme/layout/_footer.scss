@@ -1,0 +1,56 @@
+// -----------------------------------------------------------------------------
+// This file contains all the footer theme
+// -----------------------------------------------------------------------------
+
+$footer-height: 55px !default;
+$footer-dark-border-top-color: hsla(0,0%,100%,.3) !default;
+$footer-dark-text-color: white !default;
+$footer-light-border-top-color: #e7e7e7 !default;
+$footer-light-text-color: rgb(85, 85, 85) !default;
+
+.app-footer {
+  z-index: 2;
+  height: $footer-height;
+  position: relative;
+  border-top: 1px solid $footer-dark-border-top-color;
+
+  ul {
+    margin-bottom: 0;
+    padding: 0 24px;
+    list-style: none;
+
+    h5 {
+      margin-top: 1rem;
+      margin-bottom: 0 !important;
+    }
+
+    li {
+      display: block;
+    }
+
+    li, a {
+      font-size: 12px;
+      color: $footer-dark-text-color;
+      font-weight: 300;
+      text-decoration: none;
+    }
+  }
+
+  &.light-footer {
+    background-color: $body-bg-color;
+    border-top: 1px solid $footer-light-border-top-color;
+
+    ul li, ul a {
+      color: $footer-light-text-color;
+    }
+  }
+
+  &.dark-footer {
+    background-color: transparent;
+    border-top: 1px solid $footer-dark-border-top-color;
+
+    ul li, ul a {
+      color: $footer-dark-text-color;
+    }
+  }
+}

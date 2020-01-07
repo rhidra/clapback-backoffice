@@ -1,0 +1,76 @@
+html, body {
+  height: 100%;
+}
+
+.kl-tag, .rdl-tag {
+  color: white !important;
+}
+
+.tags-form-field .mat-chip-remove {
+  top: 60% !important;
+  right: 8px !important;
+
+  &:before {
+    content: fa-content($fa-var-times);
+  }
+}
+
+.rule-chips .mat-chip-list-wrapper {
+  margin: 0 !important;
+  min-height: 40px !important;
+}
+
+.rdl-selected-view .circle-label.active .icon {
+  color: mat-color($accent-color, 500) !important;
+  border-color: mat-color($accent-color, 500) !important;
+}
+
+.top-section-header {
+  padding-top: 0 !important;
+}
+
+.mat-menu-item {
+  font-size: 14px;
+}
+
+.white-spinner circle {
+  stroke: #fff;
+}
+
+secured-image img {
+  max-width: 100%;
+}
+
+secured-image mat-spinner {
+  margin: auto;
+}
+
+
+@media (min-width: 960px) {
+
+  .mat-snack-bar-container {
+    position: relative;
+    left: 130px;
+  }
+}
+
+.mat-select-panel {
+  max-height: 350px !important;
+}
+
+mat-cell, .mat-cell, mat-footer-cell, .mat-footer-cell, mat-header-cell, .mat-header-cell {
+  padding: 0.75rem !important;
+}
+
+button[disabled] {
+  cursor: not-allowed !important;
+}
+
+.mat-tab-body-content::ng-deep {
+  padding: 10px 10px 50px 10px;
+}
+
+.mat-input-element {
+  font: inherit;
+  border: none;
+}

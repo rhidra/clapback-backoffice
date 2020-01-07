@@ -1,1 +1,78 @@
-/* You can add global styles to this file, and also import other style files */
+
+@import '~@angular/material/theming';
+@include mat-core();
+
+//http://mcg.mbitson.com/#!?06aee7=%2306aee7#%2F
+$accent-color: (
+  50 : #e1f5fc,
+  100 : #b4e7f8,
+  200 : #83d7f3,
+  300 : #51c6ee,
+  400 : #2bbaeb,
+  500 : #06aee7,
+  600 : #05a7e4,
+  700 : #049de0,
+  800 : #0394dd,
+  900 : #0284d7,
+  A100 : #feffff,
+  A200 : #cbe8ff,
+  A400 : #98d2ff,
+  A700 : #7fc7ff,
+  contrast: (
+    50: $black-87-opacity,
+    100: $black-87-opacity,
+    200: $black-87-opacity,
+    300: $black-87-opacity,
+    400: $black-87-opacity,
+    500: white,
+    600: white,
+    700: white,
+    800: $white-87-opacity,
+    900: $white-87-opacity,
+    A100: $black-87-opacity,
+    A200: $black-87-opacity,
+    A400: $black-87-opacity,
+    A700: $black-87-opacity,
+  )
+);
+
+
+$primary-color: $accent-color;
+$mat-blue: $accent-color;
+$warn-color:    $mat-red !default;
+
+
+$app-typography: mat-typography-config(
+  $font-family: 'Montserrat, Helvetica, Arial, sans-serif',
+  $display-4:     mat-typography-level(6rem, 6rem, 300),
+  $display-3:     mat-typography-level(5.5rem, 5.5rem, 300),
+  $display-2:     mat-typography-level(4.5rem, 4.5rem, 300),
+  $display-1:     mat-typography-level(3.5rem, 3.5rem, 300),
+  $headline:      mat-typography-level(3.2em, 3.2em, 600),
+  $title:         mat-typography-level(3.0em, 2.0em, 500),
+  $subheading-2:  mat-typography-level(1.825em, 1.825em, 400),
+  $subheading-1:  mat-typography-level(1.3em, 1.3em, 300),
+  $body-2:        mat-typography-level(15px, 22px, 300),
+  $body-1:        mat-typography-level(14px, 20px, 400),
+  $caption:       mat-typography-level(12px, 20px, 300),
+  $button:        mat-typography-level(14px, 14px, 500),
+  $input:         mat-typography-level(16px, 1.125, 400)// Line-height must be unit-less fraction of the font-size.
+) !default;
+
+
+$footer-height: 0px;
+
+@import 'assets/scss/fonts';
+@import 'app/theme/main';
+
+$fa-font-path: "../node_modules/@fortawesome/fontawesome-free/webfonts";
+$fa-font-size-base: 22px;
+$fa-line-height-base: 24px;
+@import '~@fortawesome/fontawesome-free/scss/fontawesome';
+@import "~@fortawesome/fontawesome-free/scss/solid";
+
+@import "common";
+@import "app/app.component";
+@import "app/model/search/search.component";
+@import "app/core/navbar/navbar.component";
+
