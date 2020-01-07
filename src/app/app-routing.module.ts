@@ -1,10 +1,11 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
+import {DashboardComponent} from './dashboard/dashboard.component';
 
 
 const routes: Routes = [
-  { path: '', redirectTo: 'model', pathMatch: 'full'},
-  { path: 'model', loadChildren: './model/model.module#ModelModule'},
+  { path: '', redirectTo: 'dashboard', pathMatch: 'full'},
+  { path: 'dashboard', component: DashboardComponent},
 ];
 
 @NgModule({

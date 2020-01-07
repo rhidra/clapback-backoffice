@@ -10,7 +10,7 @@ import {RouterModule} from '@angular/router';
 import {FlexLayoutModule} from '@angular/flex-layout';
 import {FormsModule} from '@angular/forms';
 import {NavbarComponent} from './navbar/navbar.component';
-import {NavbarService} from "./navbar/navbar.service";
+import {NavbarService} from './navbar/navbar.service';
 
 @NgModule({
   imports: [

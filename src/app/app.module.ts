@@ -25,6 +25,7 @@ import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {registerLocaleData} from '@angular/common';
 import localeFr from '@angular/common/locales/fr';
 import {UtilsModule} from './utils/utils.module';
+import { DashboardComponent } from './dashboard/dashboard.component';
 
 registerLocaleData(localeFr, 'fr');
 
@@ -32,6 +33,7 @@ registerLocaleData(localeFr, 'fr');
 @NgModule({
   declarations: [
     AppComponent,
+    DashboardComponent,
   ],
   imports: [
     BrowserModule,
