@@ -1,7 +1,7 @@
 <mat-toolbar #toolbar class="app-navbar full-width" fxLayout="row" fxLayoutAlign="space-between" color="primary" [hidden]="navbarInfo === null">
-  <div  *ngIf="navbarInfo !== null" [fxFlex]="getBlockWidth() + 'px'" fxLayoutAlign="flex-start center" fxLayout="row" fxLayoutGap="12px">
+  <div  *ngIf="navbarInfo !== null" fxFlex fxLayoutAlign="flex-start center" fxLayout="row" fxLayoutGap="12px">
       <button *ngIf="navbarInfo.backCb !== null" fxFlex="nogrow" class="nav-btn" type="button" mat-icon-button (click)="navbarInfo.backCb()">
-        <mat-icon data-text-color="white" aria-label="menu" matTooltip="Retour">arrow_back</mat-icon>
+        <mat-icon data-text-color="white" aria-label="menu" matTooltip="Back">arrow_back</mat-icon>
       </button>
       <div fxFlex="nogrow">{{navbarInfo.title}}</div>
 
@@ -35,7 +35,7 @@
               (click)="navbarInfo.addCb()"
               [matTooltip]="navbarInfo.addPlaceholder">
         <mat-icon data-text-color="primary" aria-label="menu">add</mat-icon>
-        <span fxHide.lt-lg>Ajouter</span>
+        <span fxHide.lt-lg>Add</span>
       </button>
   </div>
 
@@ -43,25 +43,15 @@
     <ng-container *ngIf="navbarInfo !== null">
       <mat-form-field class="search-bar full-width" data-text-color="white" floatLabel="never" appearance="outline" *ngIf="navbarInfo.queryChangedCb !== null">
         <mat-icon matPrefix data-text-color="white">search</mat-icon>
-        <input matInput placeholder="Rechercher" (ngModelChange)="queryChanged.next($event)" [(ngModel)]="query">
+        <input matInput placeholder="Search" (ngModelChange)="queryChanged.next($event)" [(ngModel)]="query">
         <mat-icon  *ngIf="navbarInfo.filterCb !== null" (click)="navbarInfo.filterCb()" matSuffix data-text-color="white">filter_list</mat-icon>
       </mat-form-field>
     </ng-container>
   </div>
 
-  <div  *ngIf="navbarInfo !== null && getBlockWidth() > 0" [fxFlex]="getBlockWidth() + 'px'" fxLayoutAlign="flex-end center" [ngStyle]="{'min-width.px': getBlockWidth()}">
+  <div fxFlex fxLayoutAlign="flex-end center">
     <button mat-icon-button [matMenuTriggerFor]="userMenu" [fxHide.lt-md]="true">
       <mat-icon data-text-color="white" class="navbar-icon">person</mat-icon>
-    </button>
-
-    <button type="button" class="navbar-toggle"
-            [fxHide.gt-sm]="true"
-            [ngClass]="{'toggled': true}"
-            (click)="navbarService.sidebarToggle()">
-      <span class="sr-only" i18n>Ouvrir le menu</span>
-      <span class="icon-bar"></span>
-      <span class="icon-bar"></span>
-      <span class="icon-bar"></span>
     </button>
 
     <mat-menu #userMenu="matMenu" class="mat-typography">

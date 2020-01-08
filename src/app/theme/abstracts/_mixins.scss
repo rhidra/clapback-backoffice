@@ -111,7 +111,7 @@
 }
 
 /// Specify the different text colors
-@mixin color_aleternatives($addDefault: true) {
+@mixin color_alternatives($addDefault: true) {
 
   @if $addDefault == true {
     color: mat-color($primary-palette, 500);
@@ -175,7 +175,7 @@
 }
 
 /// Specify the different text colors
-@mixin shadow_aleternatives($level, $addDefault: true) {
+@mixin shadow_alternatives($level, $addDefault: true) {
 
   @if $addDefault == true {
     @include box_shadow($level, mat-color($accent-palette, 500));

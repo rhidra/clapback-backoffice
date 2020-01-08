@@ -116,7 +116,7 @@ $icons-container-font-size-list: 130px 70px 50px 100px 80px 80px 90px 60px 80px 
     .icon {
       margin-top: 32px;
       font-size: 42px;
-      @include color_aleternatives();
+      @include color_alternatives();
       width: 42px;
       height: 42px;
     }
@@ -150,7 +150,7 @@ $icons-container-font-size-list: 130px 70px 50px 100px 80px 80px 90px 60px 80px 
   }
 
   .number-container {
-    @include color_aleternatives();
+    @include color_alternatives();
     font-size: 24px;
   }
 
@@ -198,16 +198,16 @@ $icons-container-font-size-list: 130px 70px 50px 100px 80px 80px 90px 60px 80px 
 
     .icon-container, .number-container {
       @include ease-animation();
-      @include shadow_aleternatives(3);
+      @include shadow_alternatives(3);
     }
 
     &:hover {
       .title {
-        @include color_aleternatives();
+        @include color_alternatives();
       }
       .icon-container, .number-container {
         transform: translate3d(0, -.5rem, 0);
-        @include shadow_aleternatives(5);
+        @include shadow_alternatives(5);
       }
 
     }

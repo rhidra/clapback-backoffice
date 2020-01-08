@@ -1,5 +1,5 @@
-mat-icon {
-  @include color_aleternatives();
+button mat-icon {
+  @include color_alternatives();
 }
 
 .mat-button-toggle-checked {

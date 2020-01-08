@@ -1,3 +1,30 @@
-<p *ngFor="let group of groupService.groups">
-  {{group.content}}
-</p>
+<div class="app-group-search">
+  <mat-list *ngFor="let list of [groups.current, groups.future, groups.past]">
+    <h3 mat-subheader *ngIf="list === groups.current">
+      <mat-icon fontSet="fas" fontIcon="fa-play"></mat-icon>
+      Current news
+    </h3>
+    <h3 mat-subheader *ngIf="list === groups.future">
+      <mat-icon fontSet="fas" fontIcon="fa-forward"></mat-icon>
+      Future news
+    </h3>
+    <h3 mat-subheader *ngIf="list === groups.past">
+      <mat-icon fontSet="fas" fontIcon="fa-backward"></mat-icon>
+      Past news
+    </h3>
+
+    <mat-list-item *ngFor="let group of list">
+      <mat-icon mat-list-icon fontSet="fas" fontIcon="fa-file-alt"></mat-icon>
+      <h4 mat-line>{{moment(group.date).format('dddd, MMMM Do YYYY, h:mm a')}}</h4>
+      <p mat-line>{{group.content}}</p>
+
+      <button mat-icon-button>
+        <mat-icon>edit</mat-icon>
+      </button>
+      <button mat-icon-button>
+        <mat-icon data-text-color="red">delete</mat-icon>
+      </button>
+    </mat-list-item>
+    <mat-divider></mat-divider>
+  </mat-list>
+</div>
