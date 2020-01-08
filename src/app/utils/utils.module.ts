@@ -13,6 +13,8 @@ import {
   MatTableModule
 } from '@angular/material';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
+import { DialogComponent } from './dialog/dialog.component';
+import {MatDialogModule} from '@angular/material/dialog';
 
 
 @NgModule({
@@ -31,12 +33,16 @@ import {FormsModule, ReactiveFormsModule} from '@angular/forms';
     MatFormFieldModule,
     MatMenuModule,
     MatInputModule,
+    MatDialogModule,
   ],
   declarations: [
+    DialogComponent
   ],
   exports: [
   ],
-  entryComponents: [],
+  entryComponents: [
+    DialogComponent,
+  ],
   providers: [HelperService],
 
 })

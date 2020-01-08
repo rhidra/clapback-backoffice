@@ -1,4 +1,4 @@
-<div class="app-group-search">
+<div class="app-group-search" *ngIf="!isLoading">
   <mat-list *ngFor="let list of [groups.current, groups.future, groups.past]">
     <h3 mat-subheader *ngIf="list === groups.current">
       <mat-icon fontSet="fas" fontIcon="fa-play"></mat-icon>
@@ -21,10 +21,11 @@
       <button mat-icon-button>
         <mat-icon>edit</mat-icon>
       </button>
-      <button mat-icon-button>
+      <button mat-icon-button (click)="delete(group)">
         <mat-icon data-text-color="red">delete</mat-icon>
       </button>
     </mat-list-item>
     <mat-divider></mat-divider>
   </mat-list>
 </div>
+<mat-spinner *ngIf="isLoading"></mat-spinner>

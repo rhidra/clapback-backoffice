@@ -25,4 +25,13 @@ export class GroupService {
       });
     });
   }
+
+  delete(group: NewsGroup) {
+    return new Promise(resolve => {
+      this.http.delete('http://localhost:9000/news/group/' + group._id).subscribe(data => {
+        this.groups = this.groups.filter(g => g !== group);
+        resolve(data);
+      });
+    });
+  }
 }
