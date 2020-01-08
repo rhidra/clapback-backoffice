@@ -5,6 +5,7 @@ import {NewsGroup} from '../../models/newsgroup.model';
 import * as moment from 'moment';
 import {DialogComponent} from '../../utils/dialog/dialog.component';
 import {MatDialog} from '@angular/material/dialog';
+import {Router} from '@angular/router';
 
 @Component({
   selector: 'app-search',
@@ -19,11 +20,12 @@ export class GroupSearchComponent implements OnInit {
   constructor(
     private groupService: GroupService,
     private navbarService: NavbarService,
-    private dialog: MatDialog
+    private dialog: MatDialog,
+    private router: Router
   ) { }
 
   ngOnInit() {
-    this.navbarService.updateNavbar('News groups', () => {}, null, () => {});
+    this.navbarService.updateNavbar('News groups', () => this.router.navigate(['/group/edit']), null, () => {});
     this.groupService.load().then(() => {
       this.build_groups();
       this.isLoading = false;
@@ -47,10 +49,6 @@ export class GroupSearchComponent implements OnInit {
     this.groupService.search(query).then(() => {
       this.isLoading = false;
     });
-  }
-
-  edit(group: NewsGroup) {
-    console.log('ùnergf');
   }
 
   delete(e: Event, group: NewsGroup) {

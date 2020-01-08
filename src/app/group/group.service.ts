@@ -26,6 +26,12 @@ export class GroupService {
     });
   }
 
+  get(id: string) {
+    return new Promise(resolve => {
+      this.http.get('http://localhost:9000/news/group/' + id).subscribe(data => resolve(data));
+    });
+  }
+
   delete(group: NewsGroup) {
     return new Promise(resolve => {
       this.http.delete('http://localhost:9000/news/group/' + group._id).subscribe(data => {

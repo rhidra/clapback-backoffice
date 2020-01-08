@@ -1,1 +1,18 @@
-<p>edit works!</p>
+<form class="app-group-edit full-width" [formGroup]="form" (ngSubmit)="onSubmit()" *ngIf="!isLoading">
+
+  <app-datetimepicker-input formControlName="date"></app-datetimepicker-input>
+
+  <mat-form-field>
+    <input matInput placeholder="Content" formControlName="content"/>
+  </mat-form-field>
+
+  <div>
+    <button type="submit" [disabled]="form.pristine || form.invalid" mat-raised-button color="accent" cdkFocusInitial i18n>
+      <span *ngIf="isCreation" i18n>Create</span>
+      <span *ngIf="!isCreation" i18n>Update</span>
+    </button>
+  </div>
+
+  <pre>{{form.value|json}}</pre>
+</form>
+<mat-spinner *ngIf="isLoading"></mat-spinner>

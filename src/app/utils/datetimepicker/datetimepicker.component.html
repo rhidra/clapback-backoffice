@@ -1,0 +1,13 @@
+<div class="app-datetimepicker-input" [formGroup]="form" *ngIf="form" fxLayout="row">
+
+  <mat-form-field>
+    <input matInput formControlName="date" [matDatepicker]="picker" placeholder="Choose a date">
+    <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+    <mat-datepicker #picker></mat-datepicker>
+  </mat-form-field>
+
+  <div class="timepicker" fxFlexOffset="24px">
+    <mat-label>Choose a time</mat-label>
+    <ngx-timepicker-field formControlName="time" [format]="24"></ngx-timepicker-field>
+  </div>
+</div>

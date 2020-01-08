@@ -7,8 +7,8 @@ import {GroupEditComponent} from './edit/edit.component';
 const routes: Routes = [
   { path: '', redirectTo: 'search', pathMatch: 'full'},
   { path: 'search', component: GroupSearchComponent },
+  { path: 'edit', component: GroupEditComponent },
   { path: 'edit/:id', component: GroupEditComponent },
-  { path: 'edit/', component: GroupEditComponent },
 ];
 
 @NgModule({

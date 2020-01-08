@@ -15,6 +15,10 @@ import {
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import { DialogComponent } from './dialog/dialog.component';
 import {MatDialogModule} from '@angular/material/dialog';
+import { DatetimepickerComponent } from './datetimepicker/datetimepicker.component';
+import {NgxMaterialTimepickerModule} from 'ngx-material-timepicker';
+import {MatDatepickerModule} from '@angular/material/datepicker';
+import {MatMomentDateModule} from '@angular/material-moment-adapter';
 
 
 @NgModule({
@@ -34,11 +38,16 @@ import {MatDialogModule} from '@angular/material/dialog';
     MatMenuModule,
     MatInputModule,
     MatDialogModule,
+    NgxMaterialTimepickerModule,
+    MatDatepickerModule,
+    MatMomentDateModule,
   ],
   declarations: [
-    DialogComponent
+    DialogComponent,
+    DatetimepickerComponent
   ],
   exports: [
+    DatetimepickerComponent
   ],
   entryComponents: [
     DialogComponent,

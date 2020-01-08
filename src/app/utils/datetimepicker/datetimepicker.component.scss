@@ -1,0 +1,23 @@
+.app-datetimepicker-input {
+  .timepicker {
+    position: relative;
+
+    ngx-timepicker-field {
+      input {
+        background-color: inherit;
+      }
+
+      .ngx-timepicker {
+        height: 45px;
+        border-color: rgba(0, 0, 0, 0.42);
+      }
+    }
+
+    mat-label {
+      position: absolute;
+      color: rgba(0, 0, 0, 0.42);
+      top: -5px;
+      font-size: .85em;
+    }
+  }
+}
