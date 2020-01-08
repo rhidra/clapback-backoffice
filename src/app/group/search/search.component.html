@@ -1,5 +1,5 @@
 <div class="app-group-search" *ngIf="!isLoading">
-  <mat-list *ngFor="let list of [groups.current, groups.future, groups.past]">
+  <mat-nav-list *ngFor="let list of [groups.current, groups.future, groups.past]">
     <h3 mat-subheader *ngIf="list === groups.current">
       <mat-icon fontSet="fas" fontIcon="fa-play"></mat-icon>
       Current news
@@ -13,19 +13,16 @@
       Past news
     </h3>
 
-    <mat-list-item *ngFor="let group of list">
+    <a mat-list-item *ngFor="let group of list" (click)="edit(group)">
       <mat-icon mat-list-icon fontSet="fas" fontIcon="fa-file-alt"></mat-icon>
       <h4 mat-line>{{moment(group.date).format('dddd, MMMM Do YYYY, h:mm a')}}</h4>
       <p mat-line>{{group.content}}</p>
 
-      <button mat-icon-button>
-        <mat-icon fontSet="fas" fontIcon="fa-edit" class="fa-lg"></mat-icon>
-      </button>
-      <button mat-icon-button (click)="delete(group)">
+      <button mat-icon-button (click)="delete($event, group)">
         <mat-icon data-text-color="red" fontSet="fas" fontIcon="fa-trash" class="fa-lg"></mat-icon>
       </button>
-    </mat-list-item>
+    </a>
     <mat-divider></mat-divider>
-  </mat-list>
+  </mat-nav-list>
 </div>
 <mat-spinner *ngIf="isLoading"></mat-spinner>

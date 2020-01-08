@@ -49,7 +49,14 @@ export class GroupSearchComponent implements OnInit {
     });
   }
 
-  delete(group: NewsGroup) {
+  edit(group: NewsGroup) {
+    console.log('ùnergf');
+  }
+
+  delete(e: Event, group: NewsGroup) {
+    e.preventDefault();
+    e.stopImmediatePropagation();
+
     const data = {title: 'Confirmation', content: 'Do you really want to delete this news group ?'};
     this.dialog.open(DialogComponent, {data: data})
       .afterClosed().subscribe(res => {
