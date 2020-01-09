@@ -32,6 +32,18 @@ export class GroupService {
     });
   }
 
+  create(group: NewsGroup) {
+    return new Promise(resolve => {
+      this.http.post('http://localhost:9000/news/group', group).subscribe(data => resolve(data));
+    });
+  }
+
+  edit(group: NewsGroup) {
+    return new Promise(resolve => {
+      this.http.post('http://localhost:9000/news/group/' + group._id, group).subscribe(data => resolve(data));
+    });
+  }
+
   delete(group: NewsGroup) {
     return new Promise(resolve => {
       this.http.delete('http://localhost:9000/news/group/' + group._id).subscribe(data => {

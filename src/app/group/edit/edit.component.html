@@ -1,5 +1,4 @@
 <form class="app-group-edit full-width" [formGroup]="form" (ngSubmit)="onSubmit()" *ngIf="!isLoading">
-
   <app-datetimepicker-input formControlName="date"></app-datetimepicker-input>
 
   <mat-form-field>
@@ -12,7 +11,5 @@
       <span *ngIf="!isCreation" i18n>Update</span>
     </button>
   </div>
-
-  <pre>{{form.value|json}}</pre>
 </form>
 <mat-spinner *ngIf="isLoading"></mat-spinner>

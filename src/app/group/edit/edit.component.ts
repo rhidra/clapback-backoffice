@@ -4,6 +4,7 @@ import {NewsGroup} from '../../models/newsgroup.model';
 import {ActivatedRoute} from '@angular/router';
 import {GroupService} from '../group.service';
 import {NavbarService} from '../../core/navbar/navbar.service';
+import {Location} from '@angular/common';
 
 @Component({
   selector: 'app-edit',
@@ -19,7 +20,8 @@ export class GroupEditComponent implements OnInit {
     private fb: FormBuilder,
     private route: ActivatedRoute,
     private groupService: GroupService,
-    private navbarService: NavbarService
+    private navbarService: NavbarService,
+    private location: Location
   ) { }
 
   ngOnInit() {
@@ -49,6 +51,16 @@ export class GroupEditComponent implements OnInit {
   }
 
   onSubmit() {
+    Object.assign(this.group, this.form.value);
 
+    if (this.isCreation) {
+      this.groupService.create(this.group).then(model => {
+        this.location.back();
+      });
+    } else {
+      this.groupService.edit(this.group).then(() => {
+        this.location.back();
+      });
+    }
   }
 }
