@@ -1,12 +1,20 @@
-<form class="app-group-edit full-width" [formGroup]="form" (ngSubmit)="onSubmit()" *ngIf="!isLoading">
+<form class="app-group-edit full-width" [formGroup]="form" (ngSubmit)="onSubmit()" *ngIf="!isLoading" fxLayout="column" fxLayoutGap="24px">
   <app-datetimepicker-input formControlName="date"></app-datetimepicker-input>
 
   <mat-form-field>
-    <input matInput placeholder="Content" formControlName="content"/>
+    <textarea matInput placeholder="First page content" formControlName="content"></textarea>
+    <mat-hint>Content displayed on the first page of the news group. Max 500 chars</mat-hint>
   </mat-form-field>
 
   <div>
-    <button type="submit" [disabled]="form.pristine || form.invalid" mat-raised-button color="accent" cdkFocusInitial i18n>
+    <input #uploadInput hidden type="file" onclick="this.value=null" (change)="onCoverImageChange($event)" accept=".*"/>
+    <button mat-flat-button type="button" color="primary" (click)="uploadInput.click()">Cover image</button>
+    <span *ngIf="form.value.image">Current: {{form.value.image}}</span>
+    <span *ngIf="!form.value.image">No image uploaded !</span>
+  </div>
+
+  <div>
+    <button type="submit" [disabled]="form.pristine || form.invalid || isUploading" mat-raised-button color="accent" cdkFocusInitial i18n>
       <span *ngIf="isCreation" i18n>Create</span>
       <span *ngIf="!isCreation" i18n>Update</span>
     </button>

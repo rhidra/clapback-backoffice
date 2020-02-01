@@ -13,6 +13,7 @@ import {ReactiveFormsModule} from '@angular/forms';
 import {MatInputModule} from '@angular/material/input';
 import {UtilsModule} from '../utils/utils.module';
 import {MatSelectModule} from '@angular/material/select';
+import {FlexModule} from '@angular/flex-layout';
 
 
 @NgModule({
@@ -31,7 +32,8 @@ import {MatSelectModule} from '@angular/material/select';
     ReactiveFormsModule,
     MatInputModule,
     UtilsModule,
-    MatSelectModule
+    MatSelectModule,
+    FlexModule
   ]
 })
 export class GroupModule { }
