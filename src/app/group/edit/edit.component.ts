@@ -50,14 +50,15 @@ export class GroupEditComponent implements OnInit {
     this.form = this.fb.group({
       date: [this.group.date || '', [Validators.required]],
       content: [this.group.content || '', [Validators.required]],
-      image: [this.group.image || ''],
+      image: [this.group.image || '', [Validators.required]],
     });
     this.isLoading = false;
   }
 
   onCoverImageChange(event) {
     this.coverImage = event.target.files[0];
-    console.log(this.coverImage);
+    this.form.patchValue({image: this.coverImage.name});
+    this.form.markAsDirty();
   }
 
   uploadCoverImage() {
@@ -86,6 +87,7 @@ export class GroupEditComponent implements OnInit {
   }
 
   onSubmit() {
+    this.isUploading = true;
     if (this.coverImage) {
       this.uploadCoverImage().then(() => this.updateGroup());
     } else {

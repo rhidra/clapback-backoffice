@@ -15,8 +15,9 @@
 
   <div>
     <button type="submit" [disabled]="form.pristine || form.invalid || isUploading" mat-raised-button color="accent" cdkFocusInitial i18n>
-      <span *ngIf="isCreation" i18n>Create</span>
-      <span *ngIf="!isCreation" i18n>Update</span>
+      <span *ngIf="isCreation && !isUploading" i18n>Create</span>
+      <span *ngIf="!isCreation && !isUploading" i18n>Update</span>
+      <span *ngIf="isUploading" i18n>Uploading...</span>
     </button>
   </div>
 </form>
