@@ -9,7 +9,7 @@
   <div>
     <input #uploadInput hidden type="file" onclick="this.value=null" (change)="onCoverImageChange($event)" accept=".*"/>
     <button mat-flat-button type="button" color="primary" (click)="uploadInput.click()">Cover image</button>
-    <span *ngIf="form.value.image">Current: {{form.value.image}}</span>
+    <span *ngIf="form.value.image">Current: <a [href]="form.value.image">{{form.value.image}}</a></span>
     <span *ngIf="!form.value.image">No image uploaded !</span>
   </div>
 
