@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {FormArray, FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {NewsGroup} from '../../models/newsgroup.model';
 import {ActivatedRoute} from '@angular/router';
@@ -19,6 +19,8 @@ export class GroupEditComponent implements OnInit {
   isCreation: boolean;
   isLoading = true;
   isUploading = false;
+
+  get items() { return this.form.get('items') as FormArray; }
 
   constructor(
     private fb: FormBuilder,
@@ -53,17 +55,16 @@ export class GroupEditComponent implements OnInit {
       content: [this.group.content || '', [Validators.required]],
       image: [this.group.image || '', [Validators.required]],
       items: this.fb.array(this.group.items.map(item => this.fb.group({
+        _id: [item._id || ''],
         title: [item.title || '', [Validators.required]],
         content: [item.content || '', [Validators.required]],
-        image: [item.image || '', [Validators.required]],
-        videoLeft: [item.videoLeft || '', [Validators.required]],
-        videoRight: [item.videoRight || '', [Validators.required]],
+        image: [item.image || ''],
+        videoLeft: [item.videoLeft || ''],
+        videoRight: [item.videoRight || ''],
       })))
     });
     this.isLoading = false;
   }
-
-  get items() { return this.form.get('items') as FormArray; }
 
   addItem() {
     this.items.push(this.fb.group({
@@ -73,10 +74,12 @@ export class GroupEditComponent implements OnInit {
       videoLeft: '',
       videoRight: '',
     }));
+    this.form.markAsDirty();
   }
 
   removeItem(index: number) {
     this.items.removeAt(index);
+    this.form.markAsDirty();
   }
 
   onCoverImageChange(event) {
@@ -96,26 +99,23 @@ export class GroupEditComponent implements OnInit {
     });
   }
 
-  updateGroup() {
+  updateData() {
+    const rejectedItems = this.group.items.filter(item => !this.form.value.items.map(i => i._id).includes(item._id));
     Object.assign(this.group, this.form.value);
     if (this.isCreation) {
-      this.groupService.create(this.group).then(model => {
-        this.location.back();
-      });
+      this.groupService.create(this.group).then(() => this.location.back());
     } else {
-      this.groupService.edit(this.group).then(() => {
-        this.location.back();
-      });
+      this.groupService.edit(this.group, rejectedItems).then(() => this.location.back());
     }
   }
 
   onSubmit() {
     this.isUploading = true;
     if (this.coverImage) {
-      this.uploadCoverImage().then(() => this.updateGroup());
+      this.uploadCoverImage().then(() => this.updateData());
     } else {
       this.group.image = '';
-      this.updateGroup();
+      this.updateData();
     }
   }
 }

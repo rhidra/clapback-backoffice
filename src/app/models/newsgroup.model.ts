@@ -5,5 +5,5 @@ export class NewsGroup {
     content: string;
     date: string;
     image: string;
-    items: Array<NewsItem>;
+    items: Array<NewsItem> = [];
 }
