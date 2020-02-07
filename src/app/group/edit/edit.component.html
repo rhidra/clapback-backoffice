@@ -2,15 +2,63 @@
   <app-datetimepicker-input formControlName="date"></app-datetimepicker-input>
 
   <mat-form-field>
-    <textarea matInput placeholder="First page content" formControlName="content"></textarea>
-    <mat-hint>Content displayed on the first page of the news group. Max 500 chars</mat-hint>
+    <textarea matInput i18n-placeholder placeholder="First page content" formControlName="content"></textarea>
+    <mat-hint i18n>Content displayed on the first page of the news group. Max 500 chars</mat-hint>
   </mat-form-field>
 
   <div>
     <input #uploadInput hidden type="file" onclick="this.value=null" (change)="onCoverImageChange($event)" accept=".*"/>
-    <button mat-flat-button type="button" color="primary" (click)="uploadInput.click()">Cover image</button>
-    <span *ngIf="form.value.image">Current: <a [href]="form.value.image">{{form.value.image}}</a></span>
-    <span *ngIf="!form.value.image">No image uploaded !</span>
+    <button mat-flat-button type="button" color="primary" (click)="uploadInput.click()" i18n>Cover image</button>
+    <span *ngIf="form.value.image" i18n>Current: <a [href]="form.value.image">{{form.value.image}}</a></span>
+    <span *ngIf="!form.value.image" i18n>No image uploaded !</span>
+  </div>
+
+  <div>
+    <button type="button" mat-raised-button color="accent" cdkFocusInitial i18n (click)="addItem()">
+      <mat-icon data-text-color="white">add</mat-icon> Add news
+    </button>
+  </div>
+
+  <div formArrayName="items" *ngFor="let item of form.get('items').controls; let index = index;">
+    <hr/>
+    <mat-card>
+      <h3>
+        <button type="button" mat-icon-button (click)="removeItem(index)" matTooltip="remove Item"><mat-icon data-text-color="red">delete</mat-icon></button>
+        News {{index + 1}}
+      </h3>
+
+      <div class="full-width" [formGroupName]="index">
+          <mat-form-field class="full-width">
+            <input matInput formControlName="title" i18n-placeholder placeholder="Title news {{index + 1}}"/>
+          </mat-form-field>
+
+          <mat-form-field class="full-width">
+            <textarea matInput formControlName="content" i18n-placeholder placeholder="News {{index + 1}} content"></textarea>
+            <mat-hint i18n>Max 500 chars</mat-hint>
+          </mat-form-field>
+
+        <div>
+          <input #uploadInput hidden type="file" onclick="this.value=null" (change)="onCoverImageChange($event)" accept=".*"/>
+          <button mat-flat-button type="button" color="primary" (click)="uploadInput.click()" i18n>News {{index + 1  }} image</button>
+          <span *ngIf="items.controls[index].value.image" i18n>Current: <a [href]="items.controls[index].value.image">{{items.controls[index].value.image}}</a></span>
+          <span *ngIf="!items.controls[index].value.image" i18n>No image uploaded !</span>
+        </div>
+
+        <div>
+          <input #uploadInput hidden type="file" onclick="this.value=null" (change)="onCoverImageChange($event)" accept=".*"/>
+          <button mat-flat-button type="button" color="primary" (click)="uploadInput.click()" i18n>News {{index + 1  }} left video</button>
+          <span *ngIf="items.controls[index].value.image" i18n>Current: <a [href]="items.controls[index].value.image">{{items.controls[index].value.image}}</a></span>
+          <span *ngIf="!items.controls[index].value.image" i18n>No video uploaded !</span>
+        </div>
+
+        <div>
+          <input #uploadInput hidden type="file" onclick="this.value=null" (change)="onCoverImageChange($event)" accept=".*"/>
+          <button mat-flat-button type="button" color="primary" (click)="uploadInput.click()" i18n>News {{index + 1  }} right video</button>
+          <span *ngIf="items.controls[index].value.image" i18n>Current: <a [href]="items.controls[index].value.image">{{items.controls[index].value.image}}</a></span>
+          <span *ngIf="!items.controls[index].value.image" i18n>No video uploaded !</span>
+        </div>
+      </div>
+    </mat-card>
   </div>
 
   <div>

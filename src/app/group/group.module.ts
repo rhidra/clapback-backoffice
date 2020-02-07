@@ -14,6 +14,8 @@ import {MatInputModule} from '@angular/material/input';
 import {UtilsModule} from '../utils/utils.module';
 import {MatSelectModule} from '@angular/material/select';
 import {FlexModule} from '@angular/flex-layout';
+import {MatTooltipModule} from '@angular/material/tooltip';
+import {MatCardModule} from '@angular/material/card';
 
 
 @NgModule({
@@ -33,7 +35,9 @@ import {FlexModule} from '@angular/flex-layout';
     MatInputModule,
     UtilsModule,
     MatSelectModule,
-    FlexModule
+    FlexModule,
+    MatTooltipModule,
+    MatCardModule
   ]
 })
 export class GroupModule { }

@@ -1,11 +1,12 @@
 import { Component, OnInit } from '@angular/core';
-import {FormBuilder, FormGroup, Validators} from '@angular/forms';
+import {FormArray, FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {NewsGroup} from '../../models/newsgroup.model';
 import {ActivatedRoute} from '@angular/router';
 import {GroupService} from '../group.service';
 import {NavbarService} from '../../core/navbar/navbar.service';
 import {Location} from '@angular/common';
 import {HttpClient} from '@angular/common/http';
+import {NewsItem} from '../../models/newsitem.model';
 
 @Component({
   selector: 'app-edit',
@@ -51,8 +52,31 @@ export class GroupEditComponent implements OnInit {
       date: [this.group.date || '', [Validators.required]],
       content: [this.group.content || '', [Validators.required]],
       image: [this.group.image || '', [Validators.required]],
+      items: this.fb.array(this.group.items.map(item => this.fb.group({
+        title: [item.title || '', [Validators.required]],
+        content: [item.content || '', [Validators.required]],
+        image: [item.image || '', [Validators.required]],
+        videoLeft: [item.videoLeft || '', [Validators.required]],
+        videoRight: [item.videoRight || '', [Validators.required]],
+      })))
     });
     this.isLoading = false;
+  }
+
+  get items() { return this.form.get('items') as FormArray; }
+
+  addItem() {
+    this.items.push(this.fb.group({
+      title: '',
+      content: '',
+      image: '',
+      videoLeft: '',
+      videoRight: '',
+    }));
+  }
+
+  removeItem(index: number) {
+    this.items.removeAt(index);
   }
 
   onCoverImageChange(event) {
@@ -65,7 +89,6 @@ export class GroupEditComponent implements OnInit {
     return new Promise(resolve => {
       const uploadData = new FormData();
       uploadData.append('cover', this.coverImage, this.coverImage.name);
-      console.log(uploadData);
       this.http.post('http://localhost:9000/news/upload', uploadData).subscribe((r: any) => {
         this.form.patchValue({image: r.fileName});
         resolve();
