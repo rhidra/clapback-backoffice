@@ -9,11 +9,13 @@ export class DialogComponent implements OnInit {
 
   title: string;
   content: string;
+  isChoice: boolean;
 
   constructor(
     private dialogRef: MatDialogRef<DialogComponent>,
     @Inject(MAT_DIALOG_DATA) data
   ) {
+    this.isChoice = data.isChoice ? data.isChoice : false;
     this.title = data.title;
     this.content = data.content;
   }

@@ -55,7 +55,7 @@ export class GroupSearchComponent implements OnInit {
     e.preventDefault();
     e.stopImmediatePropagation();
 
-    const data = {title: 'Confirmation', content: 'Do you really want to delete this news group ?'};
+    const data = {title: 'Confirmation', content: 'Do you really want to delete this news group ?', isChoice: true};
     this.dialog.open(DialogComponent, {data: data})
       .afterClosed().subscribe(res => {
         if (res) {

@@ -8,11 +8,9 @@ export class HelperService {
   public static toDate(date: any) : Date {
     if (date && date instanceof Date){
       return date;
-    }
-    else  if (date !== null && date !== '' && typeof date === 'string'){
+    } else  if (date !== null && date !== '' && typeof date === 'string'){
       return new Date(date);
-    }
-    else  if (date !== null && date !== ''){
+    } else  if (date !== null && date !== ''){
       return date.toDate();
     }
     return null;

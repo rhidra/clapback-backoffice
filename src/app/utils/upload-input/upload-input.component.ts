@@ -1,6 +1,8 @@
-import {Component, forwardRef, Input, OnInit, Output} from '@angular/core';
+import {Component, EventEmitter, forwardRef, Input, OnInit, Output} from '@angular/core';
 import {ControlValueAccessor, NG_VALUE_ACCESSOR} from '@angular/forms';
-import {HttpClient, HttpEventType} from '@angular/common/http';
+import {HttpClient, HttpErrorResponse, HttpEventType} from '@angular/common/http';
+import {MatDialog} from '@angular/material/dialog';
+import {DialogComponent} from '../dialog/dialog.component';
 
 @Component({
   selector: 'app-upload-input',
@@ -13,13 +15,19 @@ export class UploadInputComponent implements OnInit, ControlValueAccessor {
 
   filePath = '';
   isUploading = false;
+  isError = false;
+  errorMsg = '';
 
   @Input() name = 'Image';
+
+  @Output() uploadStart = new EventEmitter();
+  @Output() uploadStop = new EventEmitter();
 
   propagateChange: any = () => {};
 
   constructor(
-    private http: HttpClient
+    private http: HttpClient,
+    private dialog: MatDialog,
   ) { }
 
   ngOnInit() {
@@ -28,14 +36,28 @@ export class UploadInputComponent implements OnInit, ControlValueAccessor {
   onChange(event) {
     const uploadData = new FormData();
     uploadData.append('media', event.target.files[0], event.target.files[0].name);
+    this.uploadStart.emit();
     this.http.post('http://localhost:9000/media?quality=80', uploadData, {reportProgress: true, observe: 'events'}).subscribe((r: any) => {
       if (r.type === HttpEventType.UploadProgress) {
         this.isUploading = true;
+        this.isError = false;
       } else if (r.type === HttpEventType.Response) {
+        this.uploadStop.emit();
         this.isUploading = false;
+        this.isError = false;
         this.filePath = r.body.filename;
         this.propagateChange(this.filePath);
       }
+    }, (err: HttpErrorResponse) => {
+      this.uploadStop.emit();
+      this.isUploading = false;
+      this.isError = true;
+      this.errorMsg = err.error;
+      this.dialog.open(DialogComponent, {data: {
+          title: 'Uploading error !',
+          content: 'The file was not uploaded due to an error. Please contact the administrator with the following error: '
+            + JSON.stringify(this.errorMsg)
+        }});
     });
   }
 

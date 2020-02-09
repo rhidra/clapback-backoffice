@@ -6,7 +6,10 @@
     <mat-hint i18n>Content displayed on the first page of the news group. Max 500 chars</mat-hint>
   </mat-form-field>
 
-  <app-upload-input formControlName="image" i18n-name name="Cover image"></app-upload-input>
+  <app-upload-input formControlName="image"
+                    (uploadStart)="uploading = uploading + 1"
+                    (uploadStop)="uploading = uploading - 1"
+                    i18n-name name="Cover image"></app-upload-input>
 
   <div>
     <button type="button" mat-raised-button color="accent" cdkFocusInitial i18n (click)="addItem()">
@@ -32,20 +35,29 @@
             <mat-hint i18n>Max 500 chars</mat-hint>
           </mat-form-field>
 
-        <app-upload-input formControlName="image" i18n-name name="Cover image"></app-upload-input>
+        <app-upload-input formControlName="image"
+                          (uploadStart)="uploading = uploading + 1"
+                          (uploadStop)="uploading = uploading - 1"
+                          i18n-name name="Cover image"></app-upload-input>
 
-        <app-upload-input formControlName="videoLeft" i18n-name name="Left video"></app-upload-input>
+        <app-upload-input formControlName="videoLeft"
+                          (uploadStart)="uploading = uploading + 1"
+                          (uploadStop)="uploading = uploading - 1"
+                          i18n-name name="Left video"></app-upload-input>
 
-        <app-upload-input formControlName="videoRight" i18n-name name="Right video"></app-upload-input>
+        <app-upload-input formControlName="videoRight"
+                          (uploadStart)="uploading = uploading + 1"
+                          (uploadStop)="uploading = uploading - 1"
+                          i18n-name name="Right video"></app-upload-input>
       </div>
     </mat-card>
   </div>
 
   <div>
-    <button type="submit" [disabled]="form.pristine || form.invalid || isUploading" mat-raised-button color="accent" cdkFocusInitial i18n>
-      <span *ngIf="isCreation && !isUploading" i18n>Create</span>
-      <span *ngIf="!isCreation && !isUploading" i18n>Update</span>
-      <span *ngIf="isUploading" i18n>Uploading...</span>
+    <button type="submit" [disabled]="form.pristine || form.invalid || !!uploading" mat-raised-button color="accent" cdkFocusInitial i18n>
+      <span *ngIf="isCreation && !uploading" i18n>Create</span>
+      <span *ngIf="!isCreation && !uploading" i18n>Update</span>
+      <span *ngIf="!!uploading" i18n>Uploading...</span>
     </button>
   </div>
 </form>

@@ -5,7 +5,6 @@ import {ActivatedRoute} from '@angular/router';
 import {GroupService} from '../group.service';
 import {NavbarService} from '../../core/navbar/navbar.service';
 import {Location} from '@angular/common';
-import {HttpClient, HttpEvent, HttpEventType} from '@angular/common/http';
 
 @Component({
   selector: 'app-edit',
@@ -14,10 +13,9 @@ import {HttpClient, HttpEvent, HttpEventType} from '@angular/common/http';
 export class GroupEditComponent implements OnInit {
   form: FormGroup;
   group: NewsGroup;
-  coverImage = null;
   isCreation: boolean;
   isLoading = true;
-  isUploading = false;
+  uploading = 0;
 
   get items() { return this.form.get('items') as FormArray; }
 
