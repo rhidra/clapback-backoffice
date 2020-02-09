@@ -1,0 +1,6 @@
+<div>
+  <input #uploadInput hidden type="file" onclick="this.value=null" (change)="onChange($event)" accept=".*"/>
+  <button mat-flat-button type="button" [disabled]="isUploading" color="primary" (click)="uploadInput.click()" i18n>{{name}}</button>
+  <span *ngIf="filePath" i18n>Current: <a [href]="filePath">{{filePath}}</a></span>
+  <span *ngIf="!filePath" i18n>No image uploaded !</span>
+</div>
