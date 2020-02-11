@@ -1,4 +1,6 @@
 <form class="app-group-edit full-width" [formGroup]="form" (ngSubmit)="onSubmit()" *ngIf="!isLoading" fxLayout="column" fxLayoutGap="24px">
+  <mat-checkbox formControlName="approved" i18n>Approved for publishing</mat-checkbox>
+
   <app-datetimepicker-input formControlName="date"></app-datetimepicker-input>
 
   <mat-form-field>

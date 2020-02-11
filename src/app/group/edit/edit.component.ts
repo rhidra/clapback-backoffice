@@ -50,6 +50,7 @@ export class GroupEditComponent implements OnInit {
       date: [this.group.date || '', [Validators.required]],
       content: [this.group.content || '', [Validators.required]],
       image: [this.group.image || '', [Validators.required]],
+      approved: [this.group.approved || false],
       items: this.fb.array(this.group.items.map(item => this.fb.group({
         _id: [item._id || ''],
         title: [item.title || '', [Validators.required]],
