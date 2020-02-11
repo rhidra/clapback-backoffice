@@ -3,4 +3,8 @@
     position: relative;
     top: 5px;
   }
+
+  p {
+    @include color_alternatives(false);
+  }
 }

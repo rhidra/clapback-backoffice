@@ -6,4 +6,5 @@ export class NewsGroup {
     date: string;
     image: string;
     items: Array<NewsItem> = [];
+    approved: boolean;
 }

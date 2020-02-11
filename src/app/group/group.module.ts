@@ -16,6 +16,7 @@ import {MatSelectModule} from '@angular/material/select';
 import {FlexModule} from '@angular/flex-layout';
 import {MatTooltipModule} from '@angular/material/tooltip';
 import {MatCardModule} from '@angular/material/card';
+import {MatCheckboxModule} from '@angular/material/checkbox';
 
 
 @NgModule({
@@ -37,7 +38,8 @@ import {MatCardModule} from '@angular/material/card';
     MatSelectModule,
     FlexModule,
     MatTooltipModule,
-    MatCardModule
+    MatCardModule,
+    MatCheckboxModule,
   ]
 })
 export class GroupModule { }

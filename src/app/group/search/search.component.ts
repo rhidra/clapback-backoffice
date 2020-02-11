@@ -27,12 +27,12 @@ export class GroupSearchComponent implements OnInit {
   ngOnInit() {
     this.navbarService.updateNavbar('News groups', () => this.router.navigate(['/group/edit']), null, () => {});
     this.groupService.load().then(() => {
-      this.build_groups();
+      this.buildGroups();
       this.isLoading = false;
     });
   }
 
-  build_groups() {
+  buildGroups() {
     this.groups = {current: Array<NewsGroup>(), future: Array<NewsGroup>(), past: Array<NewsGroup>()};
     const latest = this.groupService.groups.reduce((ltst: any, grp: any) => moment(grp.date) > moment(ltst.date) && moment(grp.date) <= moment() ? grp : ltst);
     this.groups.current.push(latest);
@@ -51,15 +51,35 @@ export class GroupSearchComponent implements OnInit {
     });
   }
 
+  approve(e: Event, group: NewsGroup) {
+    e.preventDefault();
+    e.stopImmediatePropagation();
+
+    this.dialog.open(DialogComponent, {data: {
+      title: 'Publishing content',
+      content: 'Do you want to change the approved state of this content ?',
+      isChoice: true,
+    }})
+      .afterClosed().subscribe(res => {
+        if (res) {
+          group.approved = !group.approved;
+          this.groupService.edit(group);
+        }
+    });
+  }
+
   delete(e: Event, group: NewsGroup) {
     e.preventDefault();
     e.stopImmediatePropagation();
 
-    const data = {title: 'Confirmation', content: 'Do you really want to delete this news group ?', isChoice: true};
-    this.dialog.open(DialogComponent, {data: data})
+    this.dialog.open(DialogComponent, {data: {
+      title: 'Deleting content',
+      content: 'Do you really want to delete this news group ?',
+      isChoice: true
+    }})
       .afterClosed().subscribe(res => {
         if (res) {
-          this.groupService.delete(group).then(() => this.build_groups());
+          this.groupService.delete(group).then(() => this.buildGroups());
         }
     });
   }
