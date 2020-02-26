@@ -9,7 +9,6 @@ import {UsersService} from '../users.service';
 export class UsersSearchComponent implements OnInit {
 
   displayedColumns: Array<string> = ['_id', 'email', 'phone', 'permissions'];
-  dataSource: Array<any>;
   isLoading: boolean;
 
   constructor(
