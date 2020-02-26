@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {UserService} from '../user.service';
-import {ActivatedRoute} from '@angular/router';
+import {ActivatedRoute, Router} from '@angular/router';
 import {NavbarService} from '../../core/navbar/navbar.service';
 import {User} from '../../models/user.model';
 import {Location} from '@angular/common';
@@ -25,13 +25,14 @@ export class UserEditComponent implements OnInit {
     private navbarService: NavbarService,
     private fb: FormBuilder,
     private location: Location,
+    private router: Router,
   ) { }
 
   ngOnInit() {
     this.route.paramMap.subscribe(params => {
       const id = params.get('id');
       this.isCreation = !id;
-      this.navbarService.updateNavbar(this.isCreation ? 'New user' : 'Edit user');
+      this.navbarService.updateNavbar(this.isCreation ? 'New user' : 'Edit user', null, '', null, [], null, () => this.router.navigate(['/user/']));
 
       if (this.isCreation) {
         this.user = new User();
