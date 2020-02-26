@@ -15,7 +15,7 @@ export class UserService {
 
   search(query: string = '') {
     return new Promise(resolve => {
-      this.http.get('assets/MOCK_DATA.json').subscribe((data: Array<User>) => {
+      this.http.get('http://localhost:9000/user/', {params: {query: query}}).subscribe((data: Array<User>) => {
         this.users = data;
         resolve();
       });
@@ -24,9 +24,7 @@ export class UserService {
 
   get(id: string) {
     return new Promise(resolve => {
-      this.http.get('assets/MOCK_DATA.json').subscribe((users: Array<User>) => {
-        resolve(users.find(user => user._id === id));
-      });
+      this.http.get('http://localhost:9000/user/' + id).subscribe((user: User) => resolve(user));
     });
   }
 
