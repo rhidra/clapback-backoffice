@@ -1,1 +1,31 @@
-<p>edit works!</p>
+<form class="app-edit-user full-width" [formGroup]="form" (ngSubmit)="onSubmit()" *ngIf="!isLoading" fxLayout="column" fxLayoutGap="24px">
+  <p *ngIf="!isCreation" i18n>
+    ID: {{user._id}}
+  </p>
+
+  <mat-form-field class="full-width">
+    <input matInput formControlName="email" type="email" i18n-placeholder placeholder="Email"/>
+  </mat-form-field>
+
+  <mat-form-field class="full-width">
+    <input matInput formControlName="phone" type="tel" i18n-placeholder placeholder="Phone"/>
+  </mat-form-field>
+
+  <mat-form-field>
+    <mat-label i18n>Permissions</mat-label>
+    <mat-select formControlName="permissions" multiple>
+      <mat-option value="user" i18n>User</mat-option>
+      <mat-option value="editor" i18n>Editor</mat-option>
+      <mat-option value="admin" i18n>Administrator</mat-option>
+    </mat-select>
+  </mat-form-field>
+
+  <div>
+    <button type="submit" [disabled]="form.pristine || form.invalid" mat-raised-button color="accent" cdkFocusInitial i18n>
+      <span *ngIf="isCreation" i18n>Create</span>
+      <span *ngIf="!isCreation" i18n>Update</span>
+    </button>
+  </div>
+
+  <pre>{{form.value|json}}</pre>
+</form>
