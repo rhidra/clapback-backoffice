@@ -20,5 +20,4 @@ export class UserSearchComponent implements OnInit {
       this.isLoading = false;
     });
   }
-
 }
