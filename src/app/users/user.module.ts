@@ -1,23 +1,27 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
-import { UsersRoutingModule } from './users-routing.module';
-import { UsersSearchComponent } from './search/search.component';
+import { UserRoutingModule } from './user-routing.module';
+import { UserSearchComponent } from './search/search.component';
 import {MatTableModule} from '@angular/material/table';
 import {MatTooltipModule} from '@angular/material/tooltip';
 import {MatListModule} from '@angular/material/list';
 import {MatIconModule} from '@angular/material/icon';
+import { UserEditComponent } from './edit/edit.component';
 
 
 @NgModule({
-  declarations: [UsersSearchComponent],
+  declarations: [
+    UserSearchComponent,
+    UserEditComponent
+  ],
   imports: [
     CommonModule,
-    UsersRoutingModule,
+    UserRoutingModule,
     MatTableModule,
     MatTooltipModule,
     MatListModule,
     MatIconModule
   ]
 })
-export class UsersModule { }
+export class UserModule { }

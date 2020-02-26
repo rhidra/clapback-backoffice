@@ -1,15 +1,17 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
-import {UsersSearchComponent} from './search/search.component';
+import {UserSearchComponent} from './search/search.component';
 
 
 const routes: Routes = [
   { path: '', redirectTo: 'search', pathMatch: 'full'},
-  { path: 'search', component: UsersSearchComponent },
+  { path: 'search', component: UserSearchComponent },
+  { path: 'edit', component: UserSearchComponent },
+  { path: 'edit/:id', component: UserSearchComponent },
 ];
 
 @NgModule({
   imports: [RouterModule.forChild(routes)],
   exports: [RouterModule]
 })
-export class UsersRoutingModule { }
+export class UserRoutingModule { }
