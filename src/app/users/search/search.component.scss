@@ -1,4 +1,7 @@
 .app-users-search {
+  @include box_shadow(2);
+  margin: 12px;
+
   tr.mat-row:hover {
     background: whitesmoke;
     cursor: pointer;
