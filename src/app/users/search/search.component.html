@@ -1,4 +1,4 @@
-<div *ngIf="!isLoading">
+<div *ngIf="!isLoading" class="app-users-search">
   <table mat-table [dataSource]="usersService.users" class="full-width">
 
     <ng-container matColumnDef="_id">
@@ -30,7 +30,7 @@
     </ng-container>
 
     <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns;" [routerLink]="['/users/edit', row._id]"></tr>
   </table>
 </div>
 
