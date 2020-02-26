@@ -1,8 +1,6 @@
 import { Injectable } from '@angular/core';
 import {HttpClient} from '@angular/common/http';
 import {User} from '../models/user.model';
-import {NewsGroup} from '../models/newsgroup.model';
-import {NewsItem} from '../models/newsitem.model';
 
 @Injectable({
   providedIn: 'root'
@@ -15,7 +13,7 @@ export class UserService {
 
   users: Array<User>;
 
-  load() {
+  search(query: string = '') {
     return new Promise(resolve => {
       this.http.get('assets/MOCK_DATA.json').subscribe((data: Array<User>) => {
         this.users = data;
