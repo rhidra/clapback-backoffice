@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import {GroupService} from '../group.service';
 import {NavbarService} from '../../core/navbar/navbar.service';
 import {NewsGroup} from '../../models/newsgroup.model';
-import * as moment from 'moment';
+import moment from 'moment';
 import {DialogComponent} from '../../utils/dialog/dialog.component';
 import {MatDialog} from '@angular/material/dialog';
 import {Router} from '@angular/router';

@@ -1,6 +1,6 @@
 import {Component, forwardRef, OnInit} from '@angular/core';
 import {ControlValueAccessor, FormBuilder, FormGroup, NG_VALUE_ACCESSOR, Validators} from '@angular/forms';
-import * as moment from 'moment';
+import moment from 'moment';
 
 @Component({
   selector: 'app-datetimepicker-input',
