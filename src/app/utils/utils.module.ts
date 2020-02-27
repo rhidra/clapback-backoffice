@@ -20,6 +20,7 @@ import {NgxMaterialTimepickerModule} from 'ngx-material-timepicker';
 import {MatDatepickerModule} from '@angular/material/datepicker';
 import {MatMomentDateModule} from '@angular/material-moment-adapter';
 import { UploadInputComponent } from './upload-input/upload-input.component';
+import { NotFoundComponent } from './not-found/not-found.component';
 
 
 @NgModule({
@@ -46,7 +47,8 @@ import { UploadInputComponent } from './upload-input/upload-input.component';
   declarations: [
     DialogComponent,
     DatetimepickerComponent,
-    UploadInputComponent
+    UploadInputComponent,
+    NotFoundComponent
   ],
   exports: [
     DatetimepickerComponent,
