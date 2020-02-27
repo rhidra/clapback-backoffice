@@ -66,4 +66,11 @@ export class AuthService {
       }, reject);
     });
   }
+
+  logout() {
+    this.storage.clear();
+    this.refreshToken = undefined;
+    this.accessToken = undefined;
+    this.user = undefined;
+  }
 }

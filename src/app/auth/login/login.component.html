@@ -1,11 +1,11 @@
 <form class="app-login full-width" fxLayout="column" fxLayoutGap="24px">
 
   <mat-form-field class="full-width">
-    <input matInput [(ngModel)]="email" #emailInput="ngModel" required type="email" i18n-placeholder placeholder="Email"/>
+    <input matInput [(ngModel)]="email" #emailInput="ngModel" [ngModelOptions]="{standalone: true}" required type="email" i18n-placeholder placeholder="Email"/>
   </mat-form-field>
 
   <mat-form-field class="full-width">
-    <input matInput [(ngModel)]="password" #passwordInput="ngModel" required type="password" i18n-placeholder placeholder="Password"/>
+    <input matInput [(ngModel)]="password" #passwordInput="ngModel" [ngModelOptions]="{standalone: true}" required type="password" i18n-placeholder placeholder="Password"/>
   </mat-form-field>
 
   <p *ngIf="isError" i18n>
@@ -13,7 +13,7 @@
   </p>
 
   <div>
-    <button type="button" (click)="login()" [disabled]="emailInput.invalid || passwordInput.invalid || isLoading" mat-raised-button color="accent" cdkFocusInitial i18n>
+    <button (click)="login()" [disabled]="emailInput.invalid || passwordInput.invalid || isLoading" mat-raised-button color="accent" cdkFocusInitial i18n>
       Login
     </button>
   </div>
