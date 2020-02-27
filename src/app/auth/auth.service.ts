@@ -25,6 +25,11 @@ export class AuthService {
     });
   }
 
+  hasPerm(perm: string) {
+    if (!this.user) { return false; }
+    return this.user.permissions.includes(perm);
+  }
+
   constructor(
     private http: HttpClient,
     @Inject(SESSION_STORAGE) private storage: WebStorageService,
@@ -53,6 +58,7 @@ export class AuthService {
         this.user._id = res.id;
         this.user.email = res.email;
         this.user.phone = res.phone;
+        this.user.permissions = res.permissions;
         this.accessToken = res.token;
         this.storage.set('refreshToken', this.refreshToken);
         this.storage.set('user', this.user);

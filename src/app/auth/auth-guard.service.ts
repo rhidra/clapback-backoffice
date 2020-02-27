@@ -13,8 +13,10 @@ export class AuthGuardService implements CanActivate {
   ) { }
 
   canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Promise<boolean> {
+    const permRequired: string = route.data.permission;
+
     return this.authService.getToken().then(token => {
-      if (token) {
+      if (token && (!permRequired || this.authService.hasPerm(permRequired))) {
         return new Promise(r => r(true));
       } else {
         this.router.navigate(['/', 'auth']);
