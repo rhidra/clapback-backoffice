@@ -1,4 +1,4 @@
-<div class="app-login full-width" fxLayout="column" fxLayoutGap="24px">
+<form class="app-login full-width" fxLayout="column" fxLayoutGap="24px">
 
   <mat-form-field class="full-width">
     <input matInput [(ngModel)]="email" #emailInput="ngModel" required type="email" i18n-placeholder placeholder="Email"/>
@@ -13,8 +13,8 @@
   </p>
 
   <div>
-    <button (click)="login()" [disabled]="emailInput.invalid || passwordInput.invalid || isLoading" mat-raised-button color="accent" cdkFocusInitial i18n>
+    <button type="button" (click)="login()" [disabled]="emailInput.invalid || passwordInput.invalid || isLoading" mat-raised-button color="accent" cdkFocusInitial i18n>
       Login
     </button>
   </div>
-</div>
+</form>
