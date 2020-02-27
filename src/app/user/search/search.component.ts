@@ -17,11 +17,12 @@ export class UserSearchComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    this.navbarService.updateNavbar('Users', null, '', this.search);
+    this.navbarService.updateNavbar('Users', null, '', q => this.search(q));
     this.search();
   }
 
   search(query: string = '') {
+    console.log(query);
     this.userService.search(query).then(() => this.isLoading = false);
   }
 }

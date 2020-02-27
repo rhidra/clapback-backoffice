@@ -1,7 +1,7 @@
 import {BrowserModule, DomSanitizer} from '@angular/platform-browser';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {MatSidenavModule} from '@angular/material/sidenav';
-import {HttpClientModule} from '@angular/common/http';
+import {HTTP_INTERCEPTORS, HttpClientModule} from '@angular/common/http';
 import {LOCALE_ID, NgModule} from '@angular/core';
 
 import { AppRoutingModule } from './app-routing.module';
@@ -27,9 +27,8 @@ import localeFr from '@angular/common/locales/fr';
 import {UtilsModule} from './utils/utils.module';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import {FlexLayoutModule} from '@angular/flex-layout';
-import {MatTreeModule} from '@angular/material/tree';
 import {MatExpansionModule} from '@angular/material/expansion';
-import {GroupModule} from './group/group.module';
+import {AuthInterceptor} from './auth/auth.interceptor';
 
 registerLocaleData(localeFr, 'fr');
 
@@ -68,6 +67,7 @@ registerLocaleData(localeFr, 'fr');
   providers: [
     { provide: LOCALE_ID, useValue: 'fr' },
     { provide: MAT_DATE_LOCALE, useValue: 'fr' },
+    { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true },
   ],
   entryComponents: [],
   bootstrap: [AppComponent]
