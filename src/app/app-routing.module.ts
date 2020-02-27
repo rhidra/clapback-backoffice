@@ -9,7 +9,7 @@ const routes: Routes = [
   { path: '', redirectTo: 'dashboard', pathMatch: 'full'},
   { path: 'dashboard', component: DashboardComponent, canActivate: [AuthGuardService]},
   { path: 'group', loadChildren: './group/group.module#GroupModule', canActivate: [AuthGuardService]},
-  { path: 'user', loadChildren: './user/user.module#UserModule', canActivate: [AuthGuardService]},
+  { path: 'user', loadChildren: './user/user.module#UserModule', canActivate: [AuthGuardService], data: {permission: 'admin'}},
   { path: 'auth', loadChildren: './auth/auth.module#AuthModule'},
 
   {path: '404', component: NotFoundComponent},
