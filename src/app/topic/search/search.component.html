@@ -1,0 +1,21 @@
+<div class="app-topic-search" *ngIf="!isLoading">
+  <mat-nav-list>
+    <h3 mat-subheader>
+      <mat-icon fontSet="fas" fontIcon="fa-play"></mat-icon>
+      Latest news
+    </h3>
+
+    <a mat-list-item *ngFor="let topic of topicService.topics" [routerLink]="['/', 'topic', 'edit', group._id]">
+      <mat-icon mat-list-icon fontSet="fas" fontIcon="fa-file-alt"></mat-icon>
+      <h4 mat-line>{{moment(topic.date).format('dddd, MMMM Do YYYY, h:mm a')}}</h4>
+      <p mat-line>{{topic.title}}</p>
+
+      <mat-checkbox [checked]="topic.approved" (click)="approve($event, topic)" matTooltip="Approve for publishing" i18n-matTooltip></mat-checkbox>
+      <button mat-icon-button (click)="delete($event, topic)">
+        <mat-icon data-text-color="red" fontSet="fas" fontIcon="fa-trash" class="fa-lg"></mat-icon>
+      </button>
+    </a>
+    <mat-divider></mat-divider>
+  </mat-nav-list>
+</div>
+<mat-spinner *ngIf="isLoading"></mat-spinner>

@@ -1,18 +1,19 @@
 import {Component, OnInit} from '@angular/core';
 import {FormArray, FormBuilder, FormGroup, Validators} from '@angular/forms';
-import {NewsGroup} from '../../models/newsgroup.model';
 import {ActivatedRoute} from '@angular/router';
-import {GroupService} from '../group.service';
+import {TopicService} from '../topic.service';
 import {NavbarService} from '../../core/navbar/navbar.service';
 import {Location} from '@angular/common';
+import {Topic} from '../../models/topic.model';
+import {AuthService} from '../../auth/auth.service';
 
 @Component({
   selector: 'app-edit',
   templateUrl: './edit.component.html',
 })
-export class GroupEditComponent implements OnInit {
+export class TopicEditComponent implements OnInit {
   form: FormGroup;
-  group: NewsGroup;
+  topic: Topic;
   isCreation: boolean;
   isLoading = true;
   uploading = 0;
@@ -22,9 +23,10 @@ export class GroupEditComponent implements OnInit {
   constructor(
     private fb: FormBuilder,
     private route: ActivatedRoute,
-    private groupService: GroupService,
+    private groupService: TopicService,
     private navbarService: NavbarService,
-    private location: Location
+    private location: Location,
+    private authService: AuthService,
   ) { }
 
   ngOnInit() {
@@ -34,11 +36,11 @@ export class GroupEditComponent implements OnInit {
       this.navbarService.updateNavbar(this.isCreation ? 'New' : 'Edit');
 
       if (this.isCreation) {
-        this.group = new NewsGroup();
+        this.topic = new Topic();
         this.initForm();
       } else {
-        this.groupService.get(id).then((group: NewsGroup) => {
-          this.group = group;
+        this.groupService.get(id).then((topic: Topic) => {
+          this.topic = topic;
           this.initForm();
         });
       }
@@ -47,39 +49,33 @@ export class GroupEditComponent implements OnInit {
 
   initForm() {
     this.form = this.fb.group({
-      date: [this.group.date || '', [Validators.required]],
-      content: [this.group.content || '', [Validators.required]],
-      image: [this.group.image || '', [Validators.required]],
-      approved: [this.group.approved || false],
-      items: this.fb.array(this.group.items.map(item => this.fb.group({
-        _id: [item._id || ''],
-        title: [item.title || '', [Validators.required]],
-        content: [item.content || '', [Validators.required]],
-        image: [item.image || ''],
-        videoLeft: [item.videoLeft || ''],
-        videoRight: [item.videoRight || ''],
-      })))
+      date: [this.topic.date || '', [Validators.required]],
+      title: [this.topic.title || '', [Validators.required]],
+      video: [this.topic.video || '', [Validators.required]],
+      author: [this.topic.author || '', [Validators.required]],
+      hashtag: [this.topic.hashtag || '', [Validators.required]],
+      approved: [this.topic.approved || false],
+
+      leftPanel: {
+        video: [this.topic.leftPanel.video || ''],
+        text: [this.topic.leftPanel.text || ''],
+        image: [this.topic.leftPanel.image || ''],
+        quiz: [this.topic.leftPanel.quiz || ''],
+      },
+
+      rightPanel: {
+        video: [this.topic.rightPanel.video || ''],
+        text: [this.topic.rightPanel.text || ''],
+        image: [this.topic.rightPanel.image || ''],
+        quiz: [this.topic.rightPanel.quiz || ''],
+      },
     });
     this.isLoading = false;
   }
 
-  addItem() {
-    this.items.push(this.fb.group({
-      title: '',
-      content: '',
-      image: '',
-      videoLeft: '',
-      videoRight: '',
-    }));
-    this.form.markAsDirty();
-  }
-
-  removeItem(index: number) {
-    this.items.removeAt(index);
-    this.form.markAsDirty();
-  }
-
   onSubmit() {
+    // TODO
+    /*
     const rejectedItems = this.group.items.filter(item => !this.form.value.items.map(i => i._id).includes(item._id));
     Object.assign(this.group, this.form.value);
     if (this.isCreation) {
@@ -87,5 +83,6 @@ export class GroupEditComponent implements OnInit {
     } else {
       this.groupService.edit(this.group, rejectedItems).then(() => this.location.back());
     }
+    */
   }
 }

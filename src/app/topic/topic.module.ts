@@ -1,9 +1,9 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
-import { GroupRoutingModule } from './group-routing.module';
-import { GroupSearchComponent } from './search/search.component';
-import { GroupEditComponent } from './edit/edit.component';
+import { TopicRoutingModule } from './topic-routing.module';
+import { TopicSearchComponent } from './search/search.component';
+import { TopicEditComponent } from './edit/edit.component';
 import {MatListModule} from '@angular/material/list';
 import {MatIconModule} from '@angular/material/icon';
 import {MatButtonModule} from '@angular/material/button';
@@ -21,12 +21,12 @@ import {MatCheckboxModule} from '@angular/material/checkbox';
 
 @NgModule({
   declarations: [
-    GroupSearchComponent,
-    GroupEditComponent
+    TopicSearchComponent,
+    TopicEditComponent
   ],
   imports: [
     CommonModule,
-    GroupRoutingModule,
+    TopicRoutingModule,
     MatListModule,
     MatIconModule,
     MatButtonModule,
@@ -42,4 +42,4 @@ import {MatCheckboxModule} from '@angular/material/checkbox';
     MatCheckboxModule,
   ]
 })
-export class GroupModule { }
+export class TopicModule { }

@@ -1,20 +1,20 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { GroupSearchComponent } from './search.component';
+import { TopicSearchComponent } from './search.component';
 
 describe('SearchComponent', () => {
-  let component: GroupSearchComponent;
-  let fixture: ComponentFixture<GroupSearchComponent>;
+  let component: TopicSearchComponent;
+  let fixture: ComponentFixture<TopicSearchComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ GroupSearchComponent ]
+      declarations: [ TopicSearchComponent ]
     })
     .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(GroupSearchComponent);
+    fixture = TestBed.createComponent(TopicSearchComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

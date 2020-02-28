@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {NavbarService} from '../core/navbar/navbar.service';
-import {DashboardService} from './dashboard.service';
+import {TopicService} from '../topic/topic.service';
+import {Topic} from '../models/topic.model';
 
 @Component({
   selector: 'app-dashboard',
@@ -9,15 +10,17 @@ import {DashboardService} from './dashboard.service';
 export class DashboardComponent implements OnInit {
 
   isLoading = true;
+  latest: Topic;
 
   constructor(
     private navbarService: NavbarService,
-    private dashboardService: DashboardService
+    private topicService: TopicService,
   ) { }
 
   ngOnInit() {
     this.navbarService.updateNavbar('Dashboard');
-    this.dashboardService.load().then(() => {
+    this.topicService.search().then(() => {
+      this.latest = this.topicService.topics[0];
       this.isLoading = false;
     });
   }
