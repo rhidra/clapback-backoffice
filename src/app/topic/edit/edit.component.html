@@ -14,40 +14,43 @@
 
   <!-- Left panel -->
   <hr/>
-  <mat-card>
-    <h3 i18n>Left panel</h3>
-    <div class="full-width">
-      <!--
-      <mat-form-field class="full-width">
-        <input matInput formControlName="title" i18n-placeholder placeholder="Title news {{index + 1}}"/>
+  <mat-card *ngFor="let panel of [{id: 'leftPanel', name: 'Left Panel', type: leftPanelType}, {id: 'rightPanel', name: 'Right Panel', type: rightPanelType}]">
+    <h3 i18n>{{panel.name}}</h3>
+    <div class="full-width" [formGroupName]="panel.id">
+
+      <mat-form-field>
+        <mat-label i18n>Type</mat-label>
+        <mat-select [(ngModel)]="panel.type" [ngModelOptions]="{standalone: true}">
+          <mat-option value="video" i18n>Video</mat-option>
+          <mat-option value="text" i18n>Text + Image</mat-option>
+          <mat-option value="quiz" i18n>Quiz</mat-option>
+        </mat-select>
       </mat-form-field>
 
-      <mat-form-field class="full-width">
-        <textarea matInput formControlName="content" i18n-placeholder placeholder="News {{index + 1}} content"></textarea>
-        <mat-hint i18n>Max 500 chars</mat-hint>
-      </mat-form-field>
-
-      <app-upload-input formControlName="image"
+      <app-upload-input *ngIf="panel.type === 'video'"
+                        formControlName="video"
                         (uploadStart)="uploading = uploading + 1"
                         (uploadStop)="uploading = uploading - 1"
-                        i18n-name name="Cover image"></app-upload-input>
+                        i18n-name name="Video"></app-upload-input>
 
-      <app-upload-input formControlName="videoLeft"
-                        (uploadStart)="uploading = uploading + 1"
-                        (uploadStop)="uploading = uploading - 1"
-                        i18n-name name="Left video"></app-upload-input>
+      <div *ngIf="panel.type === 'text'">
 
-      <app-upload-input formControlName="videoRight"
-                        (uploadStart)="uploading = uploading + 1"
-                        (uploadStop)="uploading = uploading - 1"
-                        i18n-name name="Right video"></app-upload-input>
-    -->
+        <app-upload-input formControlName="image"
+                          (uploadStart)="uploading = uploading + 1"
+                          (uploadStop)="uploading = uploading - 1"
+                          i18n-name name="Image"></app-upload-input>
+
+        <mat-form-field class="full-width">
+          <textarea matInput formControlName="text" i18n-placeholder placeholder="Text content"></textarea>
+          <mat-hint i18n>Max 500 chars</mat-hint>
+        </mat-form-field>
+
+      </div>
+
+      <div *ngIf="panel.type === 'quiz'">
+        <p>Feature not available yet !</p>
+      </div>
     </div>
-  </mat-card>
-
-  <hr/>
-  <mat-card>
-    <p>Same thing but for the right panel.</p>
   </mat-card>
 
   <div>
@@ -57,5 +60,7 @@
       <span *ngIf="!!uploading" i18n>Uploading...</span>
     </button>
   </div>
+
+  <pre>{{form.value|json}}</pre>
 </form>
 <mat-spinner *ngIf="isLoading"></mat-spinner>

@@ -17,6 +17,8 @@ export class TopicEditComponent implements OnInit {
   isCreation: boolean;
   isLoading = true;
   uploading = 0;
+  leftPanelType: string;
+  rightPanelType: string;
 
   get items() { return this.form.get('items') as FormArray; }
 
@@ -37,10 +39,14 @@ export class TopicEditComponent implements OnInit {
 
       if (this.isCreation) {
         this.topic = new Topic();
+        this.leftPanelType = 'video';
+        this.rightPanelType = 'video';
         this.initForm();
       } else {
         this.groupService.get(id).then((topic: Topic) => {
           this.topic = topic;
+          this.leftPanelType = this.topic.leftPanel.quiz ? 'quiz' : this.topic.leftPanel.text ? 'text' : 'video';
+          this.rightPanelType = this.topic.rightPanel.quiz ? 'quiz' : this.topic.rightPanel.text ? 'text' : 'video';
           this.initForm();
         });
       }
@@ -53,22 +59,22 @@ export class TopicEditComponent implements OnInit {
       title: [this.topic.title || '', [Validators.required]],
       video: [this.topic.video || '', [Validators.required]],
       author: [this.topic.author || '', [Validators.required]],
-      hashtag: [this.topic.hashtag || '', [Validators.required]],
+      hashtag: [this.topic.hashtag || ''],
       approved: [this.topic.approved || false],
 
-      leftPanel: {
+      leftPanel: this.fb.group({
         video: [this.topic.leftPanel.video || ''],
         text: [this.topic.leftPanel.text || ''],
         image: [this.topic.leftPanel.image || ''],
         quiz: [this.topic.leftPanel.quiz || ''],
-      },
+      }),
 
-      rightPanel: {
+      rightPanel: this.fb.group({
         video: [this.topic.rightPanel.video || ''],
         text: [this.topic.rightPanel.text || ''],
         image: [this.topic.rightPanel.image || ''],
         quiz: [this.topic.rightPanel.quiz || ''],
-      },
+      }),
     });
     this.isLoading = false;
   }
