@@ -5,7 +5,7 @@
       Latest news
     </h3>
 
-    <a mat-list-item *ngFor="let topic of topicService.topics" [routerLink]="['/', 'topic', 'edit', group._id]">
+    <a mat-list-item *ngFor="let topic of topicService.topics" [routerLink]="['/', 'topic', 'edit', topic._id]">
       <mat-icon mat-list-icon fontSet="fas" fontIcon="fa-file-alt"></mat-icon>
       <h4 mat-line>{{moment(topic.date).format('dddd, MMMM Do YYYY, h:mm a')}}</h4>
       <p mat-line>{{topic.title}}</p>
