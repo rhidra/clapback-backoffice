@@ -7,33 +7,46 @@
     <input matInput formControlName="title" i18n-placeholder placeholder="Title"/>
   </mat-form-field>
 
+  <mat-form-field class="full-width">
+    <input matInput formControlName="hashtag" i18n-placeholder placeholder="Hashtag"/>
+    <mat-hint i18n>You don't need to put the # symbol at the beginning.</mat-hint>
+  </mat-form-field>
+
   <app-upload-input formControlName="video"
                     (uploadStart)="uploading = uploading + 1"
                     (uploadStop)="uploading = uploading - 1"
                     i18n-name name="Main panel video"></app-upload-input>
 
-  <!-- Left panel -->
+  <mat-form-field>
+    <mat-label i18n>Author</mat-label>
+    <mat-select formControlName="author">
+      <mat-option *ngFor="let user of authors" [value]="user._id">{{user.name || user.email}}</mat-option>
+    </mat-select>
+    <mat-hint i18n>You can only choose a verified user.</mat-hint>
+  </mat-form-field>
+
   <hr/>
-  <mat-card *ngFor="let panel of [{id: 'leftPanel', name: 'Left Panel', type: leftPanelType}, {id: 'rightPanel', name: 'Right Panel', type: rightPanelType}]">
-    <h3 i18n>{{panel.name}}</h3>
-    <div class="full-width" [formGroupName]="panel.id">
+
+  <mat-card *ngFor="let panel of ['leftPanel', 'rightPanel']">
+    <h3>{{panel === 'leftPanel' ? 'Left Panel' : 'Right Panel'}}</h3>
+    <div class="full-width" [formGroupName]="panel">
 
       <mat-form-field>
         <mat-label i18n>Type</mat-label>
-        <mat-select [(ngModel)]="panel.type" [ngModelOptions]="{standalone: true}">
+        <mat-select [(ngModel)]="panel === 'leftPanel' ? leftPanelType : rightPanelType" [ngModelOptions]="{standalone: true}" (valueChange)="changeType($event, panel)">
           <mat-option value="video" i18n>Video</mat-option>
           <mat-option value="text" i18n>Text + Image</mat-option>
           <mat-option value="quiz" i18n>Quiz</mat-option>
         </mat-select>
       </mat-form-field>
 
-      <app-upload-input *ngIf="panel.type === 'video'"
+      <app-upload-input *ngIf="(panel === 'leftPanel' && leftPanelType === 'video') || (panel === 'rightPanel' && rightPanelType === 'video')"
                         formControlName="video"
                         (uploadStart)="uploading = uploading + 1"
                         (uploadStop)="uploading = uploading - 1"
                         i18n-name name="Video"></app-upload-input>
 
-      <div *ngIf="panel.type === 'text'">
+      <div *ngIf="(panel === 'leftPanel' && leftPanelType === 'text') || (panel === 'rightPanel' && rightPanelType === 'text')">
 
         <app-upload-input formControlName="image"
                           (uploadStart)="uploading = uploading + 1"
@@ -47,7 +60,7 @@
 
       </div>
 
-      <div *ngIf="panel.type === 'quiz'">
+      <div *ngIf="(panel === 'leftPanel' && leftPanelType === 'quiz') || (panel === 'rightPanel' && rightPanelType === 'quiz')">
         <p>Feature not available yet !</p>
       </div>
     </div>

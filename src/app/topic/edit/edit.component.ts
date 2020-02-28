@@ -6,6 +6,8 @@ import {NavbarService} from '../../core/navbar/navbar.service';
 import {Location} from '@angular/common';
 import {Topic} from '../../models/topic.model';
 import {AuthService} from '../../auth/auth.service';
+import {User} from '../../models/user.model';
+import {UserService} from '../../user/user.service';
 
 @Component({
   selector: 'app-edit',
@@ -19,23 +21,25 @@ export class TopicEditComponent implements OnInit {
   uploading = 0;
   leftPanelType: string;
   rightPanelType: string;
+  authors: Array<User>;
 
   get items() { return this.form.get('items') as FormArray; }
 
   constructor(
     private fb: FormBuilder,
     private route: ActivatedRoute,
-    private groupService: TopicService,
+    private topicService: TopicService,
     private navbarService: NavbarService,
     private location: Location,
     private authService: AuthService,
+    private userService: UserService,
   ) { }
 
   ngOnInit() {
     this.route.paramMap.subscribe(params => {
       const id = params.get('id');
       this.isCreation = !id;
-      this.navbarService.updateNavbar(this.isCreation ? 'New' : 'Edit');
+      this.navbarService.updateNavbar(this.isCreation ? 'New' : 'Edit', null, '', null, [], null, () => this.location.back());
 
       if (this.isCreation) {
         this.topic = new Topic();
@@ -43,13 +47,17 @@ export class TopicEditComponent implements OnInit {
         this.rightPanelType = 'video';
         this.initForm();
       } else {
-        this.groupService.get(id).then((topic: Topic) => {
+        this.topicService.get(id).then((topic: Topic) => {
           this.topic = topic;
           this.leftPanelType = this.topic.leftPanel.quiz ? 'quiz' : this.topic.leftPanel.text ? 'text' : 'video';
           this.rightPanelType = this.topic.rightPanel.quiz ? 'quiz' : this.topic.rightPanel.text ? 'text' : 'video';
           this.initForm();
         });
       }
+
+      this.userService.search().then(() => {
+        this.authors = this.userService.users.filter(user => user.verified);
+      });
     });
   }
 
@@ -58,7 +66,7 @@ export class TopicEditComponent implements OnInit {
       date: [this.topic.date || '', [Validators.required]],
       title: [this.topic.title || '', [Validators.required]],
       video: [this.topic.video || '', [Validators.required]],
-      author: [this.topic.author || '', [Validators.required]],
+      author: [this.topic.author || this.authService.user._id, [Validators.required]],
       hashtag: [this.topic.hashtag || ''],
       approved: [this.topic.approved || false],
 
@@ -79,16 +87,39 @@ export class TopicEditComponent implements OnInit {
     this.isLoading = false;
   }
 
-  onSubmit() {
-    // TODO
-    /*
-    const rejectedItems = this.group.items.filter(item => !this.form.value.items.map(i => i._id).includes(item._id));
-    Object.assign(this.group, this.form.value);
-    if (this.isCreation) {
-      this.groupService.create(this.group).then(() => this.location.back());
+  changeType(type, panel) {
+    if (panel === 'leftPanel') {
+      this.leftPanelType = type;
     } else {
-      this.groupService.edit(this.group, rejectedItems).then(() => this.location.back());
+      this.rightPanelType = type;
     }
-    */
+  }
+
+  onSubmit() {
+    if (this.leftPanelType === 'video') {
+      this.form.controls.leftPanel.patchValue({text: null, image: null, quiz: null});
+    } else if (this.leftPanelType === 'text') {
+      this.form.controls.leftPanel.patchValue({video: null, quiz: null});
+    } else {
+      this.form.controls.leftPanel.patchValue({text: null, image: null, video: null});
+    }
+    if (this.rightPanelType === 'video') {
+      this.form.controls.rightPanel.patchValue({text: null, image: null, quiz: null});
+    } else if (this.rightPanelType === 'text') {
+      this.form.controls.rightPanel.patchValue({video: null, quiz: null});
+    } else {
+      this.form.controls.rightPanel.patchValue({text: null, image: null, video: null});
+    }
+
+    // TODO: Remove the following lines when the quiz form is done
+    this.form.controls.leftPanel.patchValue({quiz: null});
+    this.form.controls.rightPanel.patchValue({quiz: null});
+
+    Object.assign(this.topic, this.form.value);
+    if (this.isCreation) {
+      this.topicService.create(this.topic).then(() => this.location.back());
+    } else {
+      this.topicService.edit(this.topic).then(() => this.location.back());
+    }
   }
 }
