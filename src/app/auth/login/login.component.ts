@@ -24,6 +24,11 @@ export class LoginComponent implements OnInit {
 
   ngOnInit() {
     this.navbarService.updateNavbar('Login');
+    this.authService.getToken().then(token => {
+      if (token) {
+        this.router.navigate(['/']);
+      }
+    });
   }
 
   login() {
