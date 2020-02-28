@@ -55,10 +55,7 @@ export class AuthService {
       this.http.post('http://localhost:9000/auth/login', {email, password}).subscribe((res: any) => {
         this.refreshToken = res.refreshToken;
         this.user = new User();
-        this.user._id = res.id;
-        this.user.email = res.email;
-        this.user.phone = res.phone;
-        this.user.permissions = res.permissions;
+        Object.assign(this.user, res.user);
         this.accessToken = res.token;
         this.storage.set('refreshToken', this.refreshToken);
         this.storage.set('user', this.user);
