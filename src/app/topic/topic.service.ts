@@ -39,7 +39,7 @@ export class TopicService {
   edit(topic: Topic) {
     return new Promise(resolve => {
       this.http.post('http://localhost:9000/topic/' + topic._id, topic).subscribe((data: Topic) => {
-        Object.assign(this.topics.find(temp => temp._id === topic._id), topic);
+        Object.assign(this.topics.find(temp => temp._id === topic._id) || {}, topic);
         resolve(data);
       });
     });
