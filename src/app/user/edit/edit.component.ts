@@ -48,8 +48,11 @@ export class UserEditComponent implements OnInit {
 
   initForm() {
     this.form = this.fb.group({
-      phone: [this.user.phone || '', [Validators.required]],
-      email: [this.user.email || '', [Validators.required]],
+      name: [this.user.name || '', [Validators.required]],
+      phone: [this.user.phone || ''],
+      email: [this.user.email || ''],
+      verified: [this.user.verified || false, [Validators.required]],
+      level: [this.user.level || 'level1', [Validators.required]],
       permissions: [this.user.permissions || []],
     });
     this.isLoading = false;

@@ -8,7 +8,7 @@ import {NavbarService} from '../../core/navbar/navbar.service';
 })
 export class UserSearchComponent implements OnInit {
 
-  displayedColumns: Array<string> = ['_id', 'email', 'phone', 'permissions'];
+  displayedColumns: Array<string> = ['_id', 'name', 'email', 'phone', 'level', 'verified', 'permissions'];
   isLoading: boolean = true;
 
   constructor(

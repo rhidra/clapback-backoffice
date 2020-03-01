@@ -39,4 +39,11 @@ export class UserService {
       this.http.post('http://localhost:9000/user/' + user._id, user).subscribe(() => resolve());
     });
   }
+
+  getLevelName(level: string) {
+    return level === 'level1' ? 'Newbie'
+      : level === 'level2' ? 'Well-versed'
+      : level === 'level3' ? 'News-buff'
+      : 'Error';
+  }
 }
