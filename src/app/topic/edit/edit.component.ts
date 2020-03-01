@@ -65,16 +65,20 @@ export class TopicEditComponent implements OnInit {
     this.form = this.fb.group({
       date: [this.topic.date || '', [Validators.required]],
       title: [this.topic.title || '', [Validators.required]],
-      video: [this.topic.video || '', [Validators.required]],
-      author: [this.topic.author || this.authService.user._id, [Validators.required]],
       hashtag: [this.topic.hashtag || ''],
       approved: [this.topic.approved || false],
+
+      centerPanel: this.fb.group({
+        video: [this.topic.centerPanel.video || ''],
+        author: [this.topic.centerPanel.author || this.authService.user._id, [Validators.required]],
+      }),
 
       leftPanel: this.fb.group({
         video: [this.topic.leftPanel.video || ''],
         text: [this.topic.leftPanel.text || ''],
         image: [this.topic.leftPanel.image || ''],
         quiz: [this.topic.leftPanel.quiz || ''],
+        author: [this.topic.leftPanel.author || this.authService.user._id, [Validators.required]],
       }),
 
       rightPanel: this.fb.group({
@@ -82,6 +86,7 @@ export class TopicEditComponent implements OnInit {
         text: [this.topic.rightPanel.text || ''],
         image: [this.topic.rightPanel.image || ''],
         quiz: [this.topic.rightPanel.quiz || ''],
+        author: [this.topic.rightPanel.author || this.authService.user._id, [Validators.required]],
       }),
     });
     this.isLoading = false;
