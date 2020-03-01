@@ -21,9 +21,11 @@
       <td mat-cell *matCellDef="let element">
         <mat-icon *ngFor="let perm of element.permissions" matListIcon fontSet="fas"
                   [fontIcon]="perm === 'user' ? 'fa-user' :
-                              perm === 'editor' ? 'fa-user-edit' :
+                              perm === 'creator' ? 'fa-pen-fancy' :
+                              perm === 'editor' ? 'fa-spell-check' :
                               perm === 'admin' ? 'fa-tools' : 'fa-question'"
                   [matTooltip]="perm === 'user' ? 'Regular user' :
+                              perm === 'creator' ? 'Creator' :
                               perm === 'editor' ? 'Editor' :
                               perm === 'admin' ? 'Administrator' : 'Unknown (' + perm + ')'"></mat-icon>
       </td>
