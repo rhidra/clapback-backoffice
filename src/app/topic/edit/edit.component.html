@@ -77,7 +77,7 @@
       </div>
 
       <div *ngIf="(panel === 'leftPanel' && leftPanelType === 'quiz') || (panel === 'rightPanel' && rightPanelType === 'quiz')">
-        <p>Feature not available yet !</p>
+        <app-quiz formControlName="quiz"></app-quiz>
       </div>
     </div>
   </mat-card>

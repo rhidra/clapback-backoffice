@@ -17,12 +17,14 @@ import {FlexModule} from '@angular/flex-layout';
 import {MatTooltipModule} from '@angular/material/tooltip';
 import {MatCardModule} from '@angular/material/card';
 import {MatCheckboxModule} from '@angular/material/checkbox';
+import { QuizComponent } from './quiz/quiz.component';
 
 
 @NgModule({
   declarations: [
     TopicSearchComponent,
-    TopicEditComponent
+    TopicEditComponent,
+    QuizComponent
   ],
   imports: [
     CommonModule,
