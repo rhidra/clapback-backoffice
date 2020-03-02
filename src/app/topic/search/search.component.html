@@ -6,17 +6,11 @@
     </h3>
 
     <a mat-list-item *ngFor="let topic of topicService.topics" [routerLink]="['/', 'topic', 'edit', topic._id]">
-      <mat-icon *ngFor="let panel of [topic.leftPanel, topic.centerPanel, topic.rightPanel]" mat-list-icon fontSet="fas"
-                [fontIcon]="panel.video ? 'fa-file-video' : panel.text ? 'fa-file-alt' : 'fa-file-signature'"></mat-icon>
+      <mat-icon mat-list-icon fontSet="fas" fontIcon="fa-file-alt"></mat-icon>
+      <h4 mat-line>{{moment(topic.date).format('dddd, MMMM Do YYYY, h:mm a')}}</h4>
+      <p mat-line>{{topic.title}}</p>
 
-      <h3 mat-line>{{topic.title}}</h3>
-      <p mat-line>{{moment(topic.date).format('dddd, MMMM Do YYYY, h:mm a')}}</p>
-
-      <mat-checkbox [checked]="topic.approved"
-                    [disabled]="!authService.hasPerm('editor')"
-                    (click)="approve($event, topic)"
-                    matTooltip="Approve for publishing" i18n-matTooltip></mat-checkbox>
-
+      <mat-checkbox [checked]="topic.approved" (click)="approve($event, topic)" matTooltip="Approve for publishing" i18n-matTooltip></mat-checkbox>
       <button mat-icon-button (click)="delete($event, topic)">
         <mat-icon data-text-color="red" fontSet="fas" fontIcon="fa-trash" class="fa-lg"></mat-icon>
       </button>
