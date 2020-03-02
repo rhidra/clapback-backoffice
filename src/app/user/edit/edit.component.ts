@@ -17,6 +17,7 @@ export class UserEditComponent implements OnInit {
   isCreation: boolean;
   user: User;
   form: FormGroup;
+  uploading = 0;
   isLoading = true;
 
   constructor(
@@ -51,6 +52,7 @@ export class UserEditComponent implements OnInit {
       name: [this.user.name || '', [Validators.required]],
       phone: [this.user.phone || ''],
       email: [this.user.email || ''],
+      image: [this.user.image || ''],
       verified: [this.user.verified || false, [Validators.required]],
       level: [this.user.level || 'level1', [Validators.required]],
       permissions: [this.user.permissions || []],

@@ -15,6 +15,7 @@ import {FlexModule} from '@angular/flex-layout';
 import {MatButtonModule} from '@angular/material/button';
 import {MatSelectModule} from '@angular/material/select';
 import {MatCheckboxModule} from '@angular/material/checkbox';
+import {UtilsModule} from '../utils/utils.module';
 
 
 @NgModule({
@@ -35,7 +36,8 @@ import {MatCheckboxModule} from '@angular/material/checkbox';
     MatInputModule,
     MatButtonModule,
     MatSelectModule,
-    MatCheckboxModule
+    MatCheckboxModule,
+    UtilsModule
   ]
 })
 export class UserModule { }
