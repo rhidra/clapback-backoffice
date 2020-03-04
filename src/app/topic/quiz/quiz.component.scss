@@ -1,3 +1,7 @@
 .app-quiz-form {
-
+  button {
+    mat-icon {
+      @include color_alternatives();
+    }
+  }
 }

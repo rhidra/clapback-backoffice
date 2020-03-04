@@ -8,6 +8,7 @@ import {Topic} from '../../models/topic.model';
 import {AuthService} from '../../auth/auth.service';
 import {User} from '../../models/user.model';
 import {UserService} from '../../user/user.service';
+import {QuizService} from '../quiz/quiz.service';
 
 @Component({
   selector: 'app-edit',
@@ -33,6 +34,7 @@ export class TopicEditComponent implements OnInit {
     private location: Location,
     private authService: AuthService,
     private userService: UserService,
+    private quizService: QuizService,
   ) { }
 
   ngOnInit() {
@@ -100,13 +102,20 @@ export class TopicEditComponent implements OnInit {
     }
   }
 
-  onSubmit() {
+  updateForm() {
+    const p = [];
     if (this.leftPanelType === 'video') {
       this.form.controls.leftPanel.patchValue({text: null, image: null, quiz: null});
     } else if (this.leftPanelType === 'text') {
       this.form.controls.leftPanel.patchValue({video: null, quiz: null});
     } else {
       this.form.controls.leftPanel.patchValue({text: null, image: null, video: null});
+      const quiz = this.form.value.leftPanel.quiz;
+      if (quiz._id) {
+        p.push(this.quizService.edit(quiz));
+      } else {
+        p.push(this.quizService.create(quiz).then(q => this.form.controls.leftPanel.patchValue({quiz: q._id})));
+      }
     }
     if (this.rightPanelType === 'video') {
       this.form.controls.rightPanel.patchValue({text: null, image: null, quiz: null});
@@ -114,17 +123,33 @@ export class TopicEditComponent implements OnInit {
       this.form.controls.rightPanel.patchValue({video: null, quiz: null});
     } else {
       this.form.controls.rightPanel.patchValue({text: null, image: null, video: null});
+      const quiz = this.form.value.rightPanel.quiz;
+      if (quiz._id) {
+        p.push(this.quizService.edit(quiz));
+      } else {
+        p.push(this.quizService.create(quiz).then(q => this.form.controls.rightPanel.patchValue({quiz: q._id})));
+      }
     }
+    return Promise.all(p);
+  }
 
-    // TODO: Remove the following lines when the quiz form is done
-    this.form.controls.leftPanel.patchValue({quiz: null});
-    this.form.controls.rightPanel.patchValue({quiz: null});
+  onSubmit() {
+    this.updateForm().then(() => {
+      Object.assign(this.topic, this.form.value);
+      if (this.leftPanelType === 'quiz') {
+        this.topic.leftPanel.quiz = this.form.value.leftPanel.quiz;
+      }
+      if (this.rightPanelType === 'quiz') {
+        this.topic.rightPanel.quiz = this.form.value.rightPanel.quiz;
+      }
 
-    Object.assign(this.topic, this.form.value);
-    if (this.isCreation) {
-      this.topicService.create(this.topic).then(() => this.location.back());
-    } else {
-      this.topicService.edit(this.topic).then(() => this.location.back());
-    }
+      console.log(this.topic);
+
+      if (this.isCreation) {
+        this.topicService.create(this.topic).then(() => this.location.back());
+      } else {
+        this.topicService.edit(this.topic).then(() => this.location.back());
+      }
+    });
   }
 }

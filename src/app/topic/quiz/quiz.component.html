@@ -1,3 +1,35 @@
-<div class="app-quiz-form">
+<form [formGroup]="form" *ngIf="!isLoading" class="app-quiz-form">
+  <mat-form-field>
+    <input matInput formControlName="question" i18n-placeholder placeholder="Question"/>
+  </mat-form-field>
 
-</div>
+  <mat-form-field>
+    <input matInput formControlName="content" i18n-placeholder placeholder="Subtext"/>
+    <mat-hint i18n>A small text under the question.</mat-hint>
+  </mat-form-field>
+
+  <button mat-raised-button type="button" color="primary" (click)="addChoice()">
+    <mat-icon data-text-color="white">add</mat-icon>
+    Add choice
+  </button>
+
+  <button mat-raised-button type="button" color="warn" (click)="removeChoice()">
+    <mat-icon data-text-color="white">add</mat-icon>
+    Remove choice
+  </button>
+
+  <div formArrayName="choices" *ngFor="let choice of form.get('choices').controls; let i = index">
+    <div [formGroupName]="i">
+      <hr/>
+      <mat-form-field>
+        <input matInput formControlName="text" i18n-placeholder placeholder="Answer {{i}}"/>
+      </mat-form-field>
+
+      <mat-form-field>
+        <input matInput formControlName="color" i18n-placeholder placeholder="Color {{i}}"/>
+        <mat-hint i18n>The color associated with the answer</mat-hint>
+      </mat-form-field>
+    </div>
+  </div>
+</form>
+<mat-spinner *ngIf="isLoading"></mat-spinner>
