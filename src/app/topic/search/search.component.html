@@ -7,7 +7,7 @@
 
     <a mat-list-item *ngFor="let topic of topicService.topics" [routerLink]="['/', 'topic', 'edit', topic._id]">
       <mat-icon *ngFor="let panel of [topic.leftPanel, topic.centerPanel, topic.rightPanel]" mat-list-icon fontSet="fas"
-                [fontIcon]="panel.video ? 'fa-file-video' : panel.text ? 'fa-file-alt' : 'fa-file-signature'"></mat-icon>
+                [fontIcon]="panel.video ? 'fa-file-video' : panel.text ? 'fa-file-alt' : panel.quiz ? 'fa-file-signature' : 'fa-times'"></mat-icon>
 
       <h3 mat-line>{{topic.title}}</h3>
       <p mat-line>{{moment(topic.date).format('dddd, MMMM Do YYYY, h:mm a')}}</p>
