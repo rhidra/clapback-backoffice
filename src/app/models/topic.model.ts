@@ -15,16 +15,18 @@ export class Topic {
   leftPanel: {
     video: string;
     text: string;
+    textAlt: string
     image: string;
     quiz: string;
     author: string;
-  } = {video: '', text: '', image: '', quiz: '', author: ''};
+  } = {video: '', text: '', textAlt: '', image: '', quiz: '', author: ''};
 
   rightPanel: {
     video: string;
     text: string;
+    textAlt: string;
     image: string;
     quiz: string;
     author: string;
-  } = {video: '', text: '', image: '', quiz: '', author: ''};
+  } = {video: '', text: '', textAlt: '', image: '', quiz: '', author: ''};
 }

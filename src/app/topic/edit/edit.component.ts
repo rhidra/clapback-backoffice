@@ -105,11 +105,11 @@ export class TopicEditComponent implements OnInit {
   updateForm() {
     const p = [];
     if (this.leftPanelType === 'video') {
-      this.form.controls.leftPanel.patchValue({text: null, image: null, quiz: null});
+      this.form.controls.leftPanel.patchValue({text: null, textAlt: null, image: null, quiz: null});
     } else if (this.leftPanelType === 'text') {
       this.form.controls.leftPanel.patchValue({video: null, quiz: null});
     } else {
-      this.form.controls.leftPanel.patchValue({text: null, image: null, video: null});
+      this.form.controls.leftPanel.patchValue({text: null, textAlt: null, image: null, video: null});
       const quiz = this.form.value.leftPanel.quiz;
       if (quiz._id) {
         p.push(this.quizService.edit(quiz));
@@ -118,11 +118,11 @@ export class TopicEditComponent implements OnInit {
       }
     }
     if (this.rightPanelType === 'video') {
-      this.form.controls.rightPanel.patchValue({text: null, image: null, quiz: null});
+      this.form.controls.rightPanel.patchValue({text: null, textAlt: null, image: null, quiz: null});
     } else if (this.rightPanelType === 'text') {
       this.form.controls.rightPanel.patchValue({video: null, quiz: null});
     } else {
-      this.form.controls.rightPanel.patchValue({text: null, image: null, video: null});
+      this.form.controls.rightPanel.patchValue({text: null, textAlt: null, image: null, video: null});
       const quiz = this.form.value.rightPanel.quiz;
       if (quiz._id) {
         p.push(this.quizService.edit(quiz));
@@ -142,8 +142,6 @@ export class TopicEditComponent implements OnInit {
       if (this.rightPanelType === 'quiz') {
         this.topic.rightPanel.quiz = this.form.value.rightPanel.quiz;
       }
-
-      console.log(this.topic);
 
       if (this.isCreation) {
         this.topicService.create(this.topic).then(() => this.location.back());
