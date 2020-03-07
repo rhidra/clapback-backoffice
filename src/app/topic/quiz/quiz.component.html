@@ -26,9 +26,22 @@
       </mat-form-field>
 
       <mat-form-field>
-        <input matInput formControlName="color" i18n-placeholder placeholder="Color {{i}}"/>
-        <mat-hint i18n>The color associated with the answer</mat-hint>
+        <mat-label i18n>Color {{i}}</mat-label>
+        <mat-select formControlName="color">
+          <mat-option value="" i18n>None</mat-option>
+          <mat-option value="red" i18n>Red</mat-option>
+          <mat-option value="green" i18n>Green</mat-option>
+          <mat-option value="blue" i18n>Blue</mat-option>
+          <mat-option value="orange" i18n>Orange</mat-option>
+          <mat-option value="purple" i18n>Purple</mat-option>
+          <mat-option value="black" i18n>Black</mat-option>
+          <mat-option value="white" i18n>White</mat-option>
+          <mat-option value="yellow" i18n>Yellow</mat-option>
+          <mat-option value="grey" i18n>Grey</mat-option>
+        </mat-select>
+        <mat-hint i18n>The color associated with the answer.</mat-hint>
       </mat-form-field>
+
     </div>
   </div>
 </form>
