@@ -78,6 +78,7 @@ export class TopicEditComponent implements OnInit {
       leftPanel: this.fb.group({
         video: [this.topic.leftPanel.video || ''],
         text: [this.topic.leftPanel.text || ''],
+        textAlt: [this.topic.leftPanel.textAlt || ''],
         image: [this.topic.leftPanel.image || ''],
         quiz: [this.topic.leftPanel.quiz || ''],
         author: [this.topic.leftPanel.author || this.authService.user._id, [Validators.required]],
@@ -86,6 +87,7 @@ export class TopicEditComponent implements OnInit {
       rightPanel: this.fb.group({
         video: [this.topic.rightPanel.video || ''],
         text: [this.topic.rightPanel.text || ''],
+        textAlt: [this.topic.rightPanel.textAlt || ''],
         image: [this.topic.rightPanel.image || ''],
         quiz: [this.topic.rightPanel.quiz || ''],
         author: [this.topic.rightPanel.author || this.authService.user._id, [Validators.required]],
