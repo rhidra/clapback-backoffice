@@ -38,29 +38,30 @@ export class QuizComponent implements OnInit, ControlValueAccessor {
     this.form = this.fb.group({
       question: [this.quiz.question || '', [Validators.required]],
       content: [this.quiz.content || ''],
+      isPoll: [this.quiz.isPoll || false],
       choices: this.fb.array([]),
     });
     if (!this.quiz.choices || this.quiz.choices.length === 0) {
       this.addChoice();
     } else {
-      this.quiz.choices.forEach(choice => {
-        const choices = this.form.get('choices') as FormArray;
-        choices.push(this.fb.group({
-          text: [choice.text || '', [Validators.required]],
-          color: [choice.color || ''],
-        }));
-      });
+      const choices = this.form.get('choices') as FormArray;
+      this.quiz.choices.forEach(choice => choices.push(this.createChoice(choice)));
     }
     this.form.valueChanges.subscribe(() => this.propagateChange(this.form.value));
     this.propagateChange(this.form.value);
     this.isLoading = false;
   }
 
-  createChoice() {
+  createChoice(choice: any = {}) {
     return this.fb.group({
-      text: ['', [Validators.required]],
-      color: [''],
+      text: [choice.text || '', [Validators.required]],
+      color: [choice.color || ''],
+      goodAnswer: [choice.goodAnswer || false],
     });
+  }
+
+  hasMultipleGoodAnswers() {
+    return this.form.value.choices && this.form.value.choices.filter(c => c.goodAnswer).length > 1 && !this.form.value.isPoll;
   }
 
   addChoice() {
@@ -68,9 +69,9 @@ export class QuizComponent implements OnInit, ControlValueAccessor {
     choices.push(this.createChoice());
   }
 
-  removeChoice() {
+  removeChoice(index = 0) {
     const choices = this.form.get('choices') as FormArray;
-    choices.removeAt(0);
+    choices.removeAt(index);
   }
 
   writeValue(obj: any): void {

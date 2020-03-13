@@ -8,24 +8,25 @@
     <mat-hint i18n>A small text under the question.</mat-hint>
   </mat-form-field>
 
-  <button mat-raised-button type="button" color="primary" (click)="addChoice()" i18n>
-    <mat-icon data-text-color="white">add</mat-icon>
-    Add choice
-  </button>
+  <mat-checkbox formControlName="isPoll" i18n>Is a poll ?</mat-checkbox>
 
-  <button mat-raised-button type="button" color="warn" (click)="removeChoice()" i18n>
-    <mat-icon data-text-color="white">add</mat-icon>
-    Remove choice
-  </button>
+  <div class="margin-top">
+    <button mat-raised-button type="button" color="primary" (click)="addChoice()" i18n>
+      <mat-icon data-text-color="white">add</mat-icon>
+      Add choice
+    </button>
+  </div>
 
   <div formArrayName="choices" *ngFor="let choice of form.get('choices').controls; let i = index">
-    <div [formGroupName]="i">
-      <hr/>
-      <mat-form-field>
+    <hr/>
+    <div [formGroupName]="i" fxLayout="row">
+      <button mat-button fxFlex="2" (click)="removeChoice(i)"><mat-icon data-text-color="red">delete</mat-icon></button>
+
+      <mat-form-field fxFlex fxFlexOffset="2">
         <input matInput formControlName="text" i18n-placeholder placeholder="Answer {{i}}"/>
       </mat-form-field>
 
-      <mat-form-field>
+      <mat-form-field fxFlex fxFlexOffset="2">
         <mat-label i18n>Color {{i}}</mat-label>
         <mat-select formControlName="color">
           <mat-option value="" i18n>None</mat-option>
@@ -42,7 +43,11 @@
         <mat-hint i18n>The color associated with the answer.</mat-hint>
       </mat-form-field>
 
+      <mat-checkbox fxFlex fxFlexAlign="center" fxFlexOffset="2" *ngIf="!form.value.isPoll" formControlName="goodAnswer" i18n>Good answer</mat-checkbox>
+
     </div>
   </div>
+
+  <mat-hint *ngIf="hasMultipleGoodAnswers()" data-text-color="red" i18n>Be careful, you selected more than one good answer for this quiz !</mat-hint>
 </form>
 <mat-spinner *ngIf="isLoading"></mat-spinner>

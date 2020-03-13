@@ -4,4 +4,13 @@
       @include color_alternatives();
     }
   }
+
+  mat-hint {
+    @include color_alternatives();
+  }
+
+  // TODO: Put in a library
+  .margin-top {
+    margin-top: 12px;
+  }
 }
