@@ -140,9 +140,13 @@ export class TopicEditComponent implements OnInit {
       Object.assign(this.topic, this.form.value);
       if (this.leftPanelType === 'quiz') {
         this.topic.leftPanel.quiz = this.form.value.leftPanel.quiz;
+      } else {
+        this.topic.leftPanel.quiz = null;
       }
       if (this.rightPanelType === 'quiz') {
         this.topic.rightPanel.quiz = this.form.value.rightPanel.quiz;
+      } else {
+        this.topic.rightPanel.quiz = null;
       }
 
       if (this.isCreation) {
