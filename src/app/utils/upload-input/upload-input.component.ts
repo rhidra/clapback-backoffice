@@ -3,6 +3,7 @@ import {ControlValueAccessor, NG_VALUE_ACCESSOR} from '@angular/forms';
 import {HttpClient, HttpErrorResponse, HttpEventType} from '@angular/common/http';
 import {MatDialog} from '@angular/material/dialog';
 import {DialogComponent} from '../dialog/dialog.component';
+import {environment as env} from '../../../environments/environment';
 
 @Component({
   selector: 'app-upload-input',
@@ -17,6 +18,7 @@ export class UploadInputComponent implements OnInit, ControlValueAccessor {
   isUploading = false;
   isError = false;
   errorMsg = '';
+  host = env.mediaHost;
 
   @Input() name = 'Image';
 

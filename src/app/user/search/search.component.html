@@ -3,7 +3,7 @@
 
     <ng-container matColumnDef="image">
       <th mat-header-cell *matHeaderCellDef>Profile pic</th>
-      <td mat-cell *matCellDef="let element"><img *ngIf="element.image" [src]="element.image" class="avatar" alt="avatar"/></td>
+      <td mat-cell *matCellDef="let element"><img *ngIf="element.image" [src]="host + element.image" class="avatar" alt="avatar"/></td>
     </ng-container>
 
     <ng-container matColumnDef="name">
