@@ -39,7 +39,7 @@ export class UploadInputComponent implements OnInit, ControlValueAccessor {
     const uploadData = new FormData();
     uploadData.append('media', event.target.files[0], event.target.files[0].name);
     this.uploadStart.emit();
-    this.http.post('http://localhost:9000/media?quality=80', uploadData, {reportProgress: true, observe: 'events'}).subscribe((r: any) => {
+    this.http.post(env.apiUrl + 'media?quality=80', uploadData, {reportProgress: true, observe: 'events'}).subscribe((r: any) => {
       if (r.type === HttpEventType.UploadProgress) {
         this.isUploading = true;
         this.isError = false;
