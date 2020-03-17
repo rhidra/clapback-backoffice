@@ -33,7 +33,7 @@ export class UserEditComponent implements OnInit {
     this.route.paramMap.subscribe(params => {
       const id = params.get('id');
       this.isCreation = !id;
-      this.navbarService.updateNavbar(this.isCreation ? 'New user' : 'Edit user', null, '', null, [], null, () => this.router.navigate(['/user/']));
+      this.navbarService.updateNavbar(this.isCreation ? 'New user' : 'Edit user', null, '', null, [], null, () => this.location.back());
 
       if (this.isCreation) {
         this.user = new User();

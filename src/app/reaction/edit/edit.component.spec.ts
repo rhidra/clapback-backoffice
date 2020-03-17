@@ -1,20 +1,20 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { ReactionSearchComponent } from './search.component';
+import { ReactionEditComponent } from './edit.component';
 
-describe('SearchComponent', () => {
-  let component: ReactionSearchComponent;
-  let fixture: ComponentFixture<ReactionSearchComponent>;
+describe('EditComponent', () => {
+  let component: ReactionEditComponent;
+  let fixture: ComponentFixture<ReactionEditComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ ReactionSearchComponent ]
+      declarations: [ ReactionEditComponent ]
     })
     .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(ReactionSearchComponent);
+    fixture = TestBed.createComponent(ReactionEditComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

@@ -194,3 +194,10 @@ mat-chip {
     transform: translateX(-50%);
   }
 }
+
+.avatar {
+  height: 40px;
+  width: 40px;
+  border-radius: 50%;
+  flex-shrink: 0;
+}

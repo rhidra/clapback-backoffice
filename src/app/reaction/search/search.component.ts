@@ -1,15 +1,31 @@
 import { Component, OnInit } from '@angular/core';
+import {ReactionService} from '../reaction.service';
+import {environment as env} from '../../../environments/environment';
 
 @Component({
-  selector: 'app-search',
+  selector: 'app-reaction-search',
   templateUrl: './search.component.html',
-  styleUrls: ['./search.component.scss']
 })
-export class SearchComponent implements OnInit {
+export class ReactionSearchComponent implements OnInit {
 
-  constructor() { }
+  isLoading = true;
+  host = env.mediaHost;
+  cols;
+
+  constructor(
+    private reactionService: ReactionService,
+  ) { }
 
   ngOnInit() {
+    this.reactionService.search().then(() => this.isLoading = false);
+    this.onResize();
   }
 
+  onResize(event = {target: window}) {
+    const w = event.target.innerWidth;
+    this.cols = w > 1440 ? 5
+                    : w > 1200 ? 4
+                    : w > 1000 ? 3
+                    : w > 800  ? 2 : 1;
+  }
 }

@@ -59,3 +59,9 @@ hr {
 .mat-form-field {
   @include color_alternatives();
 }
+
+.margin { margin: 6px !important; }
+.margin-top { margin-top: 6px !important; }
+.margin-bottom { margin-bottom: 6px !important; }
+.margin-right { margin-right: 6px !important; }
+.margin-left { margin-left: 6px !important; }
