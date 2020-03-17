@@ -9,7 +9,8 @@ const routes: Routes = [
   { path: '', redirectTo: 'dashboard', pathMatch: 'full'},
   { path: 'dashboard', component: DashboardComponent, canActivate: [AuthGuardService]},
   { path: 'topic', loadChildren: './topic/topic.module#TopicModule', canActivate: [AuthGuardService]},
-  { path: 'user', loadChildren: './user/user.module#UserModule', canActivate: [AuthGuardService], data: {permission: 'admin'}},
+  { path: 'reaction', loadChildren: './reaction/reaction.module#ReactionModule', canActivate: [AuthGuardService]},
+  { path: 'user', loadChildren: './user/user.module#UserModule', canActivate: [AuthGuardService], data: {permission: 'editor'}},
   { path: 'auth', loadChildren: './auth/auth.module#AuthModule'},
 
   {path: '404', component: NotFoundComponent},
