@@ -17,7 +17,7 @@ export class ReactionSearchComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    this.reactionService.searchVideo().then(() => this.isLoading = false);
+    this.reactionService.search().then(() => this.isLoading = false);
     this.onResize();
   }
 

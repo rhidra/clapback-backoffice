@@ -14,9 +14,9 @@ export class ReactionService {
     private http: HttpClient,
   ) { }
 
-  searchVideo(query: string = ''): Promise<Array<Reaction>> {
+  search(query: string = ''): Promise<Array<Reaction>> {
     return new Promise<Array<Reaction>>(resolve => {
-      this.http.get(env.apiUrl + 'reaction', {params: {populate: true, type: 'video'} as any}).subscribe((data: any) => {
+      this.http.get(env.apiUrl + 'reaction', {params: {populate: true} as any}).subscribe((data: any) => {
         this.reactions = data;
         resolve(this.reactions);
       });
