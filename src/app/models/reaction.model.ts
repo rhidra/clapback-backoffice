@@ -10,4 +10,8 @@ export class Reaction {
 
   video: string;
   text: string;
+
+  likesCounter: number;
+  commentsCounter: number;
+  viewsCounter: number;
 }

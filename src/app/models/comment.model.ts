@@ -12,4 +12,6 @@ export class Comment {
   date: string;
 
   text: string;
+
+  likesCounter: number;
 }

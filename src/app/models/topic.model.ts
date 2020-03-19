@@ -29,4 +29,9 @@ export class Topic {
     quiz: string;
     author: string;
   } = {video: '', text: '', textAlt: '', image: '', quiz: '', author: ''};
+
+  likesCounter: number;
+  viewsCounter: number;
+  commentsCounter: number;
+  clapbacksCounter: number;
 }
