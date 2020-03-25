@@ -22,6 +22,10 @@
                     (uploadStop)="uploading = uploading - 1"
                     i18n-name name="Profile pic"></app-upload-input>
 
+  <mat-form-field class="full-width">
+    <textarea matInput formControlName="description" i18n-placeholder placeholder="User description"></textarea>
+  </mat-form-field>
+
   <mat-form-field>
     <mat-label i18n>Level</mat-label>
     <mat-select formControlName="level">

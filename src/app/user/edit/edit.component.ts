@@ -53,6 +53,7 @@ export class UserEditComponent implements OnInit {
       phone: [this.user.phone || ''],
       email: [this.user.email || ''],
       image: [this.user.image || ''],
+      description: [this.user.description || ''],
       verified: [this.user.verified || false, [Validators.required]],
       level: [this.user.level || 'level1', [Validators.required]],
       permissions: [this.user.permissions || []],
