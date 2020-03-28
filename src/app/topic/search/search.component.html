@@ -1,11 +1,10 @@
 <div class="app-topic-search" *ngIf="!isLoading">
   <mat-nav-list>
     <h3 mat-subheader>
-      <mat-icon fontSet="fas" fontIcon="fa-play"></mat-icon>
-      Latest news
+      The topics appear as they are ordered here.
     </h3>
 
-    <a mat-list-item *ngFor="let topic of topicService.topics" [routerLink]="['/', 'topic', 'edit', topic._id]">
+    <a mat-list-item *ngFor="let topic of topicService.topics" [routerLink]="['/', 'topic', 'edit', topic._id]" [ngClass]="{'not-shown': moment(topic.date) > moment() || !topic.approved}">
       <mat-icon *ngFor="let panel of [topic.leftPanel, topic.centerPanel, topic.rightPanel]" mat-list-icon fontSet="fas"
                 [fontIcon]="panel.video ? 'fa-file-video' : panel.text ? 'fa-file-alt' : panel.quiz ? 'fa-file-signature' : 'fa-times'"></mat-icon>
 

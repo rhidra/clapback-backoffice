@@ -4,6 +4,10 @@
     top: 5px;
   }
 
+  a.not-shown {
+    opacity: .6;
+  }
+
   p {
     @include color_alternatives(false);
   }
