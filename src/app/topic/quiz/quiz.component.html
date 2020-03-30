@@ -10,6 +10,11 @@
 
   <mat-checkbox formControlName="isPoll" i18n>Is a poll ?</mat-checkbox>
 
+  <mat-form-field *ngIf="!form.value.isPoll">
+    <textarea matInput formControlName="explanationText" rows="6" i18n-placeholder placeholder="Explanation text"></textarea>
+    <mat-hint i18n>Use *text* and _text_ to put the text in bold and italics.</mat-hint>
+  </mat-form-field>
+
   <div class="margin-top">
     <button mat-raised-button type="button" color="primary" (click)="addChoice()" i18n>
       <mat-icon data-text-color="white">add</mat-icon>
@@ -35,7 +40,6 @@
           <mat-option value="blue" i18n>Blue</mat-option>
           <mat-option value="purple" i18n>Purple</mat-option>
           <mat-option value="black" i18n>Black</mat-option>
-          <mat-option value="white" i18n>White</mat-option>
           <mat-option value="yellow" i18n>Yellow</mat-option>
           <mat-option value="grey" i18n>Grey</mat-option>
         </mat-select>

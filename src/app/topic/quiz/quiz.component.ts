@@ -39,6 +39,7 @@ export class QuizComponent implements OnInit, ControlValueAccessor {
       question: [this.quiz.question || '', [Validators.required]],
       content: [this.quiz.content || ''],
       isPoll: [this.quiz.isPoll || false],
+      explanationText: [this.quiz.explanationText || ''],
       choices: this.fb.array([]),
     });
     if (!this.quiz.choices || this.quiz.choices.length === 0) {
@@ -47,7 +48,7 @@ export class QuizComponent implements OnInit, ControlValueAccessor {
       const choices = this.form.get('choices') as FormArray;
       this.quiz.choices.forEach(choice => choices.push(this.createChoice(choice)));
     }
-    this.form.valueChanges.subscribe(() => this.propagateChange(this.form.value));
+    this.form.valueChanges.subscribe(() => this.propagateChange(Object.assign(this.form.value, this.form.value.isPoll ? {explanationText: ''} : {})));
     this.propagateChange(this.form.value);
     this.isLoading = false;
   }
@@ -79,7 +80,6 @@ export class QuizComponent implements OnInit, ControlValueAccessor {
     this.quizId = obj;
     if (this.quizId) {
       this.quizService.get(this.quizId).then(quiz => {
-        console.log(quiz);
         this.quiz = quiz;
         this.initForm();
       });

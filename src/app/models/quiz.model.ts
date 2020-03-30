@@ -4,6 +4,7 @@ export class Quiz {
   content: string;
   topic: string;
   isPoll: boolean;
+  explanationText: string;
 
   choices: Array<{
     text: string,
