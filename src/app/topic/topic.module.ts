@@ -18,6 +18,7 @@ import {MatTooltipModule} from '@angular/material/tooltip';
 import {MatCardModule} from '@angular/material/card';
 import {MatCheckboxModule} from '@angular/material/checkbox';
 import { QuizComponent } from './quiz/quiz.component';
+import {MatChipsModule} from '@angular/material/chips';
 
 
 @NgModule({
@@ -43,6 +44,7 @@ import { QuizComponent } from './quiz/quiz.component';
     MatCardModule,
     MatCheckboxModule,
     FormsModule,
+    MatChipsModule,
   ]
 })
 export class TopicModule { }

@@ -9,6 +9,8 @@ import {AuthService} from '../../auth/auth.service';
 import {User} from '../../models/user.model';
 import {UserService} from '../../user/user.service';
 import {QuizService} from '../quiz/quiz.service';
+import {COMMA, ENTER, SPACE} from '@angular/cdk/keycodes';
+import {MatChipEvent, MatChipInputEvent} from '@angular/material/chips';
 
 @Component({
   selector: 'app-edit',
@@ -23,6 +25,7 @@ export class TopicEditComponent implements OnInit {
   leftPanelType: string;
   rightPanelType: string;
   authors: Array<User>;
+  readonly separatorKeysCodes: number[] = [ENTER, COMMA, SPACE];
 
   get items() { return this.form.get('items') as FormArray; }
 
@@ -67,7 +70,7 @@ export class TopicEditComponent implements OnInit {
     this.form = this.fb.group({
       date: [this.topic.date || '', [Validators.required]],
       title: [this.topic.title || '', [Validators.required]],
-      hashtag: [this.topic.hashtag || ''],
+      hashtags: [this.topic.hashtags || []],
       approved: [this.topic.approved || false],
 
       centerPanel: this.fb.group({
@@ -155,5 +158,22 @@ export class TopicEditComponent implements OnInit {
         this.topicService.edit(this.topic).then(() => this.location.back());
       }
     });
+  }
+
+  addHashtag(event: MatChipInputEvent) {
+    if ((event.value || '').trim()) {
+      this.form.get('hashtags').value.push(event.value.trim());
+    }
+
+    if (event.input) {
+      event.input.value = '';
+    }
+  }
+
+  removeHashtag(tag: string) {
+    const index = this.form.get('hashtags').value.indexOf(tag);
+    if (index >= 0) {
+      this.form.get('hashtags').value.splice(index, 1);
+    }
   }
 }

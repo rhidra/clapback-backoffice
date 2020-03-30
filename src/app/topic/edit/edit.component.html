@@ -8,8 +8,24 @@
   </mat-form-field>
 
   <mat-form-field class="full-width">
-    <input matInput formControlName="hashtag" i18n-placeholder placeholder="Hashtag"/>
-    <mat-hint i18n>You don't need to put the # symbol at the beginning.</mat-hint>
+    <mat-chip-list #chipList aria-label="Hashtags" formControlName="hashtags">
+      <mat-chip *ngFor="let tag of form.value.hashtags; let first=first" selectable="true"
+                removable="true" (removed)="removeHashtag(tag)" [ngStyle]="{background: first ? '#6babe3' : ''}">
+        #{{tag}}
+        <mat-icon matChipRemove>cancel</mat-icon>
+      </mat-chip>
+      <input matInput
+             [matChipInputFor]="chipList"
+             [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
+             matChipInputAddOnBlur="true"
+             (matChipInputTokenEnd)="addHashtag($event)"
+             i18n-placeholder placeholder="Hashtag"/>
+
+    </mat-chip-list>
+    <mat-hint i18n>
+      The first hashtag in the list will appear on the main page.<br/>
+      Do not put the # symbol at the beginning.
+    </mat-hint>
   </mat-form-field>
 
   <hr/>

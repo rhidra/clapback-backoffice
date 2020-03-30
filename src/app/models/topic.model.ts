@@ -3,7 +3,7 @@ export class Topic {
   _id: string;
   title: string;
 
-  hashtag: string;
+  hashtags: Array<string>;
   approved: boolean;
   date: string;
 
