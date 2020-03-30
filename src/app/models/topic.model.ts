@@ -4,6 +4,7 @@ export class Topic {
   title: string;
 
   hashtags: Array<string>;
+  suggestedHashtags: Array<string>;
   approved: boolean;
   date: string;
 

@@ -71,6 +71,7 @@ export class TopicEditComponent implements OnInit {
       date: [this.topic.date || '', [Validators.required]],
       title: [this.topic.title || '', [Validators.required]],
       hashtags: [this.topic.hashtags || []],
+      suggestedHashtags: [this.topic.suggestedHashtags || []],
       approved: [this.topic.approved || false],
 
       centerPanel: this.fb.group({
@@ -160,9 +161,9 @@ export class TopicEditComponent implements OnInit {
     });
   }
 
-  addHashtag(event: MatChipInputEvent) {
+  addHashtag(event: MatChipInputEvent, array: string) {
     if ((event.value || '').trim()) {
-      this.form.get('hashtags').value.push(event.value.trim());
+      this.form.get(array).value.push(event.value.trim());
     }
 
     if (event.input) {
@@ -170,10 +171,10 @@ export class TopicEditComponent implements OnInit {
     }
   }
 
-  removeHashtag(tag: string) {
-    const index = this.form.get('hashtags').value.indexOf(tag);
+  removeHashtag(tag: string, array: string) {
+    const index = this.form.get(array).value.indexOf(tag);
     if (index >= 0) {
-      this.form.get('hashtags').value.splice(index, 1);
+      this.form.get(array).value.splice(index, 1);
     }
   }
 }
