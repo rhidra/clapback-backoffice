@@ -7,6 +7,7 @@ export class Reaction {
   topic: string | Topic;
   user: string | User;
   date: string;
+  hashtags: Array<string>;
 
   video: string;
   text: string;
