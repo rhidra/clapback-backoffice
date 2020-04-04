@@ -22,7 +22,7 @@
     </button>
   </div>
 
-  <div formArrayName="choices" *ngFor="let choice of form.get('choices').controls; let i = index">
+  <div formArrayName="choices" *ngFor="let choice of choices['controls']; let i = index">
     <hr/>
     <div [formGroupName]="i" fxLayout="row">
       <button mat-button fxFlex="2" (click)="removeChoice(i)"><mat-icon data-text-color="red">delete</mat-icon></button>

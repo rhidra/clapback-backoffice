@@ -61,6 +61,10 @@ export class QuizComponent implements OnInit, ControlValueAccessor {
     });
   }
 
+  get choices(): any {
+    return this.form.get('choices');
+  }
+
   hasMultipleGoodAnswers() {
     return this.form.value.choices && this.form.value.choices.filter(c => c.goodAnswer).length > 1 && !this.form.value.isPoll;
   }
