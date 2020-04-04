@@ -14,10 +14,10 @@ export class ReactionEditComponent implements OnInit {
   reaction: Reaction;
 
   constructor(
-    private activatedRoute: ActivatedRoute,
-    private navbarService: NavbarService,
-    private reactionService: ReactionService,
-    private location: Location,
+    public activatedRoute: ActivatedRoute,
+    public navbarService: NavbarService,
+    public reactionService: ReactionService,
+    public location: Location,
   ) { }
 
   ngOnInit() {

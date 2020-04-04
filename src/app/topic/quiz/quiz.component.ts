@@ -28,8 +28,8 @@ export class QuizComponent implements OnInit, ControlValueAccessor {
   propagateChange: any = () => {};
 
   constructor(
-    private fb: FormBuilder,
-    private quizService: QuizService,
+    public fb: FormBuilder,
+    public quizService: QuizService,
   ) { }
 
   ngOnInit() {}

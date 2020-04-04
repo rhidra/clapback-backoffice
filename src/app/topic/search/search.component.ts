@@ -18,11 +18,11 @@ export class TopicSearchComponent implements OnInit {
   moment = moment;
 
   constructor(
-    private topicService: TopicService,
-    private navbarService: NavbarService,
-    private dialog: MatDialog,
-    private router: Router,
-    private authService: AuthService,
+    public topicService: TopicService,
+    public navbarService: NavbarService,
+    public dialog: MatDialog,
+    public router: Router,
+    public authService: AuthService,
   ) { }
 
   ngOnInit() {

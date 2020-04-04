@@ -13,7 +13,7 @@ export class ReactionSearchComponent implements OnInit {
   cols;
 
   constructor(
-    private reactionService: ReactionService,
+    public reactionService: ReactionService,
   ) { }
 
   ngOnInit() {

@@ -14,8 +14,8 @@ export class UserSearchComponent implements OnInit {
   host = env.mediaHost;
 
   constructor(
-    private navbarService: NavbarService,
-    private userService: UserService,
+    public navbarService: NavbarService,
+    public userService: UserService,
   ) { }
 
   ngOnInit() {

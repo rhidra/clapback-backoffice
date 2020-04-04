@@ -21,12 +21,12 @@ export class UserEditComponent implements OnInit {
   isLoading = true;
 
   constructor(
-    private userService: UserService,
-    private route: ActivatedRoute,
-    private navbarService: NavbarService,
-    private fb: FormBuilder,
-    private location: Location,
-    private router: Router,
+    public userService: UserService,
+    public route: ActivatedRoute,
+    public navbarService: NavbarService,
+    public fb: FormBuilder,
+    public location: Location,
+    public router: Router,
   ) { }
 
   ngOnInit() {

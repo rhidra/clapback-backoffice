@@ -30,14 +30,14 @@ export class TopicEditComponent implements OnInit {
   get items() { return this.form.get('items') as FormArray; }
 
   constructor(
-    private fb: FormBuilder,
-    private route: ActivatedRoute,
-    private topicService: TopicService,
-    private navbarService: NavbarService,
-    private location: Location,
-    private authService: AuthService,
-    private userService: UserService,
-    private quizService: QuizService,
+    public fb: FormBuilder,
+    public route: ActivatedRoute,
+    public topicService: TopicService,
+    public navbarService: NavbarService,
+    public location: Location,
+    public authService: AuthService,
+    public userService: UserService,
+    public quizService: QuizService,
   ) { }
 
   ngOnInit() {
