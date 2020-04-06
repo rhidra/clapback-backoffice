@@ -19,6 +19,7 @@ export class UploadInputComponent implements OnInit, ControlValueAccessor {
   isError = false;
   errorMsg = '';
   host = env.mediaHost;
+  uploadProgress = 0;
 
   @Input() name = 'Image';
 
@@ -41,6 +42,7 @@ export class UploadInputComponent implements OnInit, ControlValueAccessor {
     this.uploadStart.emit();
     this.http.post(env.apiUrl + 'media?quality=80', uploadData, {reportProgress: true, observe: 'events'}).subscribe((r: any) => {
       if (r.type === HttpEventType.UploadProgress) {
+        this.uploadProgress = r.loaded * 100 / r.total;
         this.isUploading = true;
         this.isError = false;
       } else if (r.type === HttpEventType.Response) {

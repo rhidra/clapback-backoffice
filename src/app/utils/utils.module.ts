@@ -21,6 +21,7 @@ import {MatDatepickerModule} from '@angular/material/datepicker';
 import {MatMomentDateModule} from '@angular/material-moment-adapter';
 import { UploadInputComponent } from './upload-input/upload-input.component';
 import { NotFoundComponent } from './not-found/not-found.component';
+import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
 
 
 @NgModule({
@@ -43,6 +44,7 @@ import { NotFoundComponent } from './not-found/not-found.component';
     NgxMaterialTimepickerModule,
     MatDatepickerModule,
     MatMomentDateModule,
+    MatProgressSpinnerModule,
   ],
   declarations: [
     DialogComponent,

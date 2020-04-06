@@ -3,6 +3,10 @@
   <button mat-flat-button type="button" [disabled]="isUploading" color="primary" (click)="uploadInput.click()" i18n>{{name}}</button>
   <span *ngIf="filePath && !isUploading && !isError" i18n>Current: <a [href]="host + filePath">{{filePath}}</a></span>
   <span *ngIf="!filePath && !isUploading && !isError" i18n>No image uploaded !</span>
+
   <span *ngIf="isUploading && !isError">Uploading...</span>
+  <mat-progress-spinner *ngIf="isUploading && !isError" [value]="uploadProgress">
+  </mat-progress-spinner>
+
   <span *ngIf="isError && !isUploading" class="error" i18n>Error: No file uploaded {{errorMsg|json}} !</span>
 </div>
