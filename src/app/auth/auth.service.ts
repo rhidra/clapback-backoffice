@@ -3,6 +3,7 @@ import {HttpClient} from '@angular/common/http';
 import {User} from '../models/user.model';
 import * as jwt_decode from 'jwt-decode';
 import {SESSION_STORAGE, WebStorageService} from 'ngx-webstorage-service';
+import {environment as env} from '../../environments/environment';
 
 @Injectable({
   providedIn: 'root'
@@ -17,7 +18,7 @@ export class AuthService {
       if (!this.isTokenExpired()) { return resolve(this.accessToken); }
       if (!this.user || !this.refreshToken) { return resolve(null); }
 
-      this.http.post('http://localhost:9000/auth/token', {id: this.user._id, refreshToken: this.refreshToken})
+      this.http.post(env.apiUrl + 'auth/token', {id: this.user._id, refreshToken: this.refreshToken})
           .subscribe((res: any) => {
             this.accessToken = res.token;
             resolve(this.accessToken);
@@ -52,7 +53,7 @@ export class AuthService {
 
   login(email: string, password: string) {
     return new Promise((resolve, reject) => {
-      this.http.post('http://localhost:9000/auth/login', {email, password}).subscribe((res: any) => {
+      this.http.post(env.apiUrl + 'auth/login', {email, password}).subscribe((res: any) => {
         this.refreshToken = res.refreshToken;
         this.user = new User();
         Object.assign(this.user, res.user);
