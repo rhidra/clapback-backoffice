@@ -50,14 +50,18 @@
   </div>
 
   <div *ngIf="!authService.isTokenExpired()" fxFlex fxLayoutAlign="flex-end center">
-    <button mat-icon-button [matMenuTriggerFor]="userMenu" [fxHide.lt-md]="true">
+    <button mat-icon-button [matTooltip]="authService.user.name" [matMenuTriggerFor]="userMenu" [fxHide.lt-md]="true">
       <mat-icon data-text-color="white" class="navbar-icon">person</mat-icon>
     </button>
 
     <mat-menu #userMenu="matMenu" class="mat-typography">
+      <button mat-menu-item [routerLink]="['/', 'user', 'edit', authService.user._id]">
+        <mat-icon matListIcon>person</mat-icon>
+        <span class="menu-text" i18n>{{authService.user.name}}</span>
+      </button>
       <button mat-menu-item (click)="logout()">
         <mat-icon matListIcon fontSet="fas" fontIcon="fa-sign-out-alt"></mat-icon>
-        <span class="menu-text"  i18n>Logout</span>
+        <span class="menu-text" i18n>Logout</span>
       </button>
     </mat-menu>
   </div>
