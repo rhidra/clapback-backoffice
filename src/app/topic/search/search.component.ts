@@ -26,7 +26,7 @@ export class TopicSearchComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    this.navbarService.updateNavbar('News groups', () => this.router.navigate(['/topic/edit']), null, () => {});
+    this.navbarService.updateNavbar('News topic', () => this.router.navigate(['/topic/edit']), 'Add Topic', () => {});
     this.topicService.search().then(() => {
       this.isLoading = false;
     });

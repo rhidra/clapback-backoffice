@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {ReactionService} from '../reaction.service';
 import {environment as env} from '../../../environments/environment';
+import {NavbarService} from '../../core/navbar/navbar.service';
 
 @Component({
   selector: 'app-reaction-search',
@@ -14,9 +15,11 @@ export class ReactionSearchComponent implements OnInit {
 
   constructor(
     public reactionService: ReactionService,
+    public navbarService: NavbarService,
   ) { }
 
   ngOnInit() {
+    this.navbarService.updateNavbar('Clapbacks');
     this.reactionService.search().then(() => this.isLoading = false);
     this.onResize();
   }

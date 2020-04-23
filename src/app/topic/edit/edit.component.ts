@@ -44,7 +44,7 @@ export class TopicEditComponent implements OnInit {
     this.route.paramMap.subscribe(params => {
       const id = params.get('id');
       this.isCreation = !id;
-      this.navbarService.updateNavbar(this.isCreation ? 'New' : 'Edit', null, '', null, [], null, () => this.location.back());
+      this.navbarService.updateNavbar(this.isCreation ? 'New topic' : 'Edit topic', null, '', null, [], null, () => this.location.back());
 
       if (this.isCreation) {
         this.topic = new Topic();
