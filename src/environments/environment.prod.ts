@@ -1,5 +1,5 @@
 export const environment = {
   production: true,
-  apiUrl: 'https://zuoyou-backend.herokuapp.com/',
-  mediaHost: 'https://zuoyou-backend.herokuapp.com',
+  apiUrl: 'https://api.zuoyoubycurios.com/',
+  mediaHost: 'https://api.zuoyoubycurios.com',
 };
