@@ -10,6 +10,10 @@ $mini-sidebar-width: 64px !default;
 $sidebar-item-height: 65px !default;
 
 
+mat-sidenav-content {
+  margin-left: $sidebar-width !important;
+}
+
 mat-sidenav {
   border-right: 1px solid $sidebar-background-color !important;
 }
