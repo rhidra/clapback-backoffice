@@ -1,9 +1,5 @@
 <div class="app-reaction-search" *ngIf="!isLoading">
   <mat-nav-list>
-    <h3 mat-subheader>
-      <mat-icon fontSet="fas" fontIcon="fa-play"></mat-icon>
-      Latest news
-    </h3>
 
     <mat-grid-list [cols]="cols" rowHeight="9:20" (window:resize)="onResize($event)">
       <mat-grid-tile *ngFor="let reaction of reactionService.reactions">
