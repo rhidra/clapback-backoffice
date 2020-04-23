@@ -1,12 +1,13 @@
 <div class="app-dashboard" *ngIf="!isLoading">
   <div fxLayout="row" fxLayoutGap="24px">
     <div fxFlex>
+      <!--
       <mat-card>
         <mat-card-header>
           <mat-card-title i18n>Current news</mat-card-title>
-          <mat-card-subtitle i18n>News group currently displayed to the users</mat-card-subtitle>
+          <mat-card-subtitle i18n>News topic currently displayed to the users</mat-card-subtitle>
         </mat-card-header>
-        <mat-card-content>
+        <mat-card-content *ngIf="latest">
           <p [innerHTML]="latest.title">
           </p>
 
@@ -22,14 +23,30 @@
               <mat-divider></mat-divider>
             </div>
             -->
+      <!--
           </mat-accordion>
         </mat-card-content>
-        <mat-card-actions align="end">
+        <mat-card-content *ngIf="!latest">
+          <p i18n>
+            No current news topic has been found !
+          </p>
+        </mat-card-content>
+        <mat-card-actions align="end" *ngIf="latest">
           <button mat-button [routerLink]="['/', 'topic', 'edit', latest._id]">
             <mat-icon>edit</mat-icon>
           </button>
         </mat-card-actions>
       </mat-card>
+      -->
+
+      <p style="text-align: center" class="margin-top-lg">
+        <br>
+        <button mat-raised-button style="margin-top: 24px" routerLink="/topic" color="primary" i18n>Go to topics</button><br>
+        <button mat-raised-button style="margin-top: 24px; background: #9e1a12" routerLink="/topic/edit" color="accent" i18n>
+          <mat-icon data-text-color="white">add</mat-icon>
+          Add a topic
+        </button>
+      </p>
     </div>
 
     <div fxFlex>
