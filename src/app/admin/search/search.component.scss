@@ -1,0 +1,21 @@
+.app-admin-search {
+  mat-card-content.counter {
+    text-align: center;
+    color: grey;
+    span.counter-main {
+      font-size: 2.5em;
+    }
+    span.counter-secondary {
+      font-size: 1.5em;
+    }
+    span.counter-unit {
+      font-size: 2em;
+    }
+  }
+
+  mat-nav-list {
+    @extend .margin;
+    background: white;
+    @include box_shadow(2);
+  }
+}
