@@ -1,15 +1,36 @@
 <div class="app-admin-search" *ngIf="!isLoading">
-  <div fxLayout="rox" fxLayoutGap="24px">
+  <div fxLayout="rox" fxLayoutGap="12px">
     <div fxFlex>
       <mat-card>
         <mat-card-header>
           <mat-card-title i18n>Storage capacity</mat-card-title>
+          <mat-card-subtitle i18n>Limit of storage in the whole server space</mat-card-subtitle>
+        </mat-card-header>
+        <mat-card-content class="counter">
+          <span class="counter-main">{{storageStats.used | number:'1.0-0'}}</span>
+          <span class="counter-secondary" *ngIf="floor((storageStats.used - floor(storageStats.used))/1000) !== 0">
+            .{{(storageStats.used - floor(storageStats.used))/1000 | number:'1.0-0'}}
+          </span>
+          <span class="counter-unit">&nbsp;Gb</span>
+          <span class="counter-main">&nbsp;/ {{storageStats.total | number:'1.0-0'}}</span>
+          <span class="counter-secondary" *ngIf="floor((storageStats.total - floor(storageStats.total))/1000) !== 0">
+            .{{(storageStats.total - floor(storageStats.total))/1000 | number:'1.0-0'}}
+          </span>
+          <span class="counter-unit">&nbsp;Gb</span>
+        </mat-card-content>
+        <mat-progress-bar [value]="storageStats.used / storageStats.total * 100"></mat-progress-bar>
+      </mat-card>
+    </div>
+    <div fxFlex>
+      <mat-card>
+        <mat-card-header>
+          <mat-card-title i18n>Media files</mat-card-title>
           <mat-card-subtitle i18n>Weight of all the media files stored on the server.</mat-card-subtitle>
         </mat-card-header>
         <mat-card-content class="counter">
-          <span class="counter-main">{{mediaStats.mediasSize/1000000|number:'1.0-0'}}.</span>
+          <span class="counter-main">{{floor(mediaStats.mediasSize/1000000) | number:'1.0-0'}}.</span>
           <span class="counter-secondary">{{(mediaStats.mediasSize - floor(mediaStats.mediasSize/1000000)*1000000)/1000|number:'1.0-0'}}</span>
-          <span class="counter-unit">&nbsp;Mo</span>
+          <span class="counter-unit">&nbsp;Mb</span>
         </mat-card-content>
       </mat-card>
     </div>
@@ -41,8 +62,8 @@
 
     <a mat-list-item *ngFor="let media of mediaStats.medias" [href]="host + media" target="_blank">
       <mat-icon mat-list-icon fontSet="fas"
-                [fontIcon]="supportedVideos.includes(media.substring(media.length-3)) ? 'fa-file-video'
-                : supportedImages.includes(media.substring(media.length-3)) ? 'fa-file-image' : 'fa-times'"></mat-icon>
+                [fontIcon]="supportedVideos.includes(media.substring(media.length-4)) ? 'fa-file-video'
+                : supportedImages.includes(media.substring(media.length-4)) ? 'fa-file-image' : 'fa-times'"></mat-icon>
 
       <h3 mat-line>{{media}}</h3>
 

@@ -11,6 +11,12 @@ export class AdminService {
     private http: HttpClient,
   ) { }
 
+  getStorageStats(): Promise<any> {
+    return new Promise(resolve => {
+      this.http.get(env.apiUrl + 'admin/storage').subscribe((stats: {total: number, used: number}) => resolve(stats));
+    });
+  }
+
   getMediaStats(): Promise<any> {
     return new Promise(resolve => {
       this.http.get(env.apiUrl + 'admin/media')

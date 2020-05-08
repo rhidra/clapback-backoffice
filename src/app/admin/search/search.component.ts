@@ -9,12 +9,13 @@ import {environment as env} from '../../../environments/environment';
 })
 export class AdminSearchComponent implements OnInit {
 
-  supportedVideos = ['mp4'];
-  supportedImages = ['jpg', 'jpeg', 'png', 'bmp', 'tiff', 'gif'];
+  supportedVideos = ['.mp4'];
+  supportedImages = ['.jpg', 'jpeg', '.png', '.bmp', 'tiff', '.gif'];
   floor = Math.floor;
   isLoading = true;
   host = env.mediaHost + '/media/';
-  mediaStats: { medias: Array<string>, thumbnailsSize: number, mediasSize: number };
+  mediaStats: {medias: Array<string>, thumbnailsSize: number, mediasSize: number};
+  storageStats: {total: number, used: number};
 
   constructor(
     public navbarService: NavbarService,
@@ -28,8 +29,8 @@ export class AdminSearchComponent implements OnInit {
 
   updateStats() {
     this.isLoading = true;
-    this.adminService.getMediaStats()
-      .then(stats => this.mediaStats = stats)
+    Promise.all([this.adminService.getMediaStats(), this.adminService.getStorageStats()])
+      .then(stats => [this.mediaStats, this.storageStats] = stats)
       .then(() => this.isLoading = false);
   }
 

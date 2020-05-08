@@ -13,6 +13,10 @@
     }
   }
 
+  mat-card-content mat-progress-bar {
+    height: 10px;
+  }
+
   mat-nav-list {
     @extend .margin;
     background: white;
