@@ -4,9 +4,6 @@
 
 image: node:12.13.0-alpine
 
-before_script:
-  -
-
 deploy:
   stage: deploy
   only: [master]
