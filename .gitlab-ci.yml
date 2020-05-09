@@ -12,4 +12,5 @@ deploy-functions:
   only: [master]
   script:
     - npm install
+    - ng build --prod
     - firebase deploy --token $FIREBASE_TOKEN
