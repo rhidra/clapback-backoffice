@@ -1,0 +1,15 @@
+# Deploy automatically using Gitlab CI to Firebase Hosting service.
+# Need the Gitlab environment variable $FIREBASE_TOKEN
+# To generate the token: firebase login:ci
+
+image: node:12.13.0-alpine
+
+before_script:
+  - npm i -g firebase-tools
+
+deploy-functions:
+  stage: deploy
+  only: [master]
+  script:
+    - npm install
+    - firebase deploy --token $FIREBASE_TOKEN
