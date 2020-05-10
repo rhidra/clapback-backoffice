@@ -4,6 +4,7 @@ import {HttpClient, HttpErrorResponse, HttpEventType} from '@angular/common/http
 import {MatDialog} from '@angular/material/dialog';
 import {DialogComponent} from '../dialog/dialog.component';
 import {environment as env} from '../../../environments/environment';
+import {AuthService} from '../../auth/auth.service';
 
 @Component({
   selector: 'app-upload-input',
@@ -31,6 +32,7 @@ export class UploadInputComponent implements OnInit, ControlValueAccessor {
   constructor(
     private http: HttpClient,
     private dialog: MatDialog,
+    private authService: AuthService,
   ) { }
 
   ngOnInit() {
@@ -38,8 +40,23 @@ export class UploadInputComponent implements OnInit, ControlValueAccessor {
 
   onChange(event) {
     const uploadData = new FormData();
+    if (event.target.files[0].size >= 1e9) {
+      this.dialog.open(DialogComponent, {data: {
+        title: 'Uploading error !',
+        content: 'Can\'t upload file larger than 1Gb ! Please contact the administrator if this is a problem.'
+      }});
+      return;
+    }
     uploadData.append('media', event.target.files[0], event.target.files[0].name);
     this.uploadStart.emit();
+    this.authService.getToken().then(token => {
+      if (token) {
+        this.upload(uploadData);
+      }
+    });
+  }
+
+  upload(uploadData: FormData) {
     this.http.post(env.apiUrl + 'media?quality=80', uploadData, {reportProgress: true, observe: 'events'}).subscribe((r: any) => {
       if (r.type === HttpEventType.UploadProgress) {
         this.uploadProgress = r.loaded * 100 / r.total;

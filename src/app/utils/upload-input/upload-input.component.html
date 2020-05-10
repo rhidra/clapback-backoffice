@@ -1,12 +1,14 @@
 <div class="app-upload-input">
   <input #uploadInput hidden type="file" onclick="this.value=null" (change)="onChange($event)"/>
-  <button mat-flat-button type="button" [disabled]="isUploading" color="primary" (click)="uploadInput.click()" i18n>{{name}}</button>
-  <span *ngIf="filePath && !isUploading && !isError" i18n>Current: <a [href]="host + filePath">{{filePath}}</a></span>
-  <span *ngIf="!filePath && !isUploading && !isError" i18n>No image uploaded !</span>
+  <button mat-flat-button type="button" [disabled]="isUploading" color="primary" (click)="uploadInput.click()" i18n>
+    <span *ngIf="!filePath">{{name}}</span>
+    <span *ngIf="filePath" i18n>Replace {{name}}</span>
+  </button>
+  <span *ngIf="filePath && !isUploading && !isError" i18n>&nbsp;Current: <a [href]="host + filePath">{{filePath}}</a></span>
 
-  <span *ngIf="isUploading && !isError">Uploading...</span>
-  <mat-progress-spinner *ngIf="isUploading && !isError" [value]="uploadProgress">
-  </mat-progress-spinner>
+  <span *ngIf="isUploading && !isError" i18n>&nbsp;Uploading... {{uploadProgress}}%</span>
+  <mat-progress-bar *ngIf="isUploading && !isError" [value]="uploadProgress">
+  </mat-progress-bar>
 
-  <span *ngIf="isError && !isUploading" class="error" i18n>Error: No file uploaded {{errorMsg|json}} !</span>
+  <span *ngIf="isError && !isUploading" class="error" i18n>&nbsp;Error: No file uploaded {{errorMsg|json}} !</span>
 </div>
