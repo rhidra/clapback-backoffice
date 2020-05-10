@@ -6,7 +6,7 @@
   </button>
   <span *ngIf="filePath && !isUploading && !isError" i18n>&nbsp;Current: <a target="_blank" [href]="host + filePath">{{filePath}}</a></span>
 
-  <span *ngIf="isUploading && !isError" i18n>&nbsp;Uploading... {{uploadProgress}}%</span>
+  <span *ngIf="isUploading && !isError" i18n>&nbsp;Uploading... {{uploadProgress | number:'1.0-0'}}%</span>
   <mat-progress-bar *ngIf="isUploading && !isError" [value]="uploadProgress">
   </mat-progress-bar>
 
