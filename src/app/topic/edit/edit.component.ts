@@ -140,7 +140,7 @@ export class TopicEditComponent implements OnInit {
   }
 
   onSubmit() {
-    this.updateForm().then(() => {
+    this.authService.getToken().then(() => this.updateForm()).then(() => {
       Object.assign(this.topic, this.form.value);
       if (this.leftPanelType === 'quiz') {
         this.topic.leftPanel.quiz = this.form.value.leftPanel.quiz;
