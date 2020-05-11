@@ -51,6 +51,13 @@ export class AuthService {
     return !(date.valueOf() > new Date().valueOf());
   }
 
+  tokenChecker() {
+    if (this.isTokenExpired()) {
+      this.getToken();
+    }
+    setTimeout(() => this.tokenChecker(), 2000);
+  }
+
   login(email: string, password: string) {
     return new Promise((resolve, reject) => {
       this.http.post(env.apiUrl + 'auth/login', {email, password}).subscribe((res: any) => {
@@ -60,6 +67,7 @@ export class AuthService {
         this.accessToken = res.token;
         this.storage.set('refreshToken', this.refreshToken);
         this.storage.set('user', this.user);
+        this.tokenChecker();
         resolve();
       }, reject);
     });
