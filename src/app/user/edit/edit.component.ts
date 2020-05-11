@@ -5,6 +5,7 @@ import {ActivatedRoute, Router} from '@angular/router';
 import {NavbarService} from '../../core/navbar/navbar.service';
 import {User} from '../../models/user.model';
 import {Location} from '@angular/common';
+import {AuthService} from '../../auth/auth.service';
 
 
 @Component({
@@ -27,6 +28,7 @@ export class UserEditComponent implements OnInit {
     public fb: FormBuilder,
     public location: Location,
     public router: Router,
+    public authService: AuthService,
   ) { }
 
   ngOnInit() {
@@ -62,11 +64,13 @@ export class UserEditComponent implements OnInit {
   }
 
   onSubmit() {
-    Object.assign(this.user, this.form.value);
-    if (this.isCreation) {
-      this.userService.create(this.user).then(() => this.location.back());
-    } else {
-      this.userService.edit(this.user).then(() => this.location.back());
-    }
+    this.authService.getToken().then(() => {
+      Object.assign(this.user, this.form.value);
+      if (this.isCreation) {
+        this.userService.create(this.user).then(() => this.location.back());
+      } else {
+        this.userService.edit(this.user).then(() => this.location.back());
+      }
+    });
   }
 }
