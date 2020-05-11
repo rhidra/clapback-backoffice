@@ -28,6 +28,7 @@ export class UploadInputComponent implements OnInit, ControlValueAccessor {
   @Output() uploadStop = new EventEmitter();
 
   propagateChange: any = () => {};
+  propagateTouch: any = () => {};
 
   constructor(
     private http: HttpClient,
@@ -39,6 +40,7 @@ export class UploadInputComponent implements OnInit, ControlValueAccessor {
   }
 
   onChange(event) {
+    this.propagateTouch();
     const uploadData = new FormData();
     if (event.target.files[0].size >= 1e9) {
       this.dialog.open(DialogComponent, {data: {
@@ -90,5 +92,7 @@ export class UploadInputComponent implements OnInit, ControlValueAccessor {
     this.propagateChange = fn;
   }
 
-  registerOnTouched(fn: any): void {}
+  registerOnTouched(fn: any): void {
+    this.propagateTouch = fn;
+  }
 }

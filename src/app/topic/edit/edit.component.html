@@ -125,7 +125,7 @@
   </mat-card>
 
   <div>
-    <button type="submit" [disabled]="form.pristine || form.invalid || !!uploading" mat-raised-button color="accent" cdkFocusInitial i18n>
+    <button type="submit" [disabled]="(form.pristine && !uploading) || form.invalid" mat-raised-button color="accent" cdkFocusInitial i18n>
       <span *ngIf="isCreation && !uploading" i18n>Create</span>
       <span *ngIf="!isCreation && !uploading" i18n>Update</span>
       <span *ngIf="!!uploading" i18n>Uploading...</span>

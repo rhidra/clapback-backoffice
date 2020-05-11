@@ -10,7 +10,9 @@ import {User} from '../../models/user.model';
 import {UserService} from '../../user/user.service';
 import {QuizService} from '../quiz/quiz.service';
 import {COMMA, ENTER, SPACE} from '@angular/cdk/keycodes';
-import {MatChipEvent, MatChipInputEvent} from '@angular/material/chips';
+import {MatChipInputEvent} from '@angular/material/chips';
+import {MatDialog} from '@angular/material/dialog';
+import {DialogComponent} from '../../utils/dialog/dialog.component';
 
 @Component({
   selector: 'app-edit',
@@ -38,6 +40,7 @@ export class TopicEditComponent implements OnInit {
     public authService: AuthService,
     public userService: UserService,
     public quizService: QuizService,
+    public dialog: MatDialog,
   ) { }
 
   ngOnInit() {
@@ -140,23 +143,46 @@ export class TopicEditComponent implements OnInit {
   }
 
   onSubmit() {
-    this.authService.getToken().then(() => this.updateForm()).then(() => {
-      Object.assign(this.topic, this.form.value);
-      if (this.leftPanelType === 'quiz') {
-        this.topic.leftPanel.quiz = this.form.value.leftPanel.quiz;
-      } else {
-        this.topic.leftPanel.quiz = null;
-      }
-      if (this.rightPanelType === 'quiz') {
-        this.topic.rightPanel.quiz = this.form.value.rightPanel.quiz;
-      } else {
-        this.topic.rightPanel.quiz = null;
-      }
+    this.onUploadsDone()
+      .then(() => this.authService.getToken())
+      .then(() => this.updateForm())
+      .then(() => {
+        Object.assign(this.topic, this.form.value);
+        if (this.leftPanelType === 'quiz') {
+          this.topic.leftPanel.quiz = this.form.value.leftPanel.quiz;
+        } else {
+          this.topic.leftPanel.quiz = null;
+        }
+        if (this.rightPanelType === 'quiz') {
+          this.topic.rightPanel.quiz = this.form.value.rightPanel.quiz;
+        } else {
+          this.topic.rightPanel.quiz = null;
+        }
 
-      if (this.isCreation) {
-        this.topicService.create(this.topic).then(() => this.location.back());
+        if (this.isCreation) {
+          this.topicService.create(this.topic).then(() => this.location.back());
+        } else {
+          this.topicService.edit(this.topic).then(() => this.location.back());
+        }
+      });
+  }
+
+  onUploadsDone(): Promise<void> {
+    let dialog;
+    return new Promise(resolve => {
+      const check = () => {
+        if (this.uploading === 0) {
+          dialog.close();
+          resolve();
+        } else {
+          setTimeout(() => check(), 1000);
+        }
+      };
+      if (this.uploading !== 0) {
+        dialog = this.dialog.open(DialogComponent, {data: {title: 'Wait until uploads are done', lockUser: true}, disableClose: true});
+        check();
       } else {
-        this.topicService.edit(this.topic).then(() => this.location.back());
+        resolve();
       }
     });
   }
