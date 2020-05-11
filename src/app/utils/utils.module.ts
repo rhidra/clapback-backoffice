@@ -18,11 +18,16 @@ import {MatDialogModule} from '@angular/material/dialog';
 import { DatetimepickerComponent } from './datetimepicker/datetimepicker.component';
 import {NgxMaterialTimepickerModule} from 'ngx-material-timepicker';
 import {MatDatepickerModule} from '@angular/material/datepicker';
-import {MatMomentDateModule} from '@angular/material-moment-adapter';
+import {
+  MAT_MOMENT_DATE_ADAPTER_OPTIONS, MAT_MOMENT_DATE_FORMATS,
+  MatMomentDateModule,
+  MomentDateAdapter
+} from '@angular/material-moment-adapter';
 import { UploadInputComponent } from './upload-input/upload-input.component';
 import { NotFoundComponent } from './not-found/not-found.component';
 import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
 import {MatProgressBarModule} from '@angular/material/progress-bar';
+import {DateAdapter, MAT_DATE_FORMATS, MAT_DATE_LOCALE} from '@angular/material/core';
 
 
 @NgModule({
@@ -61,7 +66,27 @@ import {MatProgressBarModule} from '@angular/material/progress-bar';
   entryComponents: [
     DialogComponent,
   ],
-  providers: [HelperService],
+  providers: [
+    HelperService,
+    {
+      provide: DateAdapter,
+      useClass: MomentDateAdapter,
+      deps: [MAT_DATE_LOCALE, MAT_MOMENT_DATE_ADAPTER_OPTIONS]
+    },
+    {
+      provide: MAT_DATE_FORMATS,
+      useValue: {
+        parse: {
+          dateInput: ['LL', 'L'],
+        },
+        display: {
+          dateInput: 'LL',
+          monthYearLabel: 'MMM YYYY',
+          dateA11yLabel: 'LL',
+          monthYearA11yLabel: 'MMMM YYYY',
+        },
+    }},
+  ],
 
 })
 export class UtilsModule {

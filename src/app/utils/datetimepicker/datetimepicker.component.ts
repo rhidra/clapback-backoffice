@@ -28,8 +28,9 @@ export class DatetimepickerComponent implements OnInit, ControlValueAccessor {
 
   writeValue(obj: any): void {
     const time = moment(obj).isValid() ? moment(obj).hour() + ':' + moment(obj).minute() : '';
+    const date = moment(obj).isValid() ? moment(obj) : obj;
     this.form = this.fb.group({
-      date: [obj || '', [Validators.required]],
+      date: [date || '', [Validators.required]],
       time: [time || '08:00', [Validators.required]],
     });
     this.form.valueChanges.subscribe(() => this.onChange());
