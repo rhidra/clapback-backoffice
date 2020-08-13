@@ -5,7 +5,7 @@ export class Topic {
 
   hashtags: Array<string>;
   suggestedHashtags: Array<string>;
-  approved: boolean;
+  status: 'processing' | 'private' | 'public';
   date: string;
 
   centerPanel: {

@@ -8,6 +8,7 @@ export class Reaction {
   user: string | User;
   date: string;
   hashtags: Array<string>;
+  status: 'processing' | 'public';
 
   video: string;
   text: string;

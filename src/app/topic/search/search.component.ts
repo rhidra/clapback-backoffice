@@ -39,7 +39,7 @@ export class TopicSearchComponent implements OnInit {
   }
 
   approve(e: Event, topic: Topic) {
-    if (!this.authService.hasPerm('editor')) { return; }
+    if (!this.authService.hasPerm('editor') || topic.status === 'processing') { return; }
 
     e.preventDefault();
     e.stopImmediatePropagation();
@@ -51,7 +51,7 @@ export class TopicSearchComponent implements OnInit {
     }})
       .afterClosed().subscribe(res => {
         if (res) {
-          topic.approved = !topic.approved;
+          topic.status = topic.status === 'private' ? 'public' : 'private';
           this.topicService.edit(topic);
         }
     });
