@@ -28,6 +28,7 @@ import { NotFoundComponent } from './not-found/not-found.component';
 import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
 import {MatProgressBarModule} from '@angular/material/progress-bar';
 import {DateAdapter, MAT_DATE_FORMATS, MAT_DATE_LOCALE} from '@angular/material/core';
+import {MediaUrlPipe} from "./pipes/media-url.pipe";
 
 
 @NgModule({
@@ -57,11 +58,13 @@ import {DateAdapter, MAT_DATE_FORMATS, MAT_DATE_LOCALE} from '@angular/material/
     DialogComponent,
     DatetimepickerComponent,
     UploadInputComponent,
-    NotFoundComponent
+    NotFoundComponent,
+    MediaUrlPipe,
   ],
   exports: [
     DatetimepickerComponent,
-    UploadInputComponent
+    UploadInputComponent,
+    MediaUrlPipe,
   ],
   entryComponents: [
     DialogComponent,

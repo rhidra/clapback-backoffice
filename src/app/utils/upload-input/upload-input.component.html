@@ -4,7 +4,10 @@
     <span *ngIf="!filePath">{{name}}</span>
     <span *ngIf="filePath" i18n>Replace {{name}}</span>
   </button>
-  <span *ngIf="filePath && !isUploading && !isError" i18n>&nbsp;Current: <a target="_blank" [href]="host + filePath">{{filePath}}</a></span>
+  <span *ngIf="filePath && !isUploading && !isError" i18n>&nbsp;Current:
+    <a *ngIf="type === 'video'" target="_blank" [href]="filePath | mediaUrl:'videoMP4'">{{filePath}}</a>
+    <a *ngIf="type === 'image'" target="_blank" [href]="filePath | mediaUrl:'image'">{{filePath}}</a>
+  </span>
 
   <span *ngIf="isUploading && !isError" i18n>&nbsp;Uploading... {{uploadProgress | number:'1.0-0'}}%</span>
   <mat-progress-bar *ngIf="isUploading && !isError" [value]="uploadProgress">

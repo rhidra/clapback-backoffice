@@ -18,13 +18,12 @@
             <vg-overlay-play vgFor="singleVideo"></vg-overlay-play>
 
             <video #media [vgMedia]="media" id="singleVideo" preload="auto" crossorigin>
-              <source [src]="host + reaction.video" type="video/mp4">
+              <source [src]="reaction.video | mediaUrl:'videoMP4'" type="video/mp4">
             </video>
           </vg-player>
 
           <div class="user-id pointer" [routerLink]="['/', 'user', 'edit', reaction.user._id]">
-            <img *ngIf="reaction.user.image" [src]="host + reaction.user.image" class="avatar" alt="avatar"/>
-            <img *ngIf="!reaction.user.image" src="/assets/img/avatar.png" class="avatar" alt="avatar"/>
+            <img [src]="reaction.user.image | mediaUrl:'avatar':-1:80:80" class="avatar" alt="avatar"/>
             <h3>{{reaction.user.name}}</h3>
             <p>{{reaction.user.email || reaction.user.phone}}</p>
           </div>

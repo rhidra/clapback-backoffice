@@ -13,6 +13,7 @@ import {VgControlsModule} from 'videogular2/compiled/src/controls/controls';
 import {MatButtonModule} from '@angular/material/button';
 import { ReactionEditComponent } from './edit/edit.component';
 import {VgOverlayPlayModule} from 'videogular2/compiled/src/overlay-play/overlay-play';
+import {UtilsModule} from "../utils/utils.module";
 
 
 @NgModule({
@@ -27,7 +28,8 @@ import {VgOverlayPlayModule} from 'videogular2/compiled/src/overlay-play/overlay
     VgCoreModule,
     VgControlsModule,
     MatButtonModule,
-    VgOverlayPlayModule
+    VgOverlayPlayModule,
+    UtilsModule
   ],
   providers: [
     ReactionService,

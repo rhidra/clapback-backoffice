@@ -10,7 +10,6 @@ import {NavbarService} from '../../core/navbar/navbar.service';
 export class ReactionSearchComponent implements OnInit {
 
   isLoading = true;
-  host = env.mediaHost;
   cols;
 
   constructor(

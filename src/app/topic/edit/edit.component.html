@@ -66,6 +66,7 @@
       <app-upload-input formControlName="video"
                         (uploadStart)="uploading = uploading + 1"
                         (uploadStop)="uploading = uploading - 1"
+                        type="video"
                         i18n-name name="Video"></app-upload-input>
     </div>
   </mat-card>
@@ -95,6 +96,7 @@
 
       <app-upload-input *ngIf="(panel === 'leftPanel' && leftPanelType === 'video') || (panel === 'rightPanel' && rightPanelType === 'video')"
                         formControlName="video"
+                        type="video"
                         (uploadStart)="uploading = uploading + 1"
                         (uploadStop)="uploading = uploading - 1"
                         i18n-name name="Video"></app-upload-input>
@@ -102,6 +104,7 @@
       <div *ngIf="(panel === 'leftPanel' && leftPanelType === 'text') || (panel === 'rightPanel' && rightPanelType === 'text')">
 
         <app-upload-input formControlName="image"
+                          type="image"
                           (uploadStart)="uploading = uploading + 1"
                           (uploadStop)="uploading = uploading - 1"
                           i18n-name name="Image"></app-upload-input>

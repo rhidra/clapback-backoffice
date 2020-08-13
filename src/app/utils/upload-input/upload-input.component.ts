@@ -19,10 +19,10 @@ export class UploadInputComponent implements OnInit, ControlValueAccessor {
   isUploading = false;
   isError = false;
   errorMsg = '';
-  host = env.mediaHost;
   uploadProgress = 0;
 
   @Input() name = 'Image';
+  @Input() type: 'video' | 'image' = 'image';
 
   @Output() uploadStart = new EventEmitter();
   @Output() uploadStop = new EventEmitter();
