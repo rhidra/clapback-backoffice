@@ -1,1 +1,17 @@
-<p>edit works!</p>
+
+<vg-player>
+  <vg-controls>
+    <vg-scrub-bar>
+      <vg-scrub-bar-current-time></vg-scrub-bar-current-time>
+      <vg-scrub-bar-buffering-time></vg-scrub-bar-buffering-time>
+    </vg-scrub-bar>
+
+    <vg-time-display vgProperty="total" vgFormat="mm:ss"></vg-time-display>
+  </vg-controls>
+
+  <vg-overlay-play vgFor="singleVideo"></vg-overlay-play>
+
+  <video #media [vgMedia]="media" id="singleVideo" preload="auto" crossorigin>
+    <source [src]="reaction.video | mediaUrl:'videoMP4'" type="video/mp4">
+  </video>
+</vg-player>
