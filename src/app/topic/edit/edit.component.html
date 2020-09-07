@@ -1,5 +1,5 @@
 <form class="app-topic-edit full-width" [formGroup]="form" (ngSubmit)="onSubmit()" *ngIf="!isLoading" fxLayout="column" fxLayoutGap="24px">
-  <mat-checkbox formControlName="approved" [disabled]="!authService.hasPerm('editor')" i18n>Approved for publishing</mat-checkbox>
+  <mat-checkbox formControlName="isPublic" [disabled]="!authService.hasPerm('editor')" i18n>Approved for publishing</mat-checkbox>
 
   <app-datetimepicker-input formControlName="date"></app-datetimepicker-input>
 

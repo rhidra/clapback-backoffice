@@ -75,7 +75,8 @@ export class TopicEditComponent implements OnInit {
       title: [this.topic.title || '', [Validators.required]],
       hashtags: [this.topic.hashtags || []],
       suggestedHashtags: [this.topic.suggestedHashtags || []],
-      approved: [this.topic.approved || false],
+      isPublic: [this.topic.isPublic || false],
+      isProcessing: [this.topic.isProcessing || false],
 
       centerPanel: this.fb.group({
         video: [this.topic.centerPanel.video || ''],

@@ -5,7 +5,7 @@
     </h3>
 
     <a mat-list-item *ngFor="let topic of topicService.topics" [routerLink]="['/', 'topic', 'edit', topic._id]"
-       [ngClass]="{'not-shown': moment(topic.date) > moment() || topic.status === 'processing' || topic.status === 'private'}">
+       [ngClass]="{'not-shown': moment(topic.date) > moment() || topic.isProcessing || !topic.isPublic}">
       <mat-icon *ngFor="let panel of [topic.leftPanel, topic.centerPanel, topic.rightPanel]" mat-list-icon fontSet="fas"
                 [fontIcon]="panel.video ? 'fa-file-video' : panel.text ? 'fa-file-alt' : panel.quiz ? 'fa-file-signature' : 'fa-times'"></mat-icon>
 
@@ -14,13 +14,13 @@
         {{moment(topic.date).format('dddd, MMMM Do YYYY, h:mm a')}}
       </p>
 
-      <mat-checkbox *ngIf="topic.status === 'public' || topic.status === 'private'"
-                    [checked]="topic.status === 'public'"
+      <mat-checkbox *ngIf="!topic.isProcessing"
+                    [checked]="topic.isPublic"
                     [disabled]="!authService.hasPerm('editor')"
                     (click)="approve($event, topic)"
                     matTooltip="Approve for publishing" i18n-matTooltip></mat-checkbox>
 
-      <mat-spinner *ngIf="topic.status === 'processing'" diameter="40"
+      <mat-spinner *ngIf="topic.isProcessing" diameter="40"
                     matTooltip="The videos are being processed. Please wait..." i18n-matTooltip></mat-spinner>
 
       <button mat-icon-button (click)="delete($event, topic)">
