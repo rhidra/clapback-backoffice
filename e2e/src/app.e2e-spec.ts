@@ -10,7 +10,7 @@ describe('workspace-project App', () => {
 
   it('should display welcome message', () => {
     page.navigateTo();
-    expect(page.getTitleText()).toEqual('zuoyou-backoffice app is running!');
+    expect(page.getTitleText()).toEqual('clapback-backoffice app is running!');
   });
 
   afterEach(async () => {
