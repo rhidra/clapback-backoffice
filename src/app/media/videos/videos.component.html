@@ -29,9 +29,9 @@
           <mat-card-subtitle i18n>Weight of all the MP4 videos stored on the server. MP4 files are not actually used, they are kept just in case for video backups.</mat-card-subtitle>
         </mat-card-header>
         <mat-card-content class="counter">
-          <span class="counter-main">{{floor(videosStats.mp4Size/1000000) | number:'1.0-0'}}.</span>
-          <span class="counter-secondary">{{(videosStats.mp4Size - floor(videosStats.mp4Size/1000000)*1000000)/1000|number:'1.0-0'}}</span>
-          <span class="counter-unit">&nbsp;Mb</span>
+          <span class="counter-main">{{floor(videosStats.mp4Size/1000000000) | number:'1.0-0'}}.</span>
+          <span class="counter-secondary">{{(videosStats.mp4Size - floor(videosStats.mp4Size/1000000000)*1000000000)/1000000|number:'1.0-0'}}</span>
+          <span class="counter-unit">&nbsp;Gb</span>
         </mat-card-content>
       </mat-card>
     </div>
@@ -43,9 +43,9 @@
           <mat-card-subtitle i18n>Weight of all the HLS videos stored on the server. HLS is used for video streaming.</mat-card-subtitle>
         </mat-card-header>
         <mat-card-content class="counter">
-          <span class="counter-main">{{videosStats.hlsSize/1000000|number:'1.0-0'}}.</span>
-          <span class="counter-secondary">{{(videosStats.hlsSize - floor(videosStats.hlsSize/1000000)*1000000)/1000|number:'1.0-0'}}</span>
-          <span class="counter-unit">&nbsp;Mb</span>
+          <span class="counter-main">{{videosStats.hlsSize/1000000000|number:'1.0-0'}}.</span>
+          <span class="counter-secondary">{{(videosStats.hlsSize - floor(videosStats.hlsSize/1000000000)*1000000000)/1000000|number:'1.0-0'}}</span>
+          <span class="counter-unit">&nbsp;Gb</span>
         </mat-card-content>
       </mat-card>
     </div>
@@ -59,7 +59,7 @@
         <mat-card-content class="counter">
           <span class="counter-main">{{videosStats.thumbnailsSize/1000000|number:'1.0-0'}}.</span>
           <span class="counter-secondary">{{(videosStats.thumbnailsSize - floor(videosStats.thumbnailsSize/1000000)*1000000)/1000|number:'1.0-0'}}</span>
-          <span class="counter-unit">&nbsp;Mo</span>
+          <span class="counter-unit">&nbsp;Mb</span>
         </mat-card-content>
         <mat-card-actions align="end">
           <button mat-raised-button color="warn" (click)="emptyThumbnailCache()" [disabled]="videosStats.thumbnailsSize === 0">
@@ -73,7 +73,7 @@
 
   <mat-nav-list>
     <h3 mat-subheader>
-      MP4 files stored in the server.
+      MP4 files stored in the server. (<strong>{{videosStats.mp4.length}}</strong>)
     </h3>
 
     <a mat-list-item *ngFor="let media of videosStats.mp4" [href]="host + '/media/video/' + media.slice(0, -4) + '/mp4'" target="_blank">
@@ -88,7 +88,7 @@
 
   <mat-nav-list>
     <h3 mat-subheader>
-      HLS files stored in the server.
+      HLS files stored in the server. (<strong>{{videosStats.hls.length}}</strong>)
     </h3>
 
     <a mat-list-item *ngFor="let media of videosStats.hls" [href]="host + '/media/video/' + media + '/hls'" target="_blank">

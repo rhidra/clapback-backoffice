@@ -27,7 +27,7 @@ export class MediaVideosComponent implements OnInit {
 
   async updateStats() {
     this.isLoading = true;
-    [this.videosStats, this.storageStats] = await Promise.all([this.mediaService.getVideosStats(), this.mediaService.getStorageStats()])
+    [this.videosStats, this.storageStats] = await Promise.all([this.mediaService.getVideosStats(), this.mediaService.getStorageStats()]);
     this.isLoading = false;
   }
 
