@@ -31,12 +31,20 @@ export class MediaVideosComponent implements OnInit {
     this.isLoading = false;
   }
 
-  removeMedia(e: Event, media: string) {
+  removeMP4Video(e: Event, media: string) {
     e.preventDefault();
     e.stopImmediatePropagation();
 
-    this.mediaService.deleteMedia(media);
-    // this.videosStats.medias = this.videosStats.medias.filter(m => m !== media);
+    this.mediaService.removeMP4Video(media.slice(0, -4));
+    this.videosStats.mp4 = this.videosStats.mp4.filter(m => m !== media);
+  }
+
+  removeHLSVideo(e: Event, media: string) {
+    e.preventDefault();
+    e.stopImmediatePropagation();
+
+    this.mediaService.removeHLSVideo(media);
+    this.videosStats.hls = this.videosStats.hls.filter(m => m !== media);
   }
 
   emptyThumbnailCache() {

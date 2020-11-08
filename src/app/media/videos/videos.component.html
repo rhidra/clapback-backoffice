@@ -79,7 +79,7 @@
     <a mat-list-item *ngFor="let media of videosStats.mp4" [href]="host + '/media/video/' + media.slice(0, -4) + '/mp4'" target="_blank">
       <mat-icon mat-list-icon fontSet="fas" fontIcon="fa-file-video"></mat-icon>
       <h3 mat-line>{{media}}</h3>
-      <button mat-icon-button (click)="removeMedia($event, media)">
+      <button mat-icon-button (click)="removeMP4Video($event, media)">
         <mat-icon data-text-color="red" fontSet="fas" fontIcon="fa-trash" class="fa-lg"></mat-icon>
       </button>
     </a>
@@ -94,7 +94,7 @@
     <a mat-list-item *ngFor="let media of videosStats.hls" [href]="host + '/media/video/' + media + '/hls'" target="_blank">
       <mat-icon mat-list-icon fontSet="fas" fontIcon="fa-file-video"></mat-icon>
       <h3 mat-line>{{media}}</h3>
-      <button mat-icon-button (click)="removeMedia($event, media)">
+      <button mat-icon-button (click)="removeHLSVideo($event, media)">
         <mat-icon data-text-color="red" fontSet="fas" fontIcon="fa-trash" class="fa-lg"></mat-icon>
       </button>
     </a>

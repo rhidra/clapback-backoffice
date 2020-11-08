@@ -37,9 +37,21 @@ export class MediaService {
     });
   }
 
-  deleteMedia(filename: string) {
+  removeMP4Video(fileid: string) {
     return new Promise(resolve => {
-      this.http.delete(env.apiUrl + 'media/' + filename).subscribe(() => resolve());
+      this.http.delete(`${env.apiUrl}media/video/${fileid}/mp4`).subscribe(() => resolve());
+    });
+  }
+
+  removeHLSVideo(fileid: string) {
+    return new Promise(resolve => {
+      this.http.delete(`${env.apiUrl}media/video/${fileid}/hls`).subscribe(() => resolve());
+    });
+  }
+
+  removeImage(filename: string) {
+    return new Promise(resolve => {
+      this.http.delete(`${env.apiUrl}media/image/${filename}`).subscribe(() => resolve());
     });
   }
 }
