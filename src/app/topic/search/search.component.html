@@ -1,7 +1,8 @@
 <div class="app-topic-search" *ngIf="!isLoading">
   <mat-nav-list>
     <h3 mat-subheader>
-      The topics appear as they are ordered here.
+      The topics appear as they are ordered here. Only approved topics are accesssible on the app.&nbsp;
+      <span *ngIf="!authService.hasPerm('editor')">Currently, you are not able to publish topics. Please refer to an editor to publish.</span>
     </h3>
 
     <a mat-list-item *ngFor="let topic of topicService.topics" [routerLink]="['/', 'topic', 'edit', topic._id]"
