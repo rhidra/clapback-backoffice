@@ -31,9 +31,14 @@
         <h3 matLine i18n>Users</h3>
       </mat-list-item>
 
-      <mat-list-item *ngIf="authService.hasPerm('admin')" routerLinkActive="active" [routerLink]="['/admin']" class="sidebar-menu-item" >
-        <mat-icon matListIcon fontSet="fas" fontIcon="fa-cogs"></mat-icon>
-        <h3 matLine i18n>Server</h3>
+      <mat-list-item *ngIf="authService.hasPerm('admin')" routerLinkActive="active" [routerLink]="['/media/videos']" class="sidebar-menu-item" >
+        <mat-icon matListIcon fontSet="fas" fontIcon="fa-video"></mat-icon>
+        <h3 matLine i18n>Video storage</h3>
+      </mat-list-item>
+
+      <mat-list-item *ngIf="authService.hasPerm('admin')" routerLinkActive="active" [routerLink]="['/media/images']" class="sidebar-menu-item" >
+        <mat-icon matListIcon fontSet="fas" fontIcon="fa-images"></mat-icon>
+        <h3 matLine i18n>Image storage</h3>
       </mat-list-item>
 
       <a target="_blank" [href]="rabbitMQUrl">
