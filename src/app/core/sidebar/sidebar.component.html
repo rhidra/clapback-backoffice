@@ -9,10 +9,12 @@
 
     <mat-list class="sidebar-menu">
 
+      <!--
       <mat-list-item *ngIf="authService.hasPerm('creator')"  routerLinkActive="active" [routerLink]="['/dashboard']" class="sidebar-menu-item" >
         <mat-icon matListIcon fontSet="fas" fontIcon="fa-columns"></mat-icon>
         <h3 matLine i18n>Dashboard</h3>
       </mat-list-item>
+      -->
 
       <mat-list-item *ngIf="authService.hasPerm('creator')"  routerLinkActive="active" [routerLink]="['/topic']" class="sidebar-menu-item" >
         <mat-icon matListIcon fontSet="fas" fontIcon="fa-edit"></mat-icon>

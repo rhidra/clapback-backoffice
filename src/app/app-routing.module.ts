@@ -6,7 +6,7 @@ import {NotFoundComponent} from './utils/not-found/not-found.component';
 
 
 const routes: Routes = [
-  { path: '', redirectTo: 'dashboard', pathMatch: 'full'},
+  { path: '', redirectTo: 'topic', pathMatch: 'full'},
   { path: 'dashboard', component: DashboardComponent, canActivate: [AuthGuardService]},
   { path: 'topic', loadChildren: './topic/topic.module#TopicModule', canActivate: [AuthGuardService]},
   { path: 'reaction', loadChildren: './reaction/reaction.module#ReactionModule', canActivate: [AuthGuardService]},
