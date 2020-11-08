@@ -47,7 +47,8 @@ export class MediaVideosComponent implements OnInit {
     this.videosStats.hls = this.videosStats.hls.filter(m => m !== media);
   }
 
-  emptyThumbnailCache() {
-    this.mediaService.emptyThumbnailCache().then(() => this.updateStats());
+  async emptyThumbnailCache() {
+    await this.mediaService.emptyThumbnailCache();
+    this.updateStats();
   }
 }
