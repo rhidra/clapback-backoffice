@@ -5,7 +5,7 @@ import {environment as env} from '../../environments/environment';
 @Injectable({
   providedIn: 'root'
 })
-export class AdminService {
+export class MediaService {
 
   constructor(
     private http: HttpClient,
@@ -17,10 +17,17 @@ export class AdminService {
     });
   }
 
-  getMediaStats(): Promise<any> {
+  getVideosStats(): Promise<any> {
     return new Promise(resolve => {
-      this.http.get(env.apiUrl + 'admin/media')
-        .subscribe((stats: { medias: Array<string>, thumbnailsSize: number, mediasSize: number }) => resolve(stats));
+      this.http.get(env.apiUrl + 'admin/media/videos')
+        .subscribe((stats: { mp4: Array<string>, hls: Array<string>, thumbnailsSize: number, mp4Size: number, hlsSize: number }) => resolve(stats));
+    });
+  }
+
+  getImagesStats(): Promise<any> {
+    return new Promise(resolve => {
+      this.http.get(env.apiUrl + 'admin/media/images')
+        .subscribe((stats: { images: Array<string>, imageSize: number }) => resolve(stats));
     });
   }
 

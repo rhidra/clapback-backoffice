@@ -11,7 +11,7 @@ const routes: Routes = [
   { path: 'topic', loadChildren: './topic/topic.module#TopicModule', canActivate: [AuthGuardService]},
   { path: 'reaction', loadChildren: './reaction/reaction.module#ReactionModule', canActivate: [AuthGuardService]},
   { path: 'user', loadChildren: './user/user.module#UserModule', canActivate: [AuthGuardService], data: {permission: 'editor'}},
-  { path: 'admin', loadChildren: './admin/admin.module#AdminModule', canActivate: [AuthGuardService], data: {permission: 'admin'}},
+  { path: 'media', loadChildren: './media/media.module#MediaModule', canActivate: [AuthGuardService], data: {permission: 'admin'}},
   { path: 'auth', loadChildren: './auth/auth.module#AuthModule'},
 
   {path: '404', component: NotFoundComponent},
