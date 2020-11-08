@@ -27,13 +27,19 @@ export class MediaService {
   getImagesStats(): Promise<any> {
     return new Promise(resolve => {
       this.http.get(env.apiUrl + 'admin/media/images')
-        .subscribe((stats: { images: Array<string>, imageSize: number }) => resolve(stats));
+        .subscribe((stats: { images: Array<string>, size: number }) => resolve(stats));
     });
   }
 
   emptyThumbnailCache() {
     return new Promise(resolve => {
       this.http.delete(env.apiUrl + 'admin/thumbnails').subscribe(() => resolve());
+    });
+  }
+
+  emptyModifiedImages() {
+    return new Promise(resolve => {
+      this.http.delete(env.apiUrl + 'admin/modified-images').subscribe(() => resolve());
     });
   }
 

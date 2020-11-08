@@ -1,54 +1,36 @@
-<div *ngIf="!isLoading">
-  <div fxLayout="rox" fxLayoutGap="12px">
-    <div fxFlex>
+<div class="app-admin-search" *ngIf="!isLoading">
+  <div fxLayout fxLayoutGap="12px">
+    <div>
       <mat-card>
         <mat-card-header>
-          <mat-card-title i18n>Storage capacity</mat-card-title>
-          <mat-card-subtitle i18n>Limit of storage in the whole server space</mat-card-subtitle>
+          <mat-card-title i18n>Image files</mat-card-title>
+          <mat-card-subtitle i18n>Weight of all the image files stored on the server.</mat-card-subtitle>
         </mat-card-header>
         <mat-card-content class="counter">
-          <span class="counter-main">{{storageStats.used | number:'1.0-0'}}</span>
-          <span class="counter-secondary" *ngIf="floor((storageStats.used - floor(storageStats.used))/1000) !== 0">
-            .{{(storageStats.used - floor(storageStats.used))/1000 | number:'1.0-0'}}
-          </span>
-          <span class="counter-unit">&nbsp;Gb</span>
-          <span class="counter-main">&nbsp;/ {{storageStats.total | number:'1.0-0'}}</span>
-          <span class="counter-secondary" *ngIf="floor((storageStats.total - floor(storageStats.total))/1000) !== 0">
-            .{{(storageStats.total - floor(storageStats.total))/1000 | number:'1.0-0'}}
-          </span>
-          <span class="counter-unit">&nbsp;Gb</span>
-        </mat-card-content>
-        <mat-progress-bar [value]="storageStats.used / storageStats.total * 100"></mat-progress-bar>
-      </mat-card>
-    </div>
-    <div fxFlex>
-      <mat-card>
-        <mat-card-header>
-          <mat-card-title i18n>Media files</mat-card-title>
-          <mat-card-subtitle i18n>Weight of all the media files stored on the server.</mat-card-subtitle>
-        </mat-card-header>
-        <mat-card-content class="counter">
-          <span class="counter-main">{{floor(mediaStats.mediasSize/1000000) | number:'1.0-0'}}.</span>
-          <span class="counter-secondary">{{(mediaStats.mediasSize - floor(mediaStats.mediasSize/1000000)*1000000)/1000|number:'1.0-0'}}</span>
+          <span class="counter-main">{{floor(imagesStats.size/1000000) | number:'1.0-0'}}.</span>
+          <span class="counter-secondary">{{(imagesStats.size - floor(imagesStats.size/1000000)*1000000)/1000|number:'1.0-0'}}</span>
           <span class="counter-unit">&nbsp;Mb</span>
         </mat-card-content>
       </mat-card>
     </div>
-    <div fxFlex>
+
+    <div>
       <mat-card>
         <mat-card-header>
-          <mat-card-title i18n>Thumbnail storage</mat-card-title>
-          <mat-card-subtitle i18n>Thumbnails are generated for each videos. If deleted, they will be regenerated if needed.</mat-card-subtitle>
+          <mat-card-title i18n>Remove image resizing</mat-card-title>
+          <mat-card-subtitle i18n>
+            Often, the app is resizing an image to optimize the download speed. 
+            The server stores the modified and original version.
+            The modified version can be identified by a name ending with "_w200_h300.jpg"
+            for instance. All the modified images can be removed, it will free a lot of storage space,
+            but decrease slightly the download speed the first time the image will be downloaded again,
+            because the server will have to modify and save the original image again. 
+          </mat-card-subtitle>
         </mat-card-header>
-        <mat-card-content class="counter">
-          <span class="counter-main">{{mediaStats.thumbnailsSize/1000000|number:'1.0-0'}}.</span>
-          <span class="counter-secondary">{{(mediaStats.thumbnailsSize - floor(mediaStats.thumbnailsSize/1000000)*1000000)/1000|number:'1.0-0'}}</span>
-          <span class="counter-unit">&nbsp;Mo</span>
-        </mat-card-content>
         <mat-card-actions align="end">
-          <button mat-raised-button color="warn" (click)="emptyThumbnailCache()" [disabled]="mediaStats.thumbnailsSize === 0">
+          <button mat-raised-button color="warn" (click)="emptyModifiedImages()">
             <mat-icon data-text-color="white">delete</mat-icon>
-            Empty cache
+            Remove all modified images
           </button>
         </mat-card-actions>
       </mat-card>
@@ -57,17 +39,13 @@
 
   <mat-nav-list>
     <h3 mat-subheader>
-      Media files stored in the server.
+      Image files stored in the server. (<strong>{{imagesStats.images.length}}</strong>)
     </h3>
 
-    <a mat-list-item *ngFor="let media of mediaStats.medias" [href]="host + media" target="_blank">
-      <mat-icon mat-list-icon fontSet="fas"
-                [fontIcon]="supportedVideos.includes(media.substring(media.length-4)) ? 'fa-file-video'
-                : supportedImages.includes(media.substring(media.length-4)) ? 'fa-file-image' : 'fa-times'"></mat-icon>
-
+    <a mat-list-item *ngFor="let media of imagesStats.images" [href]="host + '/media/image/' + media" target="_blank">
+      <mat-icon mat-list-icon fontSet="fas" fontIcon="fa-file-image"></mat-icon>
       <h3 mat-line>{{media}}</h3>
-
-      <button mat-icon-button (click)="removeMedia($event, media)">
+      <button mat-icon-button (click)="removeImage($event, media)">
         <mat-icon data-text-color="red" fontSet="fas" fontIcon="fa-trash" class="fa-lg"></mat-icon>
       </button>
     </a>
