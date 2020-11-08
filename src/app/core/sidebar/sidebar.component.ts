@@ -1,16 +1,14 @@
-import {
-  Component,
-  OnInit,
-} from '@angular/core';
-import {NavbarService} from '../navbar/navbar.service';
+import {Component, OnInit} from '@angular/core';
 import {AuthService} from '../../auth/auth.service';
+import {environment as env} from '../../../environments/environment';
 
 @Component({
   selector: 'app-sidebar',
   templateUrl: './sidebar.component.html',
-  styleUrls: ['./sidebar.component.scss']
 })
 export class SidebarComponent implements OnInit {
+
+  rabbitMQUrl = env.rabbitMQAdminPanelUrl;
 
   constructor(
     public authService: AuthService,
@@ -19,6 +17,4 @@ export class SidebarComponent implements OnInit {
   ngOnInit() {
 
   }
-
-
 }

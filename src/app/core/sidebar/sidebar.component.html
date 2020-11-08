@@ -34,6 +34,13 @@
         <h3 matLine i18n>Server</h3>
       </mat-list-item>
 
+      <a target="_blank" [href]="rabbitMQUrl">
+        <mat-list-item *ngIf="authService.hasPerm('admin')" class="sidebar-menu-item" >
+          <mat-icon matListIcon fontSet="fas" fontIcon="fa-tasks"></mat-icon>
+          <h3 matLine i18n>Message queue &nbsp;<mat-icon fontSet="fas" fontIcon="fa-external-link-alt"></mat-icon></h3>
+        </mat-list-item>
+      </a>
+
     </mat-list>
   </div>
 </div>
