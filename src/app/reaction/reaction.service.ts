@@ -33,10 +33,15 @@ export class ReactionService {
       if (reaction) {
         return resolve(reaction);
       } else {
-        this.http.get(env.apiUrl + 'reaction/' + id).subscribe((data: any) => {
-          resolve(data);
-        });
+        this.http.get(env.apiUrl + 'reaction/' + id).subscribe((data: any) => resolve(data));
       }
     });
+  }
+
+  async remove(id: string): Promise<void> {
+    await this.authService.onAuthenticated(true);
+    return new Promise<void>(resolve => {
+      this.http.delete(env.apiUrl + 'reaction/' + id).subscribe(() => resolve());
+    })
   }
 }

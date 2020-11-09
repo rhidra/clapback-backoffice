@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import {ActivatedRoute} from '@angular/router';
+import {ActivatedRoute, Router} from '@angular/router';
 import {NavbarService} from '../../core/navbar/navbar.service';
 import {ReactionService} from '../reaction.service';
 import {Location} from '@angular/common';
@@ -18,10 +18,11 @@ export class ReactionEditComponent implements OnInit {
     public navbarService: NavbarService,
     public reactionService: ReactionService,
     public location: Location,
+    public router: Router,
   ) { }
 
   ngOnInit() {
-    this.navbarService.updateNavbar('Edit clapback', null, '', null, [], null, () => this.location.back());
+    this.navbarService.updateNavbar('Edit clapback', null, '', null, [{icon: 'delete', cb: () => this.remove()}], null, () => this.location.back());
     this.activatedRoute.params.subscribe(params => {
       const id = params.id;
       this.reactionService.get(id).then((reaction: Reaction) => {
@@ -31,7 +32,10 @@ export class ReactionEditComponent implements OnInit {
     });
   }
 
-  initForm() {
+  initForm() {}
 
+  async remove() {
+    await this.reactionService.remove(this.reaction._id);
+    this.location.back();
   }
 }
