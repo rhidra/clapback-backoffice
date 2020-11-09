@@ -4,6 +4,7 @@ import {User} from '../models/user.model';
 import * as jwt_decode from 'jwt-decode';
 import {SESSION_STORAGE, WebStorageService} from 'ngx-webstorage-service';
 import {environment as env} from '../../environments/environment';
+import { Location } from '@angular/common';
 
 @Injectable({
   providedIn: 'root'
@@ -26,6 +27,17 @@ export class AuthService {
     });
   }
 
+  async onAuthenticated(redirectLogin: boolean = false): Promise<void> {
+    const token = await this.getToken();
+    if (token) {
+      return Promise.resolve();
+    } else if (redirectLogin) {
+      this.location.go('/auth');
+    } else {
+      return Promise.reject();
+    }
+  }
+
   hasPerm(perm: string) {
     if (!this.user) { return false; }
     return this.user.permissions.includes(perm);
@@ -34,6 +46,7 @@ export class AuthService {
   constructor(
     private http: HttpClient,
     @Inject(SESSION_STORAGE) private storage: WebStorageService,
+    private location: Location,
   ) {
     this.loadFromStorage();
   }

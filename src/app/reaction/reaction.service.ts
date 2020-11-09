@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import {Reaction} from '../models/reaction.model';
 import {HttpClient} from '@angular/common/http';
 import {environment as env} from '../../environments/environment';
+import { AuthService } from '../auth/auth.service';
 
 @Injectable({
   providedIn: 'root'
@@ -12,9 +13,11 @@ export class ReactionService {
 
   constructor(
     private http: HttpClient,
+    private authService: AuthService,
   ) { }
 
-  search(query: string = ''): Promise<Array<Reaction>> {
+  async search(query: string = ''): Promise<Array<Reaction>> {
+    await this.authService.onAuthenticated(true);
     return new Promise<Array<Reaction>>(resolve => {
       this.http.get(env.apiUrl + 'reaction', {params: {populate: true} as any}).subscribe((data: any) => {
         this.reactions = data;
@@ -23,7 +26,8 @@ export class ReactionService {
     });
   }
 
-  get(id: string): Promise<Reaction> {
+  async get(id: string): Promise<Reaction> {
+    await this.authService.onAuthenticated(true);
     return new Promise<Reaction>(resolve => {
       const reaction = this.reactions.find(r => r._id === id);
       if (reaction) {
