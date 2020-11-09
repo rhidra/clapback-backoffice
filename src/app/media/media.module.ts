@@ -13,12 +13,14 @@ import {MatCardModule} from '@angular/material/card';
 import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
 import {MatProgressBarModule} from '@angular/material/progress-bar';
 import { MediaImagesComponent } from './images/images.component';
+import { MediaCheckComponent } from './check/check.component';
 
 
 @NgModule({
   declarations: [
     MediaVideosComponent,
     MediaImagesComponent,
+    MediaCheckComponent,
   ],
   imports: [
     CommonModule,

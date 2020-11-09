@@ -1,0 +1,19 @@
+.app-media-check {
+  h3 {
+    font-size: 1.4em;
+    padding: .5em;
+  }
+  
+  .mat-subheader mat-icon {
+    position: relative;
+    top: 5px;
+  }
+
+  a.not-shown {
+    opacity: .6;
+  }
+
+  p {
+    @include color_alternatives(false);
+  }
+}

@@ -1,0 +1,128 @@
+<div class="app-media-check">
+  <h3 i18n>
+    Click on the button to check for incoherence in the database.
+    Incoherences may happen if some media files have been removed but the topic or clapback
+    entry still exists in the DB, or if a clapback or a topic has been removed, but the videos
+    and images still remains.<br/>
+
+    Please note, that the coherence check may be quite computationally expensive,
+    depending on the size of the DB and the number of media files.
+    
+    <button mat-raised-button color="warn" (click)="coherenceCheck()">
+      <mat-icon matListIcon fontSet="fas" fontIcon="fa-cogs"></mat-icon>
+      Check the coherence of the database
+    </button>
+  </h3>
+
+  <div fxLayout="row wrap" fxLayoutGap="32px" fxLayoutAlign="flex-start" *ngIf="!isLoading">
+    <mat-card *ngIf="unlinkedHLS.length !== 0">
+      <mat-card-header>
+        <mat-card-title i18n>Unlinked HLS</mat-card-title>
+        <mat-card-subtitle i18n>HLS files not linked to clapbacks or videos</mat-card-subtitle>
+      </mat-card-header>
+
+      <mat-card-content>
+        <mat-nav-list>
+          <a mat-list-item *ngFor="let media of unlinkedHLS" [href]="host + '/media/video/' + media + '/hls'" target="_blank">
+            <h3 mat-line>{{media}}</h3>
+            <button mat-icon-button (click)="removeHLSVideo($event, media)" [disabled]="isLoading">
+              <mat-icon data-text-color="red" fontSet="fas" fontIcon="fa-trash" class="fa-lg"></mat-icon>
+            </button>
+          </a>
+        </mat-nav-list>
+      </mat-card-content>
+    </mat-card>
+
+    <mat-card *ngIf="unlinkedMP4.length !== 0">
+      <mat-card-header>
+        <mat-card-title i18n>Unlinked MP4</mat-card-title>
+        <mat-card-subtitle i18n>MP4 files without a corresponding HLS streaming playlist.</mat-card-subtitle>
+      </mat-card-header>
+
+      <mat-card-content>
+        <mat-nav-list>
+          <a mat-list-item *ngFor="let media of unlinkedMP4" [href]="host + '/media/video/' + media + '/mp4'" target="_blank">
+            <h3 mat-line>{{media}}</h3>
+            <button mat-icon-button (click)="removeMP4Video($event, media)">
+              <mat-icon data-text-color="red" fontSet="fas" fontIcon="fa-trash" class="fa-lg"></mat-icon>
+            </button>
+          </a>
+        </mat-nav-list>
+      </mat-card-content>
+    </mat-card>
+
+    <mat-card *ngIf="unlinkedImages.length !== 0">
+      <mat-card-header>
+        <mat-card-title i18n>Unlinked images</mat-card-title>
+        <mat-card-subtitle i18n>Image files not linked to topics or users.</mat-card-subtitle>
+      </mat-card-header>
+
+      <mat-card-content>
+        <mat-nav-list>
+          <a mat-list-item *ngFor="let media of unlinkedImages" [href]="host + '/media/image/' + media" target="_blank">
+            <h3 mat-line>{{media}}</h3>
+            <button mat-icon-button (click)="removeImage($event, media)">
+              <mat-icon data-text-color="red" fontSet="fas" fontIcon="fa-trash" class="fa-lg"></mat-icon>
+            </button>
+          </a>
+        </mat-nav-list>
+      </mat-card-content>
+    </mat-card>
+
+    <mat-card *ngIf="unlinkedTopics.length !== 0">
+      <mat-card-header>
+        <mat-card-title i18n>Unlinked topics</mat-card-title>
+        <mat-card-subtitle i18n>Topics with a not valid video or image. Note that the rest of the content of the topic may be usable.</mat-card-subtitle>
+      </mat-card-header>
+
+      <mat-card-content>
+        <mat-nav-list>
+          <a mat-list-item *ngFor="let topic of unlinkedTopics" [routerLink]="['/', 'topic', 'edit', topic._id]"
+            [ngClass]="{'not-shown': moment(topic.date) > moment() || topic.isProcessing || !topic.isPublic}">
+
+            <mat-icon *ngFor="let panel of [topic.leftPanel, topic.centerPanel, topic.rightPanel]" mat-list-icon fontSet="fas"
+                      [fontIcon]="panel.video ? 'fa-file-video' : panel.text ? 'fa-file-alt' : panel.quiz ? 'fa-file-signature' : 'fa-times'"></mat-icon>
+      
+            <h3 mat-line>{{topic.title}}</h3>
+            <p mat-line>
+              {{moment(topic.date).format('dddd, MMMM Do YYYY, h:mm a')}}
+            </p>
+          </a>
+        </mat-nav-list>
+      </mat-card-content>
+    </mat-card>
+
+    <mat-card *ngIf="unlinkedReactions.length !== 0">
+      <mat-card-header>
+        <mat-card-title i18n>Unlinked Clapbacks</mat-card-title>
+        <mat-card-subtitle i18n>Clapbacks without a valid video. Becareful as the user will not know know you deleted his clapback !</mat-card-subtitle>
+      </mat-card-header>
+
+      <mat-card-content>
+        <mat-nav-list>
+          <a mat-list-item *ngFor="let reaction of unlinkedReactions" [routerLink]="['/', 'reaction', 'edit', reaction._id]">
+            <h3 mat-line>{{reaction.text}}</h3>
+            <p mat-line>{{moment(reaction.date).format('dddd, MMMM Do YYYY, h:mm a')}}</p>
+          </a>
+        </mat-nav-list>
+      </mat-card-content>
+    </mat-card>
+
+    <mat-card *ngIf="unlinkedUsers.length !== 0">
+      <mat-card-header>
+        <mat-card-title i18n>Unlinked users</mat-card-title>
+        <mat-card-subtitle i18n>Users without a valid profile picture.</mat-card-subtitle>
+      </mat-card-header>
+
+      <mat-card-content>
+        <mat-nav-list>
+          <a mat-list-item *ngFor="let user of unlinkedUsers" [routerLink]="['/', 'user', 'edit', user._id]">
+            <h3 mat-line>{{user.name || user.email || user.phone}}</h3>
+          </a>
+        </mat-nav-list>
+      </mat-card-content>
+    </mat-card>
+  </div>
+
+  <mat-spinner *ngIf="isLoading"></mat-spinner>
+</div>
