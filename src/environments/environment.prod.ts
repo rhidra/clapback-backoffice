@@ -3,5 +3,5 @@ export const environment = {
   apiUrl: 'https://api.clapbacktheapp.com/',
   mediaHost: 'https://api.clapbacktheapp.com',
 
-  rabbitMQAdminPanelUrl: 'https://clapbacktheapp.com/',
+  rabbitMQAdminPanelUrl: 'https://api.clapbacktheapp.com/rabbitmq/',
 };
