@@ -39,7 +39,7 @@ export class UploadInputComponent implements OnInit, ControlValueAccessor {
   ngOnInit() {
   }
 
-  onChange(event) {
+  async onChange(event) {
     this.propagateTouch();
     const uploadData = new FormData();
     if (event.target.files[0].size >= 1e9) {
@@ -51,14 +51,20 @@ export class UploadInputComponent implements OnInit, ControlValueAccessor {
     }
     uploadData.append('media', event.target.files[0], event.target.files[0].name);
     this.uploadStart.emit();
-    this.authService.getToken().then(token => {
-      if (token) {
-        this.upload(uploadData);
-      }
+    await this.authService.getToken();
+    const filename = await this.allocateFilename(event.target.files[0].name);
+    uploadData.append('filename', filename);
+    this.upload(uploadData, filename);
+  }
+
+  // filename: name of the video/image with extension
+  allocateFilename(filename: string): Promise<string> {
+    return new Promise(resolve => {
+      this.http.post(env.apiUrl + `media/alloc/${filename}`, {}).subscribe(({filename}: any) => resolve(filename));
     });
   }
 
-  upload(uploadData: FormData) {
+  upload(uploadData: FormData, filename: string) {
     this.http.post(env.apiUrl + 'media?quality=80', uploadData, {reportProgress: true, observe: 'events'}).subscribe((r: any) => {
       if (r.type === HttpEventType.UploadProgress) {
         this.uploadProgress = r.loaded * 100 / r.total;
@@ -68,8 +74,7 @@ export class UploadInputComponent implements OnInit, ControlValueAccessor {
         this.uploadStop.emit();
         this.isUploading = false;
         this.isError = false;
-        this.filePath = r.body.filename;
-        this.propagateChange(this.filePath);
+        this.propagateChange(filename);
       }
     }, (err: HttpErrorResponse) => {
       this.uploadStop.emit();
