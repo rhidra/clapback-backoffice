@@ -22,12 +22,9 @@ export class DialogComponent implements OnInit {
     this.content = data.content;
   }
 
-  ngOnInit() {
-  }
+  ngOnInit() {}
 
   close() {
-    console.log('Hellllllloooo');
-    console.log(this.lockUser);
     this.dialogRef.close(false);
   }
 
