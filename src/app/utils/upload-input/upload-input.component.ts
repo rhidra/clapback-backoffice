@@ -74,6 +74,7 @@ export class UploadInputComponent implements OnInit, ControlValueAccessor {
         this.uploadStop.emit();
         this.isUploading = false;
         this.isError = false;
+        this.filePath = filename;
         this.propagateChange(filename);
       }
     }, (err: HttpErrorResponse) => {

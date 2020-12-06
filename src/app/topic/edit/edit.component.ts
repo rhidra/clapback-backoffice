@@ -23,6 +23,7 @@ export class TopicEditComponent implements OnInit {
   topic: Topic;
   isCreation: boolean;
   isLoading = true;
+  isSubmitting = false;
   uploading = 0;
   leftPanelType: string;
   rightPanelType: string;
@@ -148,6 +149,7 @@ export class TopicEditComponent implements OnInit {
       .then(() => this.authService.getToken())
       .then(() => this.updateForm())
       .then(() => {
+        this.isSubmitting = true;
         Object.assign(this.topic, this.form.value);
         if (this.leftPanelType === 'quiz') {
           this.topic.leftPanel.quiz = this.form.value.leftPanel.quiz;
@@ -161,9 +163,13 @@ export class TopicEditComponent implements OnInit {
         }
 
         if (this.isCreation) {
-          this.topicService.create(this.topic).then(() => this.location.back());
+          this.topicService.create(this.topic)
+            .then(() => this.isSubmitting = false)
+            .then(() => this.location.back());
         } else {
-          this.topicService.edit(this.topic).then(() => this.location.back());
+          this.topicService.edit(this.topic)
+            .then(() => this.isSubmitting = false)
+            .then(() => this.location.back());
         }
       });
   }
