@@ -9,7 +9,7 @@ import { Router } from '@angular/router';
 })
 export class UserSearchComponent implements OnInit {
 
-  displayedColumns: Array<string> = ['image', 'name', 'email', 'phone', 'level', 'verified', 'permissions'];
+  displayedColumns: Array<string> = ['image', 'name', 'email', 'phone', 'level', 'verified', 'permissions', 'actions'];
   isLoading: boolean = true;
 
   constructor(
@@ -26,5 +26,11 @@ export class UserSearchComponent implements OnInit {
   search(query: string = '') {
     console.log(query);
     this.userService.search(query).then(() => this.isLoading = false);
+  }
+
+  changePassword(event: any, id: string) {
+    event.preventDefault();
+    event.stopImmediatePropagation();
+    
   }
 }

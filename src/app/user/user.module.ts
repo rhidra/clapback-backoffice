@@ -30,6 +30,7 @@ import {UtilsModule} from '../utils/utils.module';
     MatTooltipModule,
     MatListModule,
     MatIconModule,
+    MatButtonModule,
     ReactiveFormsModule,
     FlexModule,
     MatFormFieldModule,
