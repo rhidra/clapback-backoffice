@@ -4,7 +4,12 @@
   {{content}}
 </div>
 
+<mat-form-field *ngIf="input">
+  <mat-label>{{input}}</mat-label>
+  <input matInput [(ngModel)]="value">
+</mat-form-field>
+
 <div mat-dialog-actions align="end">
   <button mat-button *ngIf="!lockUser" (click)="close()">Close</button>
-  <button mat-raised-button color="primary" *ngIf="isChoice" (click)="confirm()">Confirm</button>
+  <button mat-raised-button color="primary" *ngIf="isChoice" [disabled]="input ? !value : false" (click)="confirm()">Confirm</button>
 </div>

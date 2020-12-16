@@ -11,15 +11,19 @@ export class DialogComponent implements OnInit {
   content: string;
   isChoice: boolean;
   lockUser: boolean;
+  input: string;
+  value: string;
 
   constructor(
     private dialogRef: MatDialogRef<DialogComponent>,
     @Inject(MAT_DIALOG_DATA) data
   ) {
-    this.isChoice = data.isChoice ? data.isChoice : false;
-    this.lockUser = data.lockUser ? data.lockUser : false;
+    this.isChoice = data.isChoice || !!data.input;
+    this.lockUser = !!data.lockUser;
     this.title = data.title;
     this.content = data.content;
+    this.input = data.input;
+    this.value = '';
   }
 
   ngOnInit() {}
@@ -29,6 +33,10 @@ export class DialogComponent implements OnInit {
   }
 
   confirm() {
-    this.dialogRef.close(true);
+    if (this.input) {
+      this.dialogRef.close(this.value);
+    } else {
+      this.dialogRef.close(true);
+    }
   }
 }

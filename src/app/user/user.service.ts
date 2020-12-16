@@ -40,17 +40,17 @@ export class UserService {
     });
   }
 
-  async create(user: User) {
-    await this.authService.onAuthenticated(true);
-    return new Promise(resolve => {
-      this.http.post(env.apiUrl + 'user/', user).subscribe((data: User) => resolve(data));
-    });
-  }
-
   async edit(user: User) {
     await this.authService.onAuthenticated(true);
     return new Promise(resolve => {
       this.http.post(env.apiUrl + 'user/' + user._id, user).subscribe(() => resolve());
+    });
+  }
+
+  async changePassword(user: string, password: string) {
+    await this.authService.onAuthenticated(true);
+    return new Promise(resolve => {
+      this.http.post(env.apiUrl + 'auth/pwd', {user, password}).subscribe(data => resolve(data));
     });
   }
 
