@@ -54,23 +54,24 @@ export class UserEditComponent implements OnInit {
       name: [this.user.name || '', [Validators.required]],
       phone: [this.user.phone || ''],
       email: [this.user.email || ''],
+      password: [''],
       image: [this.user.image || ''],
       description: [this.user.description || ''],
       verified: [this.user.verified || false, [Validators.required]],
       level: [this.user.level || 'level1', [Validators.required]],
-      permissions: [this.user.permissions || []],
+      permissions: [this.user.permissions || ['user']],
     });
     this.isLoading = false;
   }
 
-  onSubmit() {
-    this.authService.getToken().then(() => {
-      Object.assign(this.user, this.form.value);
-      if (this.isCreation) {
-        this.userService.create(this.user).then(() => this.location.back());
-      } else {
-        this.userService.edit(this.user).then(() => this.location.back());
-      }
-    });
+  async onSubmit() {
+    Object.assign(this.user, this.form.value);
+    if (this.isCreation) {
+      const id = await this.userService.register(this.user.email, (this.user as any).password);
+      (this.user as any)._id = id;
+      this.userService.edit(this.user).then(() => this.location.back());
+    } else {
+      this.userService.edit(this.user).then(() => this.location.back());
+    }
   }
 }

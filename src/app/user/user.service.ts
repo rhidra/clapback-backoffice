@@ -33,6 +33,13 @@ export class UserService {
     });
   }
 
+  async register(email: string, password: string) {
+    await this.authService.onAuthenticated(true);
+    return new Promise(resolve => {
+      this.http.post(env.apiUrl + 'auth/register', {email, password}).subscribe((data: any) => resolve(data.user._id));
+    });
+  }
+
   async create(user: User) {
     await this.authService.onAuthenticated(true);
     return new Promise(resolve => {

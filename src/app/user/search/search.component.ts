@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {UserService} from '../user.service';
 import {NavbarService} from '../../core/navbar/navbar.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-search',
@@ -14,10 +15,11 @@ export class UserSearchComponent implements OnInit {
   constructor(
     public navbarService: NavbarService,
     public userService: UserService,
-  ) { }
+    public router: Router,
+    ) { }
 
   ngOnInit() {
-    this.navbarService.updateNavbar('Users', null, '', q => this.search(q));
+    this.navbarService.updateNavbar('Users', () => this.router.navigate(['/user/edit']), 'Add User', q => this.search(q));
     this.search();
   }
 
